@@ -10,10 +10,14 @@
 		7468F9A9C611488EF671A986 /* Pods_SwipeToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */; };
 		95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBB280F976B00960B82 /* AppDelegate.swift */; };
 		95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBD280F976B00960B82 /* SceneDelegate.swift */; };
-		95D6EBC0280F976B00960B82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBF280F976B00960B82 /* ViewController.swift */; };
+		95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBF280F976B00960B82 /* CalendarToDoViewController.swift */; };
 		95D6EBC3280F976B00960B82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBC1280F976B00960B82 /* Main.storyboard */; };
 		95D6EBC5280F976C00960B82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBC4280F976C00960B82 /* Assets.xcassets */; };
 		95D6EBC8280F976C00960B82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBC6280F976C00960B82 /* LaunchScreen.storyboard */; };
+		95D6EBD0280FA91000960B82 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBCF280FA91000960B82 /* Task.swift */; };
+		95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */; };
+		95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */; };
+		95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,11 +26,15 @@
 		95D6EBB8280F976B00960B82 /* SwipeToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D6EBBB280F976B00960B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95D6EBBD280F976B00960B82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		95D6EBBF280F976B00960B82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		95D6EBBF280F976B00960B82 /* CalendarToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarToDoViewController.swift; sourceTree = "<group>"; };
 		95D6EBC2280F976B00960B82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95D6EBC4280F976C00960B82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95D6EBC7280F976C00960B82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95D6EBC9280F976C00960B82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95D6EBCF280FA91000960B82 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedToDoTableViewCell.swift; sourceTree = "<group>"; };
+		95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addedToDoTableViewCell.xib; sourceTree = "<group>"; };
+		95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCategoryViewController.swift; sourceTree = "<group>"; };
 		A1E1B9EA56197EC8A09A4A01 /* Pods-SwipeToDoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.release.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,7 +56,6 @@
 				038BF23017AD2660309CB535 /* Pods-SwipeToDoApp.debug.xcconfig */,
 				A1E1B9EA56197EC8A09A4A01 /* Pods-SwipeToDoApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -75,11 +82,15 @@
 			children = (
 				95D6EBBB280F976B00960B82 /* AppDelegate.swift */,
 				95D6EBBD280F976B00960B82 /* SceneDelegate.swift */,
-				95D6EBBF280F976B00960B82 /* ViewController.swift */,
+				95D6EBBF280F976B00960B82 /* CalendarToDoViewController.swift */,
+				95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */,
+				95D6EBCF280FA91000960B82 /* Task.swift */,
 				95D6EBC1280F976B00960B82 /* Main.storyboard */,
 				95D6EBC4280F976C00960B82 /* Assets.xcassets */,
 				95D6EBC6280F976C00960B82 /* LaunchScreen.storyboard */,
 				95D6EBC9280F976C00960B82 /* Info.plist */,
+				95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */,
+				95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */,
 			);
 			path = SwipeToDoApp;
 			sourceTree = "<group>";
@@ -154,6 +165,7 @@
 			files = (
 				95D6EBC8280F976C00960B82 /* LaunchScreen.storyboard in Resources */,
 				95D6EBC5280F976C00960B82 /* Assets.xcassets in Resources */,
+				95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */,
 				95D6EBC3280F976B00960B82 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,7 +219,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95D6EBC0280F976B00960B82 /* ViewController.swift in Sources */,
+				95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */,
+				95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */,
+				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
+				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
 			);

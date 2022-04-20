@@ -10,5 +10,6 @@ target 'SwipeToDoApp' do
   pod 'FSCalendar'
   pod 'MaterialComponents'
   pod 'Charts'
+  pod 'lottie-ios'
 
 end

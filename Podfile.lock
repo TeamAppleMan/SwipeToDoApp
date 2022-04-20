@@ -4,6 +4,7 @@ PODS:
   - Charts/Core (4.0.2):
     - SwiftAlgorithms (~> 1.0)
   - FSCalendar (2.8.4)
+  - lottie-ios (3.3.0)
   - MaterialComponents (124.2.0):
     - MaterialComponents/ActionSheet (= 124.2.0)
     - "MaterialComponents/ActionSheet+Theming (= 124.2.0)"
@@ -655,6 +656,7 @@ PODS:
 DEPENDENCIES:
   - Charts
   - FSCalendar
+  - lottie-ios
   - MaterialComponents
   - VerticalCardSwiper
 
@@ -662,6 +664,7 @@ SPEC REPOS:
   trunk:
     - Charts
     - FSCalendar
+    - lottie-ios
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -673,6 +676,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
@@ -681,6 +685,6 @@ SPEC CHECKSUMS:
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   VerticalCardSwiper: 68df635b354500f86934ea044ade37a264c044c6
 
-PODFILE CHECKSUM: db3c07ebee64ea23cf44ae57bbdef1b5f1bdf6c4
+PODFILE CHECKSUM: e639e43a052286b809e55df5a2e4ff702a81106c
 
 COCOAPODS: 1.10.2
