@@ -41,6 +41,9 @@
                                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="タスク消化"/>
+                                        <connections>
+                                            <action selector="taskDeleteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OyC-hq-D2N"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タスクを入力してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U1s-ip-goa" customClass="MDCOutlinedTextField">
                                         <rect key="frame" x="24" y="110" width="260" height="34"/>
@@ -48,7 +51,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <segue destination="WPI-PG-KCA" kind="show" id="lJ3-EU-5Sk"/>
+                                            <segue destination="WPI-PG-KCA" kind="show" identifier="NavVCSegue" id="lJ3-EU-5Sk"/>
                                         </connections>
                                     </textField>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ntA-ye-43B">
@@ -69,7 +72,7 @@
                         <outlet property="dateLabel" destination="6rY-KI-B85" id="Wwa-9k-Zv0"/>
                         <outlet property="tableView" destination="ntA-ye-43B" id="vSr-Ns-MQI"/>
                         <outlet property="taskTextField" destination="U1s-ip-goa" id="2Oi-eD-zPD"/>
-                        <segue destination="gNS-Qe-s1D" kind="show" id="rHS-gM-JIe"/>
+                        <segue destination="gNS-Qe-s1D" kind="show" identifier="SwipeCardSegue" id="rHS-gM-JIe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -186,21 +189,37 @@
             </objects>
             <point key="canvasLocation" x="1821.5999999999999" y="87.931034482758619"/>
         </scene>
-        <!--View Controller-->
+        <!--Swipe Card View Controller-->
         <scene sceneID="Rcx-eh-hlL">
             <objects>
-                <viewController id="gNS-Qe-s1D" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="gNS-Qe-s1D" customClass="SwipeCardViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AJn-CV-8YC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yg4-Jg-zMH">
+                                <rect key="frame" x="13" y="59" width="99" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="BackButton"/>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1r-qG-ByO" customClass="VerticalCardSwiper" customModule="VerticalCardSwiper">
+                                <rect key="frame" x="0.0" y="111" width="375" height="590"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="SUh-Va-C93"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="4xx-vO-Mct"/>
+                    <connections>
+                        <outlet property="cardSwiper" destination="E1r-qG-ByO" id="dZY-Ix-XDZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcQ-fq-HwL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1822" y="836"/>
+            <point key="canvasLocation" x="1821.5999999999999" y="835.71428571428578"/>
         </scene>
     </scenes>
     <resources>

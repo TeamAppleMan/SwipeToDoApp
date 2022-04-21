@@ -65,19 +65,24 @@ class CalendarToDoViewController: UIViewController {
         view.endEditing(true)
     }
 
-    // セミモーダルへの画面遷移
+    // HACK: if文が連結していてあまり良い書き方ではない
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nav = segue.destination as! UINavigationController
-        if let sheet = nav.sheetPresentationController {
-            let inputCategoryVC = nav.topViewController as! InputCategoryViewController
-            inputCategoryVC.task = taskTextField.text ?? "aaa"
-            sheet.detents = [.medium()]
-            //モーダル出現後も親ビュー操作可能にする
-            sheet.largestUndimmedDetentIdentifier = .medium
-            // 角丸の半径を変更する
-            sheet.preferredCornerRadius = 20.0
-            //　グラバーを表示する（上の灰色のバー）
-            sheet.prefersGrabberVisible = true
+        // セミモーダルへの画面遷移
+        if segue.identifier == "NavVCSegue"{
+            let nav = segue.destination as! UINavigationController
+            if let sheet = nav.sheetPresentationController {
+                let inputCategoryVC = nav.topViewController as! InputCategoryViewController
+                inputCategoryVC.task = taskTextField.text ?? "aaa"
+                sheet.detents = [.medium()]
+                //モーダル出現後も親ビュー操作可能にする
+                sheet.largestUndimmedDetentIdentifier = .medium
+                // 角丸の半径を変更する
+                sheet.preferredCornerRadius = 20.0
+                //　グラバーを表示する（上の灰色のバー）
+                sheet.prefersGrabberVisible = true
+            }
+        }else if segue.identifier == "SwipeCardSegue"{
+
         }
     }
 
@@ -99,6 +104,10 @@ class CalendarToDoViewController: UIViewController {
 
         taskTextField.text = ""
         tableView.reloadData()
+    }
+
+    @IBAction func taskDeleteButton(_ sender: Any) {
+        performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
 }
