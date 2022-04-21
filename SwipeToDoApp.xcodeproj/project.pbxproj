@@ -18,6 +18,7 @@
 		95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */; };
 		95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */; };
 		95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */; };
+		95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF92810EAE700960B82 /* CategoryList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedToDoTableViewCell.swift; sourceTree = "<group>"; };
 		95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addedToDoTableViewCell.xib; sourceTree = "<group>"; };
 		95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCategoryViewController.swift; sourceTree = "<group>"; };
+		95D6EBF92810EAE700960B82 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		A1E1B9EA56197EC8A09A4A01 /* Pods-SwipeToDoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.release.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				95D6EBC9280F976C00960B82 /* Info.plist */,
 				95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */,
 				95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */,
+				95D6EBF92810EAE700960B82 /* CategoryList.swift */,
 			);
 			path = SwipeToDoApp;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */,
+				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
 				95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */,
 				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,

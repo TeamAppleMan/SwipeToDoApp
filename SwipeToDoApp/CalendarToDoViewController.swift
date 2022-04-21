@@ -18,12 +18,18 @@ class CalendarToDoViewController: UIViewController {
 
     private var searchTasks: [Task]? = []
     private var taskDatas: [Task]? = []
+    var categoryList = CategoryList()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setTableView()
         setCalendar()
         setTextField()
+    }
+    private func setTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
     }
 
     private func setCalendar(){
@@ -63,18 +69,38 @@ class CalendarToDoViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nav = segue.destination as! UINavigationController
         if let sheet = nav.sheetPresentationController {
-            let inputTaskVC = nav.topViewController as! InputCategoryViewController
-            //inputTaskVC.task = taskTextField.text ?? "aaa"
+            let inputCategoryVC = nav.topViewController as! InputCategoryViewController
+            inputCategoryVC.task = taskTextField.text ?? "aaa"
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作可能にする
-            //sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.largestUndimmedDetentIdentifier = .medium
             // 角丸の半径を変更する
             sheet.preferredCornerRadius = 20.0
             //　グラバーを表示する（上の灰色のバー）
             sheet.prefersGrabberVisible = true
         }
-
     }
+
+    // モーダル遷移先のCancelButtonを押すと、帰ってくる処理
+    @IBAction func exitCancel(segue: UIStoryboardSegue){
+    }
+
+    @IBAction func exitSave(segue: UIStoryboardSegue){
+        print("saveButton")
+        let inputCategoryVC = segue.source as! InputCategoryViewController
+
+        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
+        // カレンダーデータのオプショナルバインディング
+        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+            return
+        }
+        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList.categories[selectedIndexNumber], isRepeatedTodo: false, isDone: false, photos: categoryList.photos[selectedIndexNumber]!))
+        print("taskDatas: ",taskDatas!)
+
+        taskTextField.text = ""
+        tableView.reloadData()
+    }
+
 }
 
 extension CalendarToDoViewController: UITextFieldDelegate {
@@ -87,11 +113,9 @@ extension CalendarToDoViewController: UITextFieldDelegate {
 extension CalendarToDoViewController: FSCalendarDelegate {
     // カレンダーの日付をタップした時に、カードに日付情報を反映させる処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        // Why?: ここでtableView.reloadData()を行なっている理由
         tableView.reloadData()
         let calPosition = Calendar.current
-        let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-                                                Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
+        let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
         taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
         dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
     }
@@ -104,21 +128,22 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return 0
         }
-
         // 配列の中から選択された同じ日付のデータが存在するかを調べて、あればsearchTasksに追加
         searchTasks = taskDatas?.filter {
             $0.date ==  nowSelectedDate
         }
-
+        print("searchTask: ",searchTasks?.count)
         return searchTasks?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
-        // 後で書く
-        cell.detailLabel.text = searchTasks?[indexPath.row].detail
-        cell.categoryLabel.text = searchTasks?[indexPath.row].category ?? ""
+        cell.detailLabel.text = searchTasks![indexPath.row].detail
+        cell.categoryLabel.text = searchTasks![indexPath.row].category
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 

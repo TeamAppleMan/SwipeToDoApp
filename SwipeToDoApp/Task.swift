@@ -13,6 +13,5 @@ struct Task{
     var category: String
     var isRepeatedTodo: Bool
     var isDone: Bool
-    var name: String
     var photos: UIImage
 }

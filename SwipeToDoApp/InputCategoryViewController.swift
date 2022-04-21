@@ -8,22 +8,35 @@
 import UIKit
 
 class InputCategoryViewController: UIViewController {
+    var task: String = ""
+    var selectedIndexNumber: Int = 0
 
+    @IBOutlet var tableView: UITableView!
+    // TODO: ここは画面2からデータベースで持っていきたい
+    let categoryList = CategoryList()
+    @IBOutlet var selectedLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        selectedLabel.text = "「\(task)」のカテゴリーを選択してください"
     }
+}
+
+extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        categoryList.categories.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCellID", for: indexPath)
+        cell.textLabel?.text = categoryList.categories[indexPath.row]
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexNumber = indexPath.row
+    }
+
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

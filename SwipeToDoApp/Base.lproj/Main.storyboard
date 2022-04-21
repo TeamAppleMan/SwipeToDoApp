@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kdf-Ih-wP4" customClass="FSCalendar">
-                                <rect key="frame" x="51" y="62" width="272" height="147"/>
+                                <rect key="frame" x="33" y="62" width="308" height="147"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -54,7 +54,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ntA-ye-43B">
                                         <rect key="frame" x="24" y="172" width="260" height="225"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -69,25 +69,66 @@
                         <outlet property="dateLabel" destination="6rY-KI-B85" id="Wwa-9k-Zv0"/>
                         <outlet property="tableView" destination="ntA-ye-43B" id="vSr-Ns-MQI"/>
                         <outlet property="taskTextField" destination="U1s-ip-goa" id="2Oi-eD-zPD"/>
+                        <segue destination="gNS-Qe-s1D" kind="show" id="rHS-gM-JIe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="744.79999999999995" y="87.931034482758619"/>
         </scene>
-        <!--Input Category View Controller-->
+        <!--カテゴリーを選択-->
         <scene sceneID="Nd6-gC-deL">
             <objects>
                 <viewController id="Es4-U2-plC" customClass="InputCategoryViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wI3-d5-cp2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sl5-wM-pg3">
+                                <rect key="frame" x="16" y="120" width="337" height="612"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCellID" id="rgw-Je-Ud2">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="337" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rgw-Je-Ud2" id="JvX-Hz-R5e">
+                                            <rect key="frame" x="0.0" y="0.0" width="337" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="「読書」のカテゴリーを選択してください" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axo-mR-5xh">
+                                <rect key="frame" x="16" y="64" width="337" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kVL-Wt-Hwb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hdP-r8-2tn"/>
+                    <navigationItem key="navigationItem" title="カテゴリーを選択" id="hdP-r8-2tn">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="iR4-kA-5vV">
+                            <connections>
+                                <segue destination="ArA-sE-PW4" kind="unwind" unwindAction="exitCancelWithSegue:" id="hFp-cH-bxd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="I6p-jQ-32j">
+                            <connections>
+                                <segue destination="ArA-sE-PW4" kind="unwind" unwindAction="exitSaveWithSegue:" id="fsc-AQ-ZSR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="selectedLabel" destination="Axo-mR-5xh" id="g5a-l3-jAN"/>
+                        <outlet property="tableView" destination="Sl5-wM-pg3" id="KSc-ml-OTU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Grz-RV-wuD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ArA-sE-PW4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2764" y="87.931034482758619"/>
         </scene>
@@ -105,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1B7-dO-kR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="750"/>
+            <point key="canvasLocation" x="745" y="837"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2P1-up-fkb">
@@ -144,6 +185,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hN8-Nm-yUi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1821.5999999999999" y="87.931034482758619"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Rcx-eh-hlL">
+            <objects>
+                <viewController id="gNS-Qe-s1D" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AJn-CV-8YC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SUh-Va-C93"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4xx-vO-Mct"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lcQ-fq-HwL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1822" y="836"/>
         </scene>
     </scenes>
     <resources>
