@@ -9,7 +9,8 @@ import UIKit
 import FSCalendar
 import MaterialComponents
 
-class CalendarToDoViewController: UIViewController {
+class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDelegate {
+
 
     @IBOutlet var calendar: FSCalendar!
     @IBOutlet var tableView: UITableView!
@@ -26,15 +27,66 @@ class CalendarToDoViewController: UIViewController {
         setCalendar()
         setTextField()
     }
+
     override func viewWillAppear(_ animated: Bool) {
-        searchTasks = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
+        super.viewWillAppear(true)
+        taskDatas = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
         tableView.reloadData()
-        print(searchTasks!.count)
     }
-    private func setTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
+
+    // HACK: if文が連結していてあまり良い書き方ではない
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // セミモーダルへの画面遷移
+        if segue.identifier == "NavVCSegue"{
+            let nav = segue.destination as! UINavigationController
+            if let sheet = nav.sheetPresentationController {
+                let inputCategoryVC = nav.topViewController as! InputCategoryViewController
+                inputCategoryVC.task = taskTextField.text ?? "aaa"
+                sheet.detents = [.medium()]
+                //モーダル出現後も親ビュー操作可能にする
+                sheet.largestUndimmedDetentIdentifier = .medium
+                // 角丸の半径を変更する
+                sheet.preferredCornerRadius = 20.0
+                //　グラバーを表示する（上の灰色のバー）
+                sheet.prefersGrabberVisible = true
+            }
+        }else if segue.identifier == "SwipeCardSegue"{
+            // 保存したタスクデータを渡すorUserDefalutsで保存する？
+            let swipeCardVC = segue.destination as! SwipeCardViewController
+            swipeCardVC.delegate = self
+            swipeCardVC.catchTaskData = searchTasks ?? []
+        }
+    }
+
+    // SwipeCardViewControllerによるデリゲートメソッド。Swipe後のデータをTableViewに反映
+    func catchDidSwipeCardData(catchTask: [Task]) {
+        taskDatas = catchTask
+        tableView.reloadData()
+    }
+
+    // モーダル遷移先のCancelButtonを押すと、帰ってくる処理
+    @IBAction func exitCancel(segue: UIStoryboardSegue){
+    }
+
+    @IBAction func exitSave(segue: UIStoryboardSegue){
+        print("saveButton")
+        let inputCategoryVC = segue.source as! InputCategoryViewController
+
+        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
+        // カレンダーデータのオプショナルバインディング
+        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+            return
+        }
+        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList.categories[selectedIndexNumber], isRepeatedTodo: false, isDone: false, photos: categoryList.photos[selectedIndexNumber]!))
+        print("taskDatas: ",taskDatas!)
+
+        taskTextField.text = ""
+        tableView.reloadData()
+    }
+
+    // SwipeCardVCへ画面遷移
+    @IBAction func taskDeleteButton(_ sender: Any) {
+        performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
     private func setCalendar(){
@@ -65,56 +117,16 @@ class CalendarToDoViewController: UIViewController {
         taskTextField.setOutlineColor(.blue, for: .editing)
         taskTextField.setFloatingLabelColor(.blue, for: .editing)
     }
+
+    private func setTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
+    }
+
     // 余白タッチでキーボード収納
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-
-    // HACK: if文が連結していてあまり良い書き方ではない
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // セミモーダルへの画面遷移
-        if segue.identifier == "NavVCSegue"{
-            let nav = segue.destination as! UINavigationController
-            if let sheet = nav.sheetPresentationController {
-                let inputCategoryVC = nav.topViewController as! InputCategoryViewController
-                inputCategoryVC.task = taskTextField.text ?? "aaa"
-                sheet.detents = [.medium()]
-                //モーダル出現後も親ビュー操作可能にする
-                sheet.largestUndimmedDetentIdentifier = .medium
-                // 角丸の半径を変更する
-                sheet.preferredCornerRadius = 20.0
-                //　グラバーを表示する（上の灰色のバー）
-                sheet.prefersGrabberVisible = true
-            }
-        }else if segue.identifier == "SwipeCardSegue"{
-            // 保存したタスクデータを渡すorUserDefalutsで保存する？
-            let swipeCardVC = segue.destination as! SwipeCardViewController
-            swipeCardVC.catchTaskData = searchTasks ?? []
-        }
-    }
-
-    // モーダル遷移先のCancelButtonを押すと、帰ってくる処理
-    @IBAction func exitCancel(segue: UIStoryboardSegue){
-    }
-
-    @IBAction func exitSave(segue: UIStoryboardSegue){
-        print("saveButton")
-        let inputCategoryVC = segue.source as! InputCategoryViewController
-
-        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
-        // カレンダーデータのオプショナルバインディング
-        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return
-        }
-        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList.categories[selectedIndexNumber], isRepeatedTodo: false, isDone: false, photos: categoryList.photos[selectedIndexNumber]!))
-        print("taskDatas: ",taskDatas!)
-
-        taskTextField.text = ""
-        tableView.reloadData()
-    }
-
-    @IBAction func taskDeleteButton(_ sender: Any) {
-        performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
 }
@@ -138,17 +150,17 @@ extension CalendarToDoViewController: FSCalendarDelegate {
 }
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        searchTasks = []
         // 現在選択されたデータの取得。なぜか１日ずれるため１日ずらす
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return searchTasks?.count ?? 0
+            return taskDatas?.count ?? 0
         }
         // 配列の中から選択された同じ日付のデータが存在するかを調べて、あればsearchTasksに追加
         searchTasks = taskDatas?.filter {
             $0.date ==  nowSelectedDate
         }
         // アプリ内保存
-        JsonEncoder.saveItemsToUserDefaults(list: searchTasks!, key: "searchTasksKey")
+        JsonEncoder.saveItemsToUserDefaults(list: taskDatas!, key: "searchTasksKey")
         return searchTasks?.count ?? 0
     }
 
@@ -159,6 +171,7 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryLabel.text = searchTasks![indexPath.row].category
         return cell
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
