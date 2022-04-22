@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7468F9A9C611488EF671A986 /* Pods_SwipeToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */; };
+		95979D072812282700E1457E /* JsonEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D062812282700E1457E /* JsonEncoder.swift */; };
 		95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB1281121CA0025C9A1 /* CardViewCell.swift */; };
 		95A29BB4281121CA0025C9A1 /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A29BB2281121CA0025C9A1 /* CardViewCell.xib */; };
 		95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		038BF23017AD2660309CB535 /* Pods-SwipeToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95979D062812282700E1457E /* JsonEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonEncoder.swift; sourceTree = "<group>"; };
 		95A29BB1281121CA0025C9A1 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		95A29BB2281121CA0025C9A1 /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				95D6EBCF280FA91000960B82 /* Task.swift */,
 				95D6EBF92810EAE700960B82 /* CategoryList.swift */,
+				95979D062812282700E1457E /* JsonEncoder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95979D072812282700E1457E /* JsonEncoder.swift in Sources */,
 				95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */,
 				95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */,
 				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,

@@ -26,6 +26,11 @@ class CalendarToDoViewController: UIViewController {
         setCalendar()
         setTextField()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        searchTasks = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
+        tableView.reloadData()
+        print(searchTasks!.count)
+    }
     private func setTableView(){
         tableView.delegate = self
         tableView.dataSource = self
@@ -82,7 +87,9 @@ class CalendarToDoViewController: UIViewController {
                 sheet.prefersGrabberVisible = true
             }
         }else if segue.identifier == "SwipeCardSegue"{
-
+            // 保存したタスクデータを渡すorUserDefalutsで保存する？
+            let swipeCardVC = segue.destination as! SwipeCardViewController
+            swipeCardVC.catchTaskData = searchTasks ?? []
         }
     }
 
@@ -131,21 +138,22 @@ extension CalendarToDoViewController: FSCalendarDelegate {
 }
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchTasks = []
 
         // 現在選択されたデータの取得。なぜか１日ずれるため１日ずらす
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return 0
+            return searchTasks?.count ?? 0
         }
         // 配列の中から選択された同じ日付のデータが存在するかを調べて、あればsearchTasksに追加
         searchTasks = taskDatas?.filter {
             $0.date ==  nowSelectedDate
         }
-        print("searchTask: ",searchTasks?.count)
+        // アプリ内保存
+        JsonEncoder.saveItemsToUserDefaults(list: searchTasks!, key: "searchTasksKey")
         return searchTasks?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        searchTasks = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         cell.detailLabel.text = searchTasks![indexPath.row].detail
         cell.categoryLabel.text = searchTasks![indexPath.row].category

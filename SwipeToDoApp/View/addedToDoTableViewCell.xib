@@ -33,7 +33,7 @@
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="categoryLabel" destination="z06-YD-i0n" id="PVM-UR-Dqh"/>
                 <outlet property="detailLabel" destination="taX-cr-mDv" id="DBH-sn-pjy"/>

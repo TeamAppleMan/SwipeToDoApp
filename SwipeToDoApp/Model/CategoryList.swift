@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 struct CategoryList {
-    let shopping: UIImage = UIImage(named: "shopping")!
-    var categories: [String] = ["趣味", "娯楽", "暇つぶし", "成長"]
-    var photos: [UIImage?] = [UIImage(named: "shopping"),UIImage(named: "shopping"),UIImage(named: "shopping"),UIImage(named: "shopping")]
+    var categories: [String] = ["運動", "プログラミング", "買い物", "会議"]
+    var photos: [UIImage?] = [UIImage(named: "manran"),UIImage(named: "programming"),UIImage(named: "shopping"),UIImage(named: "mtg")]
 }
