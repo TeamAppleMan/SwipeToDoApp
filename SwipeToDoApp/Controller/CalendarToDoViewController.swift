@@ -19,7 +19,7 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
 
     private var searchTasks: [Task]? = []
     private var taskDatas: [Task]? = []
-    var categoryList = CategoryList()
+    var categoryList: [CategoryList] = [CategoryList.init(categories: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,8 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return
         }
-        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList.categories[selectedIndexNumber], isRepeatedTodo: false, isDone: false, photos: categoryList.photos[selectedIndexNumber]!))
+        print("selectedIndexNumber:",selectedIndexNumber)
+        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList[selectedIndexNumber].categories, isRepeatedTodo: false, isDone: false, photos: categoryList[selectedIndexNumber].photos!))
         print("taskDatas: ",taskDatas!)
 
         taskTextField.text = ""

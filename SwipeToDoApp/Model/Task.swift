@@ -6,35 +6,7 @@
 //
 
 import UIKit
-//class Task: Codable{
-//    var date: Date!
-//    var detail: String!
-//    var category: String!
-//    var isRepeatedTodo: Bool!
-//    var isDone: Bool!
-//    var photos: UIImage!
-//    init(date: Date,detail: String,category: String,isRepeatedTodo: Bool,isDone: Bool,photos: UIImage){
-//        self.date = date
-//        self.detail = detail
-//        self.category = category
-//        self.isRepeatedTodo = isRepeatedTodo
-//        self.isDone = isDone
-//        self.photos = photos
-//    }
-//}
-//struct Task: Codable {
-//    var detail: String
-//    var isDone: Bool
-//    var category: String
-//    var photos: UIImage
-//
-//    init(detail: String, isDone: Bool,category: String) {
-//        self.detail = detail
-//        self.isDone = isDone
-//        self.category = category
-//        // self.photos = photos
-//    }
-//}
+
 final class Task {
     var date: Date
     var detail: String
