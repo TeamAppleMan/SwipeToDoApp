@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import MaterialComponents
+import RealmSwift
 
 class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDelegate {
 
@@ -19,10 +20,13 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
 
     private var searchTasks: [Task]? = []
     private var taskDatas: [Task]? = []
-    var categoryList: [CategoryList] = [CategoryList.init(categories: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
+    // TODO: UserDefalutで保存したデータを持ってくる
+//    var categoryList: [CategoryList] = [CategoryList.init(categoryName: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // RealmのファイルURLを表示する
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         setTableView()
         setCalendar()
         setTextField()
@@ -78,7 +82,7 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
             return
         }
         print("selectedIndexNumber:",selectedIndexNumber)
-        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList[selectedIndexNumber].categories, isRepeatedTodo: false, isDone: false, photos: categoryList[selectedIndexNumber].photos!))
+//        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList[selectedIndexNumber].categories, isRepeatedTodo: false, isDone: false, photos: categoryList[selectedIndexNumber].photos!))
         print("taskDatas: ",taskDatas!)
 
         taskTextField.text = ""
@@ -142,7 +146,7 @@ extension CalendarToDoViewController: UITextFieldDelegate {
 extension CalendarToDoViewController: FSCalendarDelegate {
     // カレンダーの日付をタップした時に、カードに日付情報を反映させる処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        tableView.reloadData()
+//        tableView.reloadData()
         let calPosition = Calendar.current
         let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
         taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"

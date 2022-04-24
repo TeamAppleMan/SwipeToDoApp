@@ -11,5 +11,6 @@ target 'SwipeToDoApp' do
   pod 'MaterialComponents'
   pod 'Charts'
   pod 'lottie-ios'
+  pod 'RealmSwift'
 
 end

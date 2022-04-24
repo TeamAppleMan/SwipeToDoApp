@@ -13,7 +13,9 @@ class InputCategoryViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     // TODO: ここは画面2からデータベースで持っていきたい
-    var categoryList: [CategoryList] = [CategoryList.init(categories: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
+//    var categoryList: [CategoryList] = [CategoryList.init(categories: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
+    // TODO: とりあえず書く
+    var categoryList: [CategoryList] = []
     @IBOutlet var selectedLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCellID", for: indexPath)
-        cell.textLabel?.text = categoryList[indexPath.row].categories
+        // cell.textLabel?.text = categoryList[indexPath.row].categories
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
