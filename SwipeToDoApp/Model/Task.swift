@@ -6,70 +6,11 @@
 //
 
 import UIKit
-
-final class Task {
-    var date: Date
-    var detail: String
-    var category: String
-    var isRepeatedTodo: Bool
-    var isDone: Bool
-    var photos: UIImage?
-
-    init(date: Date,detail: String,category: String,isRepeatedTodo: Bool,isDone: Bool,photos: UIImage?){
-        self.date = date
-        self.detail = detail
-        self.category = category
-        self.isRepeatedTodo = isRepeatedTodo
-        self.isDone = isDone
-        self.photos = photos
-    }
-
-}
-
-extension Task: Codable {
-
-    // Decodable
-    enum CodingKeys: String, CodingKey {
-        case date
-        case detail
-        case category
-        case isRepeatedTodo
-        case isDone
-        case photos
-    }
-
-    convenience init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        let date = try values.decode(Date.self, forKey: .date)
-        let detail = try values.decode(String.self, forKey: .detail)
-        let category = try values.decode(String.self, forKey: .category)
-        let isRepeatedTodo = try values.decode(Bool.self, forKey: .isRepeatedTodo)
-        let isDone = try values.decode(Bool.self, forKey: .isDone)
-
-        let imageDataBase64String = try values.decode(String.self, forKey: .photos)
-        let photos: UIImage?
-        if let data = Data(base64Encoded: imageDataBase64String) {
-            photos = UIImage(data: data)
-        } else {
-            photos = nil
-        }
-        self.init(date: date, detail: detail, category: category, isRepeatedTodo: isRepeatedTodo, isDone: isDone, photos: photos)
-        // self.init(id: id, title: title, image: photos)
-    }
-
-    // Encodable
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(date, forKey: .date)
-        try container.encode(detail, forKey: .detail)
-        try container.encode(isRepeatedTodo, forKey: .isRepeatedTodo)
-        try container.encode(isDone, forKey: .isDone)
-        try container.encode(category, forKey: .category)
-
-        if let image = photos, let imageData = image.pngData() {
-            let imageDataBase64String = imageData.base64EncodedString()
-            try container.encode(imageDataBase64String, forKey: .photos)
-        }
-    }
-
+import RealmSwift
+class Task: Object{
+    @objc dynamic var date: Date? = nil
+    @objc dynamic var detail: String = ""
+    @objc dynamic var category: String = ""
+    @objc dynamic var isRepeatedTodo: Bool = false
+    @objc dynamic var isDone: Bool = false
 }

@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 import RealmSwift
 class CategoryList: Object{
-    @objc dynamic var categoryName: String = ""
-    @objc dynamic var image: Data? = nil
+    @objc dynamic var name: String = ""
+    @objc dynamic var photo: Data? = nil
 }

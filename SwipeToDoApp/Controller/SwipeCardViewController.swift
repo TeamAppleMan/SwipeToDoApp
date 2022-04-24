@@ -49,7 +49,7 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             verticalCardSwiperView.backgroundColor = .white
             cardCell.detailTextView.text = cardTaskData[index].detail
             // カテゴリー写真を暗くする
-            cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: cardTaskData[index].photos!, level: 0.5)
+//            cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: cardTaskData[index].photos!, level: 0.5)
             cardCell.categoryLabel.text = cardTaskData[index].category
             return cardCell
         }

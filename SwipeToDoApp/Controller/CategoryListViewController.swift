@@ -25,9 +25,9 @@ class CategoryListViewController: UIViewController{
             let imageProgramming: Data! = (UIImage(named: "programming"))?.pngData()
             let imageShopping: Data! = (UIImage(named: "shopping"))?.pngData()
             let imageMtg: Data! = (UIImage(named: "mtg"))?.pngData()
-            let programming: CategoryList! = CategoryList.init(value: ["categoryName": "プログラミング","image": imageProgramming])
-            let shopping: CategoryList! = CategoryList.init(value: ["categoryName": "買い物","image": imageShopping])
-            let mtg: CategoryList! = CategoryList.init(value: ["categoryName": "会議","image": imageMtg])
+            let programming: CategoryList! = CategoryList.init(value: ["name": "プログラミング","photo": imageProgramming])
+            let shopping: CategoryList! = CategoryList.init(value: ["name": "買い物","photo": imageShopping])
+            let mtg: CategoryList! = CategoryList.init(value: ["name": "会議","photo": imageMtg])
             try! realm.write{
                 realm.add(programming)
                 realm.add(shopping)
@@ -57,10 +57,6 @@ class CategoryListViewController: UIViewController{
     @IBAction func tappedPlusCategoryButton(_ sender: Any) {
         performSegue(withIdentifier: "AddCategorySegue", sender: nil)
     }
-
-    @IBAction func reloadButton(_ sender: Any) {
-        tableView.reloadData()
-    }
 }
 
 extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
@@ -70,8 +66,8 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryID", for: indexPath) as! CategoryTableViewCell
-        cell.categoryNameLabel.text = categoryList[indexPath.row].categoryName
-        cell.categoryImageView.image = UIImage(data: categoryList[indexPath.row].image!)
+        cell.categoryNameLabel.text = categoryList[indexPath.row].name
+        cell.categoryImageView.image = UIImage(data: categoryList[indexPath.row].photo!)
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -100,5 +96,3 @@ extension CategoryListViewController: AddCategoryViewControllerDelegate{
 
 
 }
-
-//tableView.reloadData()

@@ -123,9 +123,9 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
             // カテゴリ一覧画面に画像をカテゴリ名前を渡す
-            self.addedCategoryList.categoryName = selectedCategoryName
+            self.addedCategoryList.name = selectedCategoryName
 
-            self.addedCategoryList.image = selectedCategoryPhoto.pngData()
+            self.addedCategoryList.photo = selectedCategoryPhoto.pngData()
             self.delegate?.catchAddedCategoryData(catchAddedCategoryList: self.addedCategoryList)
             self.navigationController?.popViewController(animated: true)
         }
@@ -150,9 +150,9 @@ extension AddCategoryViewController: UIImagePickerControllerDelegate,UINavigatio
         if let pickerImage = info[.editedImage] as? UIImage{
             let categoryName: String = categoryNameTextField.text ?? ""
             let categoryPhoto: UIImage = pickerImage
-//            addedCategoryList.categories = categoryName
-//            addedCategoryList.photos = categoryPhoto
-//            delegate?.catchAddedCategoryData(catchAddedCategoryList: addedCategoryList)
+            addedCategoryList.name = categoryName
+            addedCategoryList.photo = categoryPhoto.pngData()
+            delegate?.catchAddedCategoryData(catchAddedCategoryList: addedCategoryList)
             picker.dismiss(animated: true,completion: nil)
             navigationController?.popViewController(animated: true)
         }

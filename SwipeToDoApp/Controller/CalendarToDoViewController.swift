@@ -20,8 +20,6 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
 
     private var searchTasks: [Task]? = []
     private var taskDatas: [Task]? = []
-    // TODO: UserDefalutで保存したデータを持ってくる
-//    var categoryList: [CategoryList] = [CategoryList.init(categoryName: "運動", photos: UIImage(named: "manran")),CategoryList.init(categories: "プログラミング", photos: UIImage(named: "programming")),CategoryList.init(categories: "買い物", photos: UIImage(named: "shopping")),CategoryList.init(categories: "会議", photos: UIImage(named: "mtg"))]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,15 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        taskDatas = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
+        // ここの日付の指定はInt型
+        let calPosition = Calendar.current
+        // 現在の年・月・日・時刻を取得
+        let comp = calPosition.dateComponents(
+            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
+             Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
+             from: Date())
+        let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
+        calendar.select(selectDay)
         tableView.reloadData()
     }
 
@@ -164,13 +170,10 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         searchTasks = taskDatas?.filter {
             $0.date ==  nowSelectedDate
         }
-        // アプリ内保存
-        JsonEncoder.saveItemsToUserDefaults(list: taskDatas!, key: "searchTasksKey")
         return searchTasks?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        searchTasks = JsonEncoder.readItemsFromUserUserDefault(key: "searchTasksKey")
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         cell.detailLabel.text = searchTasks![indexPath.row].detail
         cell.categoryLabel.text = searchTasks![indexPath.row].category
