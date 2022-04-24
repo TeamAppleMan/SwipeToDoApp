@@ -19,7 +19,8 @@ class AddCategoryViewController: UIViewController {
 
     var checkPermission = CheckPermission()
 
-    // var addedCategoryList = CategoryList(categories: "", photos: UIImage(named:""))
+    // 追加するカテゴリ名
+    var addedCategoryList: CategoryList = CategoryList(value: [])
 
     private var photoArray: [String] = ["programming","cooking","imac","manran","mtg","coffee"]
     private var categoryNameArray: [String] = ["プログラミング","料理","PC作業","運動","打ち合わせ","勉強"]
@@ -122,9 +123,10 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
             // カテゴリ一覧画面に画像をカテゴリ名前を渡す
-//            self.addedCategoryList.categories = selectedCategoryName
-//            self.addedCategoryList.photos = selectedCategoryPhoto
-           //  self.delegate?.catchAddedCategoryData(catchAddedCategoryList: self.addedCategoryList)
+            self.addedCategoryList.categoryName = selectedCategoryName
+
+            self.addedCategoryList.image = selectedCategoryPhoto.pngData()
+            self.delegate?.catchAddedCategoryData(catchAddedCategoryList: self.addedCategoryList)
             self.navigationController?.popViewController(animated: true)
         }
         let cancelAction = UIAlertAction(title: "CANCEL", style: .default){ (cancel) in

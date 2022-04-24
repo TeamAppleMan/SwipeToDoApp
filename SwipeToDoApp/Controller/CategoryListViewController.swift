@@ -6,30 +6,39 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CategoryListViewController: UIViewController{
 
     @IBOutlet var tableView: UITableView!
-    // TODO: アプリ内保存したカテゴリ値を代入、保存がなければ初期値とする
-    var categoryList: [CategoryList] = []
+
+    var categoryList: Results<CategoryList>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
-        tableView.reloadData()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        // realmに保存されているCategoryListの内容をcategoryListにいれて更新
+        let realm = try! Realm()
+        categoryList = realm.objects(CategoryList.self)
 
-        //カテゴリーリストが空（アプリ内保存がない）場合は初期値を設定
-        if (categoryList.isEmpty) {
-            // UIImageをデータ型に変換
+        // 初期状態の設定または、カテゴリリストがないときはデフォルトの設定にする
+        if categoryList.isEmpty{
             let imageProgramming: Data! = (UIImage(named: "programming"))?.pngData()
             let imageShopping: Data! = (UIImage(named: "shopping"))?.pngData()
             let imageMtg: Data! = (UIImage(named: "mtg"))?.pngData()
-            categoryList = [CategoryList(value: ["categoryName": "プログラミング","image": imageProgramming]),CategoryList(value: ["categoryName": "プログラミング","image": imageShopping]),CategoryList(value: ["categoryName": "プログラミング","image": imageMtg])]
-//            categoryList = [CategoryList(categoryName: "プログラミング", image: imageProgramming),CategoryList(categoryName: "買い物", image: imageShopping),CategoryList(categoryName: "会議", image: imageMtg)]
+            let programming: CategoryList! = CategoryList.init(value: ["categoryName": "プログラミング","image": imageProgramming])
+            let shopping: CategoryList! = CategoryList.init(value: ["categoryName": "買い物","image": imageShopping])
+            let mtg: CategoryList! = CategoryList.init(value: ["categoryName": "会議","image": imageMtg])
+            try! realm.write{
+                realm.add(programming)
+                realm.add(shopping)
+                realm.add(mtg)
+            }
         }
+        tableView.reloadData()
+        setTableView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         tableView.reloadData()
     }
     private func setTableView() {
@@ -68,16 +77,24 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //
-            categoryList.remove(at: indexPath.row)
+            // categoryList.remove(at: indexPath.row)
+            // Realmを使用してカテゴリリストのアプリ内保存を行う
+            let realm = try! Realm()
+            try! realm.write{
+                let category = categoryList[indexPath.row]
+                realm.delete(category)
+            }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 }
 extension CategoryListViewController: AddCategoryViewControllerDelegate{
     func catchAddedCategoryData(catchAddedCategoryList: CategoryList) {
-        categoryList.append(catchAddedCategoryList)
-        // TODO: カテゴリリストのアプリ内保存を行う
-        print(categoryList.count)
+        // Realmを使用してカテゴリリストのアプリ内保存を行う
+        let realm = try! Realm()
+        try! realm.write{
+            realm.add(catchAddedCategoryList)
+        }
         tableView.reloadData()
     }
 
