@@ -11,9 +11,9 @@ protocol AddCategoryViewControllerDelegate{
 }
 class AddCategoryViewController: UIViewController {
 
-    @IBOutlet var horizontalCollectionView: UICollectionView!
-    @IBOutlet var categoryNameTextField: UITextField!
-    @IBOutlet var albumButton: UIButton!
+    @IBOutlet private var horizontalCollectionView: UICollectionView!
+    @IBOutlet private var categoryNameTextField: UITextField!
+    @IBOutlet private var albumButton: UIButton!
 
     var delegate: AddCategoryViewControllerDelegate?
 
@@ -22,8 +22,11 @@ class AddCategoryViewController: UIViewController {
     // 追加するカテゴリ名
     var addedCategoryList: CategoryList = CategoryList(value: [])
 
-    private var photoArray: [String] = ["programming","cooking","imac","manran","mtg","coffee"]
-    private var categoryNameArray: [String] = ["プログラミング","料理","PC作業","運動","打ち合わせ","勉強"]
+    // HACK: テンプレートカテゴリ 要検討案件です〜
+    private var templatePhotoArray: [String] = ["programming","cooking","imac","manran","mtg","coffee"]
+    private var templateCategoryNameArray: [String] = ["プログラミング","料理","PC作業","運動","打ち合わせ","勉強"]
+
+    // CollectionView関連の変数
     private var viewWidth: CGFloat!
     private var viewHeight: CGFloat!
     private var cellWidth: CGFloat!
@@ -39,13 +42,14 @@ class AddCategoryViewController: UIViewController {
         horizontalCollectionView.dataSource = self
         // アルバムボタンを押せなくする（テキストフィールドに値が入ってないため）
         albumButton.isEnabled = false
+        // 押せないことをアピールするためにalpha値を0.1にしている
         albumButton.alpha = 0.1
         checkPermission.checkAlbum()
-        let nib = UINib(nibName: "CategoryCollectionViewCell", bundle: .main)
+        let nib = UINib(nibName: "TemplateCategoryCollectionViewCell", bundle: .main)
         horizontalCollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionID")
     }
 
-    @IBAction func tappedAlbumButton(_ sender: Any) {
+    @IBAction private func tappedAlbumButton(_ sender: Any) {
         let sourceType: UIImagePickerController.SourceType = .photoLibrary
         createImagePicker(sourceType: sourceType)
     }
@@ -70,6 +74,7 @@ extension AddCategoryViewController: UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // カテゴリ名がテキストフィールドに入力されるとアルバムボタンを押せるようにする
         albumButton.isEnabled = true
+        // アルバムボタンを押せるとアピールするためにalpha値をデフォルトの1に戻す
         albumButton.alpha = 1
         return true
     }
@@ -80,11 +85,11 @@ extension AddCategoryViewController: UITextFieldDelegate{
 }
 extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoArray.count
+        return templatePhotoArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionID", for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionID", for: indexPath) as! TemplateCategoryCollectionViewCell
         cell.backgroundColor = UIColor.white
         cell.layer.cornerRadius = 12 // セルを角丸にする
         cell.layer.shadowOpacity = 0.4 // セルの影の濃さを調整する
@@ -92,9 +97,9 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 10, height: 10) // 影の方向
         cell.layer.masksToBounds = false
-        cell.categoryNameLabel.text = categoryNameArray[indexPath.row]
-        cell.backgroundImageView.image = UIImage(named: photoArray[indexPath.row])
-        cell.backgroundImageView.image = cell.darkenPictureCollectionViewCell(image: UIImage(named: photoArray[indexPath.row])!, level: 0.5)
+        cell.categoryNameLabel.text = templateCategoryNameArray[indexPath.row]
+        cell.backgroundImageView.image = UIImage(named: templatePhotoArray[indexPath.row])
+        cell.backgroundImageView.image = cell.darkenPictureCollectionViewCell(image: UIImage(named: templatePhotoArray[indexPath.row])!, level: 0.5)
         return cell
     }
 
@@ -117,14 +122,12 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
 
     // セルをタップしたら呼ばれるメソッド
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategoryName: String = categoryNameArray[indexPath.row]
-        // TODO: 強制アンラップなんとかしたい〜
-        let selectedCategoryPhoto: UIImage = UIImage(named: (photoArray[indexPath.row]))!
+        let selectedCategoryName: String = templateCategoryNameArray[indexPath.row]
+        let selectedCategoryPhoto: UIImage = UIImage(named: (templatePhotoArray[indexPath.row]))!
         let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
             // カテゴリ一覧画面に画像をカテゴリ名前を渡す
             self.addedCategoryList.name = selectedCategoryName
-
             self.addedCategoryList.photo = selectedCategoryPhoto.pngData()
             self.delegate?.catchAddedCategoryData(catchAddedCategoryList: self.addedCategoryList)
             self.navigationController?.popViewController(animated: true)
@@ -152,6 +155,7 @@ extension AddCategoryViewController: UIImagePickerControllerDelegate,UINavigatio
             let categoryPhoto: UIImage = pickerImage
             addedCategoryList.name = categoryName
             addedCategoryList.photo = categoryPhoto.pngData()
+            // 選択した画像とカテゴリ名をCategoryListViewControllerに渡す
             delegate?.catchAddedCategoryData(catchAddedCategoryList: addedCategoryList)
             picker.dismiss(animated: true,completion: nil)
             navigationController?.popViewController(animated: true)

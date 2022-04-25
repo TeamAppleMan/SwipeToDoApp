@@ -9,29 +9,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardViewID" id="KGk-i7-Jjw" customClass="CardViewCell" customModule="SwipeToDoApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="340" height="500"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardViewID" rowHeight="553" id="KGk-i7-Jjw" customClass="CardViewCell" customModule="SwipeToDoApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="553"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="340" height="500"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="553"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-6J-r2J">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="553"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-hs-6WX">
-                        <rect key="frame" x="92" y="228.66666666666666" width="156" height="42.999999999999972"/>
+                        <rect key="frame" x="91.666666666666686" y="255" width="156" height="43"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="detail" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SS4-NB-dFp">
-                        <rect key="frame" x="20" y="366" width="240" height="77"/>
+                        <rect key="frame" x="16" y="403" width="240" height="77"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
@@ -46,7 +46,7 @@
                 <outlet property="categoryPhotoImageView" destination="DJp-6J-r2J" id="3Dg-uG-v8V"/>
                 <outlet property="detailTextView" destination="SS4-NB-dFp" id="yPm-Ak-6Mo"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="92.410714285714278"/>
+            <point key="canvasLocation" x="136.80000000000001" y="111.94581280788178"/>
         </tableViewCell>
     </objects>
 </document>

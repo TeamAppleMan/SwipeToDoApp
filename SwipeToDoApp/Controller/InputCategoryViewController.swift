@@ -9,20 +9,24 @@ import UIKit
 import RealmSwift
 
 class InputCategoryViewController: UIViewController {
-    var task: String = ""
+    // CandarToDoViewControllerから受け取ったタスク名
+    var catchTask: String = ""
+
+    // HACK: カプセル化するか怪しかったので一旦なしで。
     var selectedIndexNumber: Int = 0
 
-    @IBOutlet var tableView: UITableView!
-    // TODO: とりあえず書く
-    var categoryList: Results<CategoryList>!
-    @IBOutlet var selectedLabel: UILabel!
+    @IBOutlet private var tableView: UITableView!
+    private var categoryList: Results<CategoryList>!
+    @IBOutlet private var selectedLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // relamで保存されたcategoryListの読み込み
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
         tableView.delegate = self
         tableView.dataSource = self
-        selectedLabel.text = "「\(task)」のカテゴリーを選択してください"
+        selectedLabel.text = "「\(catchTask)」のカテゴリーを選択してください"
     }
 }
 

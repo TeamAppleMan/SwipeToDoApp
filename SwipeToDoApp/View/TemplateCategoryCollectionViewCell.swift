@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryCollectionViewCell: UICollectionViewCell {
+class TemplateCategoryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var categoryNameLabel: UILabel!
     @IBOutlet var backgroundImageView: UIImageView!

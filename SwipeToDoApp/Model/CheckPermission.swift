@@ -8,6 +8,7 @@
 import Foundation
 import Photos
 
+// 写真アクセスのためのクラス
 class CheckPermission{
     func checkAlbum(){
         PHPhotoLibrary.requestAuthorization { (status) in

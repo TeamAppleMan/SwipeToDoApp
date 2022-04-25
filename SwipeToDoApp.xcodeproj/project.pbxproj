@@ -12,8 +12,8 @@
 		95979D0C28127C0E00E1457E /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */; };
 		95979D0D28127C0E00E1457E /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */; };
 		95979D0F281280ED00E1457E /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D0E281280ED00E1457E /* AddCategoryViewController.swift */; };
-		95979D122812857F00E1457E /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D102812857F00E1457E /* CategoryCollectionViewCell.swift */; };
-		95979D132812857F00E1457E /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95979D112812857F00E1457E /* CategoryCollectionViewCell.xib */; };
+		95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */; };
+		95979D132812857F00E1457E /* TemplateCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */; };
 		95979D15281287F000E1457E /* CheckPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D14281287F000E1457E /* CheckPermission.swift */; };
 		95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB1281121CA0025C9A1 /* CardViewCell.swift */; };
 		95A29BB4281121CA0025C9A1 /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A29BB2281121CA0025C9A1 /* CardViewCell.xib */; };
@@ -41,8 +41,8 @@
 		95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		95979D0E281280ED00E1457E /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
-		95979D102812857F00E1457E /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		95979D112812857F00E1457E /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TemplateCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		95979D14281287F000E1457E /* CheckPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermission.swift; sourceTree = "<group>"; };
 		95A29BB1281121CA0025C9A1 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		95A29BB2281121CA0025C9A1 /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
@@ -114,8 +114,8 @@
 				95A29BB2281121CA0025C9A1 /* CardViewCell.xib */,
 				95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */,
 				95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */,
-				95979D102812857F00E1457E /* CategoryCollectionViewCell.swift */,
-				95979D112812857F00E1457E /* CategoryCollectionViewCell.xib */,
+				95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */,
+				95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,7 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D6EBC8280F976C00960B82 /* LaunchScreen.storyboard in Resources */,
-				95979D132812857F00E1457E /* CategoryCollectionViewCell.xib in Resources */,
+				95979D132812857F00E1457E /* TemplateCategoryCollectionViewCell.xib in Resources */,
 				95D6EBC5280F976C00960B82 /* Assets.xcassets in Resources */,
 				95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */,
 				95979D0D28127C0E00E1457E /* CategoryTableViewCell.xib in Resources */,
@@ -303,7 +303,7 @@
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
 				95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
-				95979D122812857F00E1457E /* CategoryCollectionViewCell.swift in Sources */,
+				95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */,
 				95979D0C28127C0E00E1457E /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,25 +10,23 @@ import FSCalendar
 import MaterialComponents
 import RealmSwift
 
-class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDelegate {
+class CalendarToDoViewController: UIViewController {
 
-    @IBOutlet var calendar: FSCalendar!
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var taskTextField: MDCOutlinedTextField!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet private var calendar: FSCalendar!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var taskTextField: MDCOutlinedTextField!
+    @IBOutlet private var dateLabel: UILabel!
 
-    private var searchTasks: [Task]? = []
-    private var taskDatas: [Task]? = []
-
-    var task: Results<Task>!
-    var categoryList: Results<CategoryList>!
+    private var task: Results<Task>!
+    private var categoryList: Results<CategoryList>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // RealmのファイルURLを表示する
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+
         let realm = try! Realm()
-        task = realm.objects(Task.self)
+        task = realm.objects(Task.self) // Taskの保存
         setTableView()
         setCalendar()
         setTextField()
@@ -36,20 +34,25 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        // ここの日付の指定はInt型
-        let calPosition = Calendar.current
-        // 現在の年・月・日・時刻を取得
-        let comp = calPosition.dateComponents(
-            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-             Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
-             from: Date())
-        let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
+        setInitCalendar()
+        tableView.reloadData()
+    }
+
+    // HACK: setCalendarと内容が少し被ってしまっている。少し冗長になってしまっている。前田さん作のDateのextensionを使用すればもう少し短くなるかも？？。
+    private func setInitCalendar(){
+        // 最新で選択したカレンダーの日付をデフォルトで選択された状態にする。（スワイプ画面から戻ってきたときこの方が自然だから）
         if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
             calendar.select(UserDefaults.standard.object(forKey: "selectedDateKey") as! Date)
         }else{
+            let calPosition = Calendar.current
+            // 現在の年・月・日・時刻を取得
+            let comp = calPosition.dateComponents(
+                [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
+                 Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
+                 from: Date())
+            let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
             calendar.select(selectDay)
         }
-        tableView.reloadData()
     }
 
     // HACK: if文が連結していてあまり良い書き方ではない
@@ -59,7 +62,7 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
             let nav = segue.destination as! UINavigationController
             if let sheet = nav.sheetPresentationController {
                 let inputCategoryVC = nav.topViewController as! InputCategoryViewController
-                inputCategoryVC.task = taskTextField.text ?? "aaa"
+                inputCategoryVC.catchTask = taskTextField.text ?? "aaa"
                 sheet.detents = [.medium()]
                 //モーダル出現後も親ビュー操作可能にする
                 sheet.largestUndimmedDetentIdentifier = .medium
@@ -69,10 +72,10 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
                 sheet.prefersGrabberVisible = true
             }
         }else if segue.identifier == "SwipeCardSegue"{
-            // 保存したタスクデータを渡すorUserDefalutsで保存する？
             let swipeCardVC = segue.destination as! SwipeCardViewController
             swipeCardVC.delegate = self
-            // 日付レベルでフィルタリング
+
+            // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
             let realm = try! Realm()
             guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
                 return
@@ -80,12 +83,6 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
             let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
             swipeCardVC.catchTask = filtersTask
         }
-    }
-
-    // SwipeCardViewControllerによるデリゲートメソッド。Swipe後のデータをTableViewに反映
-    func catchDidSwipeCardData(catchTask: [Task]) {
-        taskDatas = catchTask
-        tableView.reloadData()
     }
 
     // モーダル遷移先のCancelButtonを押すと、帰ってくる処理
@@ -97,21 +94,23 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
         let inputCategoryVC = segue.source as! InputCategoryViewController
 
         let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
-        // カレンダーデータのオプショナルバインディング
+
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return
         }
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
-        let newTodo = Task.init(value: ["date": nowSelectedDate,"detail": taskTextField.text ?? "","category": categoryList[selectedIndexNumber].name,"isRepeated": false,"isDone": false,"photo": categoryList[selectedIndexNumber].photo])
+        // 新しいタスクの初期化（isRepeatedとisDoneはfalseにしている）
+        let newTodo = Task.init(value: ["date": nowSelectedDate,"detail": taskTextField.text ?? "","category": categoryList[selectedIndexNumber].name,"isRepeated": false,"isDone": false,"photo": categoryList[selectedIndexNumber].photo!])
         try! realm.write{
             realm.add(newTodo)
         }
         taskTextField.text = ""
+        // 追加されたTaskをtableViewに反映するために、tableView.reloadData()している
         tableView.reloadData()
     }
 
-    @IBAction func taskDeleteButton(_ sender: Any) {
+    @IBAction private func taskDeleteButton(_ sender: Any) {
         // SwipeCardVCへ画面遷移
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
@@ -148,6 +147,7 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
     private func setTableView(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 100
         tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
     }
 
@@ -155,11 +155,6 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    func catchDidSwipeCardData(catchTask: Results<Task>) {
-        task = catchTask
-        tableView.reloadData()
-    }
-
 }
 
 extension CalendarToDoViewController: UITextFieldDelegate {
@@ -178,16 +173,17 @@ extension CalendarToDoViewController: FSCalendarDelegate {
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return
         }
-        // Swipe画面から戻ってきた時にカレンダーの選択をnowSelectedDateにするために保存
+        // Swipe画面から戻ってきた時にカレンダーの選択をselectedDateにするためにselectedDateを保存
         UserDefaults.standard.set(selectedDate,forKey: "selectedDateKey")
         let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
+
         taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
         dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
     }
 }
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 年、月、日付レベルでフィルタリング
+        // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let realm = try! Realm()
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return 0
@@ -197,7 +193,7 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         // 日付レベルでフィルタリング
         let realm = try! Realm()
@@ -210,9 +206,13 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryLabel.text = object.category
         return cell
     }
+}
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+extension CalendarToDoViewController: SwipeCardViewControllerDelegate{
+    // SwipeCardViewControllerのデリゲートメソッド: バックボタンを押した時に呼ばれる
+    func catchDidSwipeCardData(catchTask: Results<Task>) {
+        task = catchTask
+        tableView.reloadData()
     }
 }
 

@@ -15,9 +15,11 @@ protocol SwipeCardViewControllerDelegate{
 
 class SwipeCardViewController: UIViewController {
 
-    @IBOutlet var cardSwiper: VerticalCardSwiper!
-    var catchTask: Results<Task>!
-    var cardTask: Results<Task>!
+    @IBOutlet private var cardSwiper: VerticalCardSwiper!
+
+    private var cardTask: Results<Task>!
+    public var catchTask: Results<Task>!
+
     var delegate: SwipeCardViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -27,27 +29,38 @@ class SwipeCardViewController: UIViewController {
         cardSwiper.register(nib:UINib(nibName: "CardViewCell", bundle: nil), forCellWithReuseIdentifier: "CardViewID")
         cardSwiper.reloadData()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        // HACK: 正直cardTaskに格納する意味はないです。。笑
         cardTask = catchTask
     }
 
+    // CalendarToDoViewControllerの画面遷移
     @IBAction func tappedBackButton(_ sender: Any) {
-        // cardTaskDataのデータを前の画面に渡す（おそらくデリゲートを使う？）
+        // カードで更新したtaskデータをCalendarToDoViewControllerに渡し、tableViewをリロードするという意図があります
         delegate?.catchDidSwipeCardData(catchTask: cardTask)
         dismiss(animated: true)
     }
+
+    // ボタンで右スワイプ（左スワイプは何も起きないようになっている）
+    @IBAction func tappedSwipeRightButton(_ sender: Any) {
+        // 自動右スワイプ
+        if let currentIndex = cardSwiper.focussedCardIndex {
+            _ = cardSwiper.swipeCardAwayProgrammatically(at: currentIndex, to: .Right)
+        }
+    }
 }
 extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiperDatasource{
+    // カードの個数を返すデリゲートメソッド
     func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
-        catchTask.count
+        cardTask.count
     }
 
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "CardViewID", for: index) as? CardViewCell {
-            cardCell.setRandomBackgroundColor()
-            // verticalCardSwiperView.backgroundColor = UIColor.random()
             verticalCardSwiperView.backgroundColor = .white
+
             let object = cardTask[index]
             cardCell.detailTextView.text = object.detail
             // カテゴリー写真を暗くする
@@ -57,13 +70,13 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
         }
         return CardCell()
     }
+    // 右スワイプした時に呼ばれるデリゲートメソッド
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
         if swipeDirection == .Right{
+            // 右スワイプしたタスクデータはisDoneをfalseにしてRealmに登録
             let realm = try! Realm()
-            // デリートではなく、isDoneをfalseからtrueにしてaddする
             try! realm.write{
                 cardTask[index].isDone = true
-
             }
         }
     }
