@@ -40,6 +40,4 @@ extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
     }
-
-    
 }

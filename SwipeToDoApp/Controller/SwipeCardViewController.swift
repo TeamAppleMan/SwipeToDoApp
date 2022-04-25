@@ -7,16 +7,17 @@
 
 import UIKit
 import VerticalCardSwiper
+import RealmSwift
 
 protocol SwipeCardViewControllerDelegate{
-    func catchDidSwipeCardData(catchTask: [Task])
+    func catchDidSwipeCardData(catchTask: Results<Task>)
 }
 
 class SwipeCardViewController: UIViewController {
 
     @IBOutlet var cardSwiper: VerticalCardSwiper!
-    var catchTaskData: [Task] = []
-    var cardTaskData: [Task] = []
+    var catchTask: Results<Task>!
+    var cardTask: Results<Task>!
     var delegate: SwipeCardViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -28,18 +29,18 @@ class SwipeCardViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        cardTaskData = catchTaskData
+        cardTask = catchTask
     }
 
     @IBAction func tappedBackButton(_ sender: Any) {
         // cardTaskDataのデータを前の画面に渡す（おそらくデリゲートを使う？）
-        delegate?.catchDidSwipeCardData(catchTask: cardTaskData)
+        delegate?.catchDidSwipeCardData(catchTask: cardTask)
         dismiss(animated: true)
     }
 }
 extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiperDatasource{
     func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
-        cardTaskData.count
+        catchTask.count
     }
 
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
@@ -47,19 +48,23 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             cardCell.setRandomBackgroundColor()
             // verticalCardSwiperView.backgroundColor = UIColor.random()
             verticalCardSwiperView.backgroundColor = .white
-            cardCell.detailTextView.text = cardTaskData[index].detail
+            let object = cardTask[index]
+            cardCell.detailTextView.text = object.detail
             // カテゴリー写真を暗くする
-//            cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: cardTaskData[index].photos!, level: 0.5)
-            cardCell.categoryLabel.text = cardTaskData[index].category
+            cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: UIImage(data: object.photo!)!, level: 0.5)
+            cardCell.categoryLabel.text = object.category
             return cardCell
         }
         return CardCell()
     }
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
         if swipeDirection == .Right{
-            cardTaskData.remove(at: index)
+            let realm = try! Realm()
+            // デリートではなく、isDoneをfalseからtrueにしてaddする
+            try! realm.write{
+                cardTask[index].isDone = true
+
+            }
         }
     }
-
-
 }

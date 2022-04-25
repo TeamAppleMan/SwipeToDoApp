@@ -18,6 +18,8 @@
 		95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB1281121CA0025C9A1 /* CardViewCell.swift */; };
 		95A29BB4281121CA0025C9A1 /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A29BB2281121CA0025C9A1 /* CardViewCell.xib */; };
 		95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */; };
+		95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A4990628157A0700B84AC9 /* DataUtils.swift */; };
+		95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A499082815FD8B00B84AC9 /* DateExtension.swift */; };
 		95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBB280F976B00960B82 /* AppDelegate.swift */; };
 		95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBD280F976B00960B82 /* SceneDelegate.swift */; };
 		95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBBF280F976B00960B82 /* CalendarToDoViewController.swift */; };
@@ -44,6 +46,8 @@
 		95A29BB1281121CA0025C9A1 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		95A29BB2281121CA0025C9A1 /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewController.swift; sourceTree = "<group>"; };
+		95A4990628157A0700B84AC9 /* DataUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtils.swift; sourceTree = "<group>"; };
+		95A499082815FD8B00B84AC9 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		95D6EBB8280F976B00960B82 /* SwipeToDoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeToDoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D6EBBB280F976B00960B82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95D6EBBD280F976B00960B82 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				95D6EBCF280FA91000960B82 /* Task.swift */,
 				95D6EBF92810EAE700960B82 /* CategoryList.swift */,
 				95979D14281287F000E1457E /* CheckPermission.swift */,
+				95A4990628157A0700B84AC9 /* DataUtils.swift */,
+				95A499082815FD8B00B84AC9 /* DateExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,8 +290,10 @@
 				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
 				95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */,
 				95979D15281287F000E1457E /* CheckPermission.swift in Sources */,
+				95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */,
 				95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */,
 				95979D0F281280ED00E1457E /* AddCategoryViewController.swift in Sources */,
+				95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */,
 				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,

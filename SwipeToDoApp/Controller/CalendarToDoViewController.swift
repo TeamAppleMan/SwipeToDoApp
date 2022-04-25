@@ -12,7 +12,6 @@ import RealmSwift
 
 class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDelegate {
 
-
     @IBOutlet var calendar: FSCalendar!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var taskTextField: MDCOutlinedTextField!
@@ -21,10 +20,15 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
     private var searchTasks: [Task]? = []
     private var taskDatas: [Task]? = []
 
+    var task: Results<Task>!
+    var categoryList: Results<CategoryList>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // RealmのファイルURLを表示する
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        let realm = try! Realm()
+        task = realm.objects(Task.self)
         setTableView()
         setCalendar()
         setTextField()
@@ -40,7 +44,11 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
              Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
              from: Date())
         let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
-        calendar.select(selectDay)
+        if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
+            calendar.select(UserDefaults.standard.object(forKey: "selectedDateKey") as! Date)
+        }else{
+            calendar.select(selectDay)
+        }
         tableView.reloadData()
     }
 
@@ -64,7 +72,13 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
             // 保存したタスクデータを渡すorUserDefalutsで保存する？
             let swipeCardVC = segue.destination as! SwipeCardViewController
             swipeCardVC.delegate = self
-            swipeCardVC.catchTaskData = searchTasks ?? []
+            // 日付レベルでフィルタリング
+            let realm = try! Realm()
+            guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+                return
+            }
+            let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+            swipeCardVC.catchTask = filtersTask
         }
     }
 
@@ -87,10 +101,12 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
             return
         }
-        print("selectedIndexNumber:",selectedIndexNumber)
-//        taskDatas?.append(.init(date: nowSelectedDate, detail: taskTextField.text ?? "", category: categoryList[selectedIndexNumber].categories, isRepeatedTodo: false, isDone: false, photos: categoryList[selectedIndexNumber].photos!))
-        print("taskDatas: ",taskDatas!)
-
+        let realm = try! Realm()
+        categoryList = realm.objects(CategoryList.self)
+        let newTodo = Task.init(value: ["date": nowSelectedDate,"detail": taskTextField.text ?? "","category": categoryList[selectedIndexNumber].name,"isRepeated": false,"isDone": false,"photo": categoryList[selectedIndexNumber].photo])
+        try! realm.write{
+            realm.add(newTodo)
+        }
         taskTextField.text = ""
         tableView.reloadData()
     }
@@ -139,6 +155,10 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    func catchDidSwipeCardData(catchTask: Results<Task>) {
+        task = catchTask
+        tableView.reloadData()
+    }
 
 }
 
@@ -152,8 +172,14 @@ extension CalendarToDoViewController: UITextFieldDelegate {
 extension CalendarToDoViewController: FSCalendarDelegate {
     // カレンダーの日付をタップした時に、カードに日付情報を反映させる処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        tableView.reloadData()
+        // 選択されたカレンダーの日付ごとに、TableViewの表示を変更するためのtableView.reloadData()
+        tableView.reloadData()
         let calPosition = Calendar.current
+        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+            return
+        }
+        // Swipe画面から戻ってきた時にカレンダーの選択をnowSelectedDateにするために保存
+        UserDefaults.standard.set(selectedDate,forKey: "selectedDateKey")
         let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
         taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
         dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
@@ -161,22 +187,27 @@ extension CalendarToDoViewController: FSCalendarDelegate {
 }
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchTasks = []
-        // 現在選択されたデータの取得。なぜか１日ずれるため１日ずらす
+        // 年、月、日付レベルでフィルタリング
+        let realm = try! Realm()
         guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return taskDatas?.count ?? 0
+            return 0
         }
-        // 配列の中から選択された同じ日付のデータが存在するかを調べて、あればsearchTasksに追加
-        searchTasks = taskDatas?.filter {
-            $0.date ==  nowSelectedDate
-        }
-        return searchTasks?.count ?? 0
+        let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+        return filtersTask.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
-        cell.detailLabel.text = searchTasks![indexPath.row].detail
-        cell.categoryLabel.text = searchTasks![indexPath.row].category
+        // 日付レベルでフィルタリング
+        let realm = try! Realm()
+        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+            return cell
+        }
+        let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+        let object = filtersTask[indexPath.row]
+        cell.detailLabel.text = object.detail
+        cell.categoryLabel.text = object.category
         return cell
     }
 
