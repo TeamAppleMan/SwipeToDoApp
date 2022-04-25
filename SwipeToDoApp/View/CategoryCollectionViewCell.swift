@@ -13,7 +13,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet var backgroundImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundImageView.layer.cornerRadius = 12
     }
     public func darkenPictureCollectionViewCell(image:UIImage, level:CGFloat) -> UIImage {
         // 一時的な暗くするようの黒レイヤ

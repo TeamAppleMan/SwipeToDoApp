@@ -111,8 +111,8 @@ class CalendarToDoViewController: UIViewController, SwipeCardViewControllerDeleg
         tableView.reloadData()
     }
 
-    // SwipeCardVCへ画面遷移
     @IBAction func taskDeleteButton(_ sender: Any) {
+        // SwipeCardVCへ画面遷移
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
