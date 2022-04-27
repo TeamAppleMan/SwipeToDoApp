@@ -30,10 +30,12 @@ class MotivationViewController: UIViewController {
     @IBOutlet private weak var taskRatioOfMonthPieChartView: PieChartView!
     @IBOutlet private weak var categoryRatioOfMonthPieChartView: PieChartView!
     private var taskCountOfMonthChartDataSet: LineChartDataSet!
+    private var taskRatioOfMonthPieDataSet: PieChartDataSet!
+    private var categoryRatioOfMonthPieDataSet: PieChartDataSet!
 
     private var taskCountOfMonthChartData: [Double] = []
-    private var taskRatioOfMonthPieDataSet2: [PieChartDataSet] = []
-    private var categoryRatioOfMonthPieDataSet2: [PieChartDataSet] = []
+    private var taskRatioOfMonthPieData: [PieChartDataEntry] = []
+    private var categoryRatioOfMonthPieData: [PieChartDataEntry] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +83,7 @@ class MotivationViewController: UIViewController {
     private func calculateMonth() {
         var filterTasks:[Task] = []
         // トップの折れ線グラフの計算
+        // 当月のTaskかどうかをfilterする
         filterTasks = tasks.filter {
             presentDate < $0.date && $0.date < presentDate.added(year: 0, month: 1, day: 0, hour: 0, minute: 0, second: 0)
         }
@@ -95,6 +98,28 @@ class MotivationViewController: UIViewController {
         createTaskCountOfMonthLineChart(data: taskCountOfMonthChartData)
         print(taskCountOfMonthChartData)
 
+        //　達成率（円グラフ）計算
+        let achieveCount = taskCountOfMonthChartData.reduce(0, +)
+        let achieveRatio = ( achieveCount / Double(taskCountOfMonthChartData.count) ) * 100
+        taskRatioOfMonthPieData = [
+                PieChartDataEntry(value: Double(achieveRatio), label: "達成"),
+                PieChartDataEntry(value: Double(100 - achieveRatio), label: "未達成")
+            ]
+        createTaskRatioOfMonthPieChart(dataEntries: taskRatioOfMonthPieData)
+
+        // カテゴリー割合計算
+        var specificCategoriesTask: [Task] = []
+        var data3: [Int] = []
+        taskRatioOfMonthPieData.removeAll()
+        for category in categoryLists {
+            // カテゴリをfilterしてappend
+            specificCategoriesTask = filterTasks.filter{
+                $0.category == category.name
+            }
+            data3.append(specificCategoriesTask.count)
+            taskRatioOfMonthPieData.append(PieChartDataEntry(value: Double(specificCategoriesTask.count), label: category.name))
+        }
+        createCategoryRatioOfMonthPieChart(dataEntries: taskRatioOfMonthPieData)
     }
 
     private func createTaskCountOfMonthLineChart(data: [Double]) {
@@ -164,5 +189,77 @@ class MotivationViewController: UIViewController {
         taskCountOfMonthLineChartView.isHidden = false
     }
 
+    private func createTaskRatioOfMonthPieChart(dataEntries: [PieChartDataEntry]) {
+        taskRatioOfMonthPieChartView.noDataText = "表示できるデータがありません"
+        taskRatioOfMonthPieChartView.drawHoleEnabled = false //中心まで塗りつぶし
+        taskRatioOfMonthPieChartView.highlightPerTapEnabled = false  // グラフがタップされたときのハイライトをOFF（任意）
+        taskRatioOfMonthPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
+        taskRatioOfMonthPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
+        taskRatioOfMonthPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
+        taskRatioOfMonthPieChartView.legend.enabled = true  // グラフの注釈
+        taskRatioOfMonthPieChartView.legend.formSize = CGFloat(20)
+
+        let dataSet = PieChartDataSet(entries: dataEntries, label: "")
+        // グラフの色
+        dataSet.colors = [#colorLiteral(red: 0.9219940305, green: 0.662347734, blue: 0.6161623597, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)]
+        // グラフのデータの値の色
+        dataSet.valueTextColor = UIColor.gray
+        // グラフのデータのタイトルの色
+        dataSet.entryLabelColor = UIColor.black
+
+        // データがないときにnoDataTextを表示させる
+        if dataEntries.isEmpty == false {
+            taskRatioOfMonthPieChartView.data = PieChartData(dataSet: dataSet)
+        } else {
+            taskRatioOfMonthPieChartView.data = nil
+        }
+
+        // データを％表示にする
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 1
+        formatter.multiplier = 1.0
+        taskRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
+        taskRatioOfMonthPieChartView.usePercentValuesEnabled = true
+        taskRatioOfMonthPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        taskRatioOfMonthPieChartView.isHidden = false
+    }
+
+    private func createCategoryRatioOfMonthPieChart(dataEntries: [PieChartDataEntry]) {
+        categoryRatioOfMonthPieChartView.noDataText = "表示できるデータがありません"
+        categoryRatioOfMonthPieChartView.drawHoleEnabled = false //中心まで塗りつぶし
+        categoryRatioOfMonthPieChartView.highlightPerTapEnabled = false  // グラフがタップされたときのハイライトをOFF（任意）
+        categoryRatioOfMonthPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
+        categoryRatioOfMonthPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
+        categoryRatioOfMonthPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
+        categoryRatioOfMonthPieChartView.legend.enabled = true  // グラフの注釈
+        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(20)
+
+        let dataSet = PieChartDataSet(entries: dataEntries, label: "")
+        // グラフの色
+        dataSet.colors = [#colorLiteral(red: 0.9219940305, green: 0.662347734, blue: 0.6161623597, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)]
+        //dataSet.colors = ChartColorTemplates.vordiplom()
+        // グラフのデータの値の色
+        dataSet.valueTextColor = UIColor.gray
+        // グラフのデータのタイトルの色
+        dataSet.entryLabelColor = UIColor.black
+
+        // データがないときにnoDataTextを表示させる
+        if dataEntries.isEmpty == false {
+            categoryRatioOfMonthPieChartView.data = PieChartData(dataSet: dataSet)
+        } else {
+            categoryRatioOfMonthPieChartView.data = nil
+        }
+
+        // データを％表示にする
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 1
+        formatter.multiplier = 1.0
+        categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
+        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = true
+        categoryRatioOfMonthPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        categoryRatioOfMonthPieChartView.isHidden = false
+    }
 
 }
