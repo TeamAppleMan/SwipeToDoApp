@@ -15,6 +15,7 @@ class MotivationViewController: UIViewController {
     private var categoryLists: Results<CategoryList>!
     private var tasks: Results<Task>!
     private var presentDate: Date!
+    private var todayDate: Date!
 
     @IBOutlet private weak var taskRangeSegmentedControl: UISegmentedControl!
 
@@ -80,6 +81,7 @@ class MotivationViewController: UIViewController {
             [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
              Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
              from: Date())
+        todayDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: todayComppnent.day! + 1, hour: 0, minute: 0, second: 0 )
         presentDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: 2, hour: 0, minute: 0, second: 0 )
         self.navigationItem.title = "\(presentDate.year)年\(presentDate.month)月"
 
@@ -191,10 +193,11 @@ class MotivationViewController: UIViewController {
 
     func calculateAll() {
         var allDateList: [Date] = []
+        var toNowAllDateList: [Date] = []
         var endTaskcount = 0.0
         var eachCategoryTasks: [Task] = []
         var categoryRatioNoDateCheck: [Int] = []
-        taskCountOfMonthChartData = []
+        taskCountOfAllChartData = []
         taskRatioOfAllPieData = []
         categoryRatioOfAllPieData = []
 
@@ -203,27 +206,34 @@ class MotivationViewController: UIViewController {
         for task in tasks {
             allDateList.append(task.date)
         }
-        guard let mostOldDate = allDateList.min() else { return }
+
+        toNowAllDateList = allDateList.filter{
+            $0 <= todayDate
+        }
+        // 後の計算用に
+        guard let mostOldDate = toNowAllDateList.min() else { return }
 
         // その差から数える月数を取得
         let fromOldToNowMonth = mostOldDate.getMonthCount(between: mostOldDate)
 
         // その月の回数分だけforを回してtrueの数を調べる
         for i in 0..<fromOldToNowMonth {
-            var endTaskOfMonth: [Task] = []
+            var endTaskOfMonthly: [Task] = []
 
-            endTaskOfMonth = tasks.filter{
+            endTaskOfMonthly = tasks.filter{
                 $0.date.month == mostOldDate.added(year: 0, month: i, day: 0, hour: 0, minute: 0, second: 0).month && $0.date.year == mostOldDate.added(year: 0, month: i, day: 0, hour: 0, minute: 0, second: 0).year && $0.isDone == true
             }
-            endTaskcount += Double(endTaskOfMonth.count)
-            taskCountOfMonthChartData.append(endTaskcount)
+            endTaskcount += Double(endTaskOfMonthly.count)
+            taskCountOfAllChartData.append(endTaskcount)
         }
-        createTaskCountOfAllLineChart(data: taskCountOfMonthChartData)
+        createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
 
         //　達成率（円グラフ）計算
-        let achieveCount = taskCountOfMonthChartData.max() ?? 0
-        if allDateList.count != 0 {
-            let achieveRatio = ( achieveCount / Double(allDateList.count) ) * 100
+        print(taskCountOfAllChartData)
+        let achieveCount = taskCountOfAllChartData.max() ?? 0
+        print(achieveCount)
+        if toNowAllDateList.count != 0 {
+            let achieveRatio = ( achieveCount / Double(toNowAllDateList.count) ) * 100
             taskRatioOfAllPieData = [
                 PieChartDataEntry(value: Double(achieveRatio), label: "達成"),
                 PieChartDataEntry(value: Double(100 - achieveRatio), label: "未達成")
