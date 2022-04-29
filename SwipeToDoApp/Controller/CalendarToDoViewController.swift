@@ -72,7 +72,8 @@ class CalendarToDoViewController: UIViewController {
                 sheet.prefersGrabberVisible = true
             }
         }else if segue.identifier == "SwipeCardSegue"{
-            let swipeCardVC = segue.destination as! SwipeCardViewController
+            let nav = segue.destination as! UINavigationController
+            let swipeCardVC = nav.topViewController as! SwipeCardViewController
             swipeCardVC.delegate = self
 
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
@@ -110,10 +111,6 @@ class CalendarToDoViewController: UIViewController {
         tableView.reloadData()
     }
 
-    @IBAction private func taskDeleteButton(_ sender: Any) {
-        // SwipeCardVCへ画面遷移
-        performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
-    }
 
     private func setCalendar(){
         calendar.delegate = self
