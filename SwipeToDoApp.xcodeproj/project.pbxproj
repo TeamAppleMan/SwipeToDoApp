@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7468F9A9C611488EF671A986 /* Pods_SwipeToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */; };
+		87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802033281BB328006228A9 /* SettingTableViewController.swift */; };
+		87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */; };
+		87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */; };
 		95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D0828127A4400E1457E /* CategoryListViewController.swift */; };
 		95979D0C28127C0E00E1457E /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */; };
 		95979D0D28127C0E00E1457E /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */; };
@@ -37,6 +40,9 @@
 /* Begin PBXFileReference section */
 		038BF23017AD2660309CB535 /* Pods-SwipeToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87802033281BB328006228A9 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFeedbackViewController.swift; sourceTree = "<group>"; };
+		87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMethodOfOperationViewController.swift; sourceTree = "<group>"; };
 		95979D0828127A4400E1457E /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 				95979D0828127A4400E1457E /* CategoryListViewController.swift */,
 				95979D0E281280ED00E1457E /* AddCategoryViewController.swift */,
 				95A4990A2816314D00B84AC9 /* MotivationViewController.swift */,
+				87802033281BB328006228A9 /* SettingTableViewController.swift */,
+				87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */,
+				87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -294,13 +303,16 @@
 				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
 				95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */,
 				95979D15281287F000E1457E /* CheckPermission.swift in Sources */,
+				87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */,
 				95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */,
+				87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */,
 				95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */,
 				95979D0F281280ED00E1457E /* AddCategoryViewController.swift in Sources */,
 				95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */,
 				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
+				87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */,
 				95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
 				95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */,
