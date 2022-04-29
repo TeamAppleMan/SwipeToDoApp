@@ -19,6 +19,10 @@ class CalendarToDoViewController: UIViewController {
 
     private var task: Results<Task>!
     private var categoryList: Results<CategoryList>!
+    private var selectedYear: Int = 0
+    private var selectedMonth: Int = 0
+    private var selectedDay: Int = 0
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +78,10 @@ class CalendarToDoViewController: UIViewController {
         }else if segue.identifier == "SwipeCardSegue"{
             let nav = segue.destination as! UINavigationController
             let swipeCardVC = nav.topViewController as! SwipeCardViewController
+            // 選択された日付を渡す
+            if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
+                swipeCardVC.catchDate =  UserDefaults.standard.object(forKey: "selectedDateKey") as? Date
+            }
             swipeCardVC.delegate = self
 
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
@@ -173,7 +181,12 @@ extension CalendarToDoViewController: FSCalendarDelegate {
         // Swipe画面から戻ってきた時にカレンダーの選択をselectedDateにするためにselectedDateを保存
         UserDefaults.standard.set(selectedDate,forKey: "selectedDateKey")
         let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
-
+//        selectedYear = calendar.selectedDate?.year ?? 0
+//        selectedMonth = calendar.selectedDate?.month ?? 0
+//        selectedDay = calendar.selectedDate?.day ?? 0
+//        print("selectedYear: ",selectedYear)
+//        print("selectedMonth: ",selectedMonth)
+//        print("selectedDay:",selectedDay)
         taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
         dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
     }
