@@ -60,11 +60,6 @@ class CategoryListViewController: UIViewController{
             addCategoryVC.delegate = self
         }
     }
-
-    // AddCategoryViewControllerへの画面遷移
-    @IBAction private func tappedPlusCategoryButton(_ sender: Any) {
-        performSegue(withIdentifier: "AddCategorySegue", sender: nil)
-    }
 }
 
 extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{

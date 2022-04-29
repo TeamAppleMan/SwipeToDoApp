@@ -72,7 +72,12 @@ class CalendarToDoViewController: UIViewController {
                 sheet.prefersGrabberVisible = true
             }
         }else if segue.identifier == "SwipeCardSegue"{
-            let swipeCardVC = segue.destination as! SwipeCardViewController
+            let nav = segue.destination as! UINavigationController
+            let swipeCardVC = nav.topViewController as! SwipeCardViewController
+            // ナビゲーションバータイトル用に、選択された日付を渡す
+            if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
+                swipeCardVC.catchDate =  UserDefaults.standard.object(forKey: "selectedDateKey") as? Date
+            }
             swipeCardVC.delegate = self
 
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
