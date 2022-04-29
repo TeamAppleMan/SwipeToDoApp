@@ -229,9 +229,7 @@ class MotivationViewController: UIViewController {
         createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
 
         //　達成率（円グラフ）計算
-        print(taskCountOfAllChartData)
         let achieveCount = taskCountOfAllChartData.max() ?? 0
-        print(achieveCount)
         if toNowAllDateList.count != 0 {
             let achieveRatio = ( achieveCount / Double(toNowAllDateList.count) ) * 100
             taskRatioOfAllPieData = [
@@ -263,9 +261,9 @@ class MotivationViewController: UIViewController {
         }
 
         endTaskNumberLabel1.text = String(Int(achieveCount))
-        planTaskNumberLabel.text = String(Int(allDateList.count))
+        planTaskNumberLabel.text = String(Int(toNowAllDateList.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
-        noEndTaskNumberLabel.text = String(Int(allDateList.count) - Int(achieveCount))
+        noEndTaskNumberLabel.text = String(Int(toNowAllDateList.count) - Int(achieveCount))
         lineChartDescriptionLabel.text = "経過月"
         taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
         taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
