@@ -60,6 +60,7 @@ class CategoryListViewController: UIViewController{
             addCategoryVC.delegate = self
         }
     }
+    
 }
 
 extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
