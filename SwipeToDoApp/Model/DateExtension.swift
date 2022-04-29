@@ -18,17 +18,17 @@ extension Date {
 
     // Dataの初期値
     init(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, second: Int? = nil) {
-            self.init(
-                timeIntervalSince1970: Date().fixed(
-                    year:   year,
-                    month:  month,
-                    day:    day,
-                    hour:   hour,
-                    minute: minute,
-                    second: second
-                ).timeIntervalSince1970
-            )
-        }
+        self.init(
+            timeIntervalSince1970: Date().fixed(
+                year:   year,
+                month:  month,
+                day:    day,
+                hour:   hour,
+                minute: minute,
+                second: second
+            ).timeIntervalSince1970
+        )
+    }
 
     // Dataの修正。上書きされる。
     func fixed(year: Int? = nil, month: Int? = nil, day: Int? = nil, hour: Int? = nil, minute: Int? = nil, second: Int? = nil) -> Date {

@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 class Task: Object{
-    @objc dynamic var date: Date? = nil
+    @objc dynamic var date: Date = Date()
     @objc dynamic var detail: String = ""
     @objc dynamic var category: String = ""
     @objc dynamic var isRepeatedTodo: Bool = false
