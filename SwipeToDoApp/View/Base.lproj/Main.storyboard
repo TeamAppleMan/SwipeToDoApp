@@ -273,11 +273,11 @@
             <objects>
                 <viewController id="GLf-NZ-Dzb" customClass="MotivationViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W5w-0W-wgu">
-                        <rect key="frame" x="0.0" y="0.0" width="377" height="1600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="377" height="1593"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPi-qT-tQe">
-                                <rect key="frame" x="0.0" y="88" width="377" height="1429"/>
+                                <rect key="frame" x="0.0" y="88" width="377" height="1422"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqk-Bz-qfn">
                                         <rect key="frame" x="0.0" y="0.0" width="377" height="1450"/>
@@ -288,6 +288,9 @@
                                                     <segment title="月間"/>
                                                     <segment title="総合"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="didChangedSegmentedControl:" destination="GLf-NZ-Dzb" eventType="valueChanged" id="iqh-x9-lHO"/>
+                                                </connections>
                                             </segmentedControl>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFc-Uj-BaJ">
                                                 <rect key="frame" x="25" y="86" width="327" height="385"/>
@@ -297,6 +300,13 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="190" id="0Wh-gZ-YT8"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgH-df-XqC" customClass="LineChartView" customModule="Charts">
+                                                        <rect key="frame" x="28" y="83" width="271" height="190"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="190" id="kyV-8n-56S"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="達成タスク数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-mX-hx7">
@@ -354,12 +364,15 @@
                                                     <constraint firstAttribute="trailing" secondItem="hvW-Wn-BMq" secondAttribute="trailing" constant="15" id="HiZ-x8-dUu"/>
                                                     <constraint firstItem="hvW-Wn-BMq" firstAttribute="top" secondItem="oFc-Uj-BaJ" secondAttribute="top" constant="10" id="Lic-lY-qAO"/>
                                                     <constraint firstAttribute="height" constant="385" id="QSD-il-kQ9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hgH-df-XqC" secondAttribute="trailing" constant="28" id="RLM-0z-1vo"/>
                                                     <constraint firstItem="siK-vF-Wh9" firstAttribute="top" secondItem="7QT-GC-Lc3" secondAttribute="bottom" constant="8" id="WuM-Ng-aCG"/>
                                                     <constraint firstItem="7QT-GC-Lc3" firstAttribute="leading" secondItem="oFc-Uj-BaJ" secondAttribute="leading" constant="28" id="gwb-oV-LMb"/>
                                                     <constraint firstItem="7QT-GC-Lc3" firstAttribute="top" secondItem="bwP-mX-hx7" secondAttribute="bottom" constant="8" id="hJD-ZS-GaJ"/>
+                                                    <constraint firstItem="hgH-df-XqC" firstAttribute="leading" secondItem="oFc-Uj-BaJ" secondAttribute="leading" constant="28" id="lam-Js-z2q"/>
                                                     <constraint firstAttribute="trailing" secondItem="ooL-cq-vyv" secondAttribute="trailing" id="lon-BU-Zi0"/>
                                                     <constraint firstItem="bwP-mX-hx7" firstAttribute="leading" secondItem="oFc-Uj-BaJ" secondAttribute="leading" constant="18" id="rUC-pf-qHA"/>
                                                     <constraint firstItem="7QT-GC-Lc3" firstAttribute="top" secondItem="ooL-cq-vyv" secondAttribute="bottom" constant="43" id="ucQ-nZ-hFV"/>
+                                                    <constraint firstItem="hgH-df-XqC" firstAttribute="top" secondItem="ooL-cq-vyv" secondAttribute="bottom" constant="43" id="wnT-iQ-bxw"/>
                                                     <constraint firstItem="ooL-cq-vyv" firstAttribute="leading" secondItem="oFc-Uj-BaJ" secondAttribute="leading" id="wxa-Cy-PTN"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -376,6 +389,13 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="250" id="YN7-tL-HEM"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cIB-ca-4sT" customClass="PieChartView" customModule="Charts">
+                                                        <rect key="frame" x="20" y="80" width="287" height="250"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="250" id="wM8-Es-Hv1"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="登録タスク数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxi-6i-Jcc">
@@ -445,10 +465,13 @@
                                                     <constraint firstItem="LIu-9a-ZBk" firstAttribute="top" secondItem="4WN-gu-o3F" secondAttribute="top" constant="10" id="49b-07-Af7"/>
                                                     <constraint firstItem="hlq-sb-tRH" firstAttribute="leading" secondItem="4WN-gu-o3F" secondAttribute="leading" id="CHI-UV-bCo"/>
                                                     <constraint firstAttribute="trailing" secondItem="hlq-sb-tRH" secondAttribute="trailing" id="J5t-wd-drQ"/>
+                                                    <constraint firstItem="cIB-ca-4sT" firstAttribute="top" secondItem="hlq-sb-tRH" secondAttribute="bottom" constant="40" id="KMQ-iw-pyn"/>
                                                     <constraint firstItem="hlq-sb-tRH" firstAttribute="top" secondItem="4WN-gu-o3F" secondAttribute="top" id="c1V-oo-lIR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cIB-ca-4sT" secondAttribute="trailing" constant="20" id="etz-NE-VSX"/>
                                                     <constraint firstItem="F1f-a5-Kyx" firstAttribute="leading" secondItem="4WN-gu-o3F" secondAttribute="leading" constant="20" id="fJw-cH-tXf"/>
                                                     <constraint firstAttribute="trailing" secondItem="F1f-a5-Kyx" secondAttribute="trailing" constant="20" id="kxl-1C-D1r"/>
                                                     <constraint firstItem="F1f-a5-Kyx" firstAttribute="top" secondItem="hlq-sb-tRH" secondAttribute="bottom" constant="40" id="lJF-2t-tQC"/>
+                                                    <constraint firstItem="cIB-ca-4sT" firstAttribute="leading" secondItem="4WN-gu-o3F" secondAttribute="leading" constant="20" id="nGB-TT-qw7"/>
                                                     <constraint firstAttribute="trailing" secondItem="LIu-9a-ZBk" secondAttribute="trailing" constant="15" id="nMK-6J-WSK"/>
                                                     <constraint firstAttribute="height" constant="500" id="uRC-nT-wdm"/>
                                                 </constraints>
@@ -466,6 +489,13 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="250" id="MRo-xk-eCH"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EDA-tI-0GQ" customClass="PieChartView" customModule="Charts">
+                                                        <rect key="frame" x="20" y="80" width="287" height="250"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="250" id="Vn9-yu-rzi"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     達成カテゴリ率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxi-uy-X61">
@@ -491,10 +521,13 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="dxi-uy-X61" firstAttribute="leading" secondItem="v2z-0T-Knj" secondAttribute="leading" id="1fW-8l-ne6"/>
+                                                    <constraint firstAttribute="trailing" secondItem="EDA-tI-0GQ" secondAttribute="trailing" constant="20" id="GyR-NU-TmD"/>
                                                     <constraint firstAttribute="trailing" secondItem="dxi-uy-X61" secondAttribute="trailing" id="TKS-sa-Z8N"/>
+                                                    <constraint firstItem="EDA-tI-0GQ" firstAttribute="top" secondItem="dxi-uy-X61" secondAttribute="bottom" constant="40" id="Xn1-gx-okY"/>
                                                     <constraint firstAttribute="height" constant="365" id="YGj-83-7VW"/>
                                                     <constraint firstItem="dxi-uy-X61" firstAttribute="top" secondItem="v2z-0T-Knj" secondAttribute="top" id="atz-2q-5TB"/>
                                                     <constraint firstAttribute="trailing" secondItem="1Yw-6D-yS8" secondAttribute="trailing" constant="15" id="c5P-HH-aRg"/>
+                                                    <constraint firstItem="EDA-tI-0GQ" firstAttribute="leading" secondItem="v2z-0T-Knj" secondAttribute="leading" constant="20" id="doj-vK-jml"/>
                                                     <constraint firstItem="1Yw-6D-yS8" firstAttribute="top" secondItem="v2z-0T-Knj" secondAttribute="top" constant="10" id="lHa-Qf-yqI"/>
                                                     <constraint firstItem="cUN-Tr-nvx" firstAttribute="leading" secondItem="v2z-0T-Knj" secondAttribute="leading" constant="20" id="lKD-3C-ghk"/>
                                                     <constraint firstItem="cUN-Tr-nvx" firstAttribute="top" secondItem="dxi-uy-X61" secondAttribute="bottom" constant="40" id="rNb-No-VW1"/>
@@ -558,15 +591,23 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <size key="freeformSize" width="377" height="1600"/>
+                    <size key="freeformSize" width="377" height="1593"/>
                     <connections>
+                        <outlet property="categoryRatioOfAllPieChartView" destination="EDA-tI-0GQ" id="c2x-iw-C73"/>
                         <outlet property="categoryRatioOfMonthPieChartView" destination="cUN-Tr-nvx" id="cg8-rD-RsP"/>
                         <outlet property="categoryRatioSubBarLabel" destination="1Yw-6D-yS8" id="1jl-xb-TiC"/>
                         <outlet property="categoryRatioTopBarLabel" destination="dxi-uy-X61" id="3oK-Ry-Sdb"/>
+                        <outlet property="endTaskNumberLabel1" destination="9oO-xZ-nMj" id="ZhN-kf-cbf"/>
+                        <outlet property="endTaskNumberLabel2" destination="hQk-Zd-Ih9" id="AdG-fA-UPq"/>
+                        <outlet property="lineChartDescriptionLabel" destination="siK-vF-Wh9" id="xFN-fe-7V5"/>
+                        <outlet property="noEndTaskNumberLabel" destination="lIQ-6b-gEl" id="bT4-Fe-d10"/>
+                        <outlet property="planTaskNumberLabel" destination="8MC-jl-5xT" id="ceF-u8-ZPY"/>
+                        <outlet property="taskCountOfAllLineChartView" destination="hgH-df-XqC" id="MmH-Ek-1m9"/>
                         <outlet property="taskCountOfMonthLineChartView" destination="7QT-GC-Lc3" id="PWC-Kp-Ec8"/>
-                        <outlet property="taskCountSubBarLabel" destination="hvW-Wn-BMq" id="1p2-de-89p"/>
-                        <outlet property="taskCountTopBarLabel" destination="ooL-cq-vyv" id="zQL-Jo-PuT"/>
+                        <outlet property="taskCountSubBarLabel" destination="hvW-Wn-BMq" id="VRH-fp-7ei"/>
+                        <outlet property="taskCountTopBarLabel" destination="ooL-cq-vyv" id="rJT-0Y-h3I"/>
                         <outlet property="taskRangeSegmentedControl" destination="CYG-8b-w8G" id="oMq-ME-8w2"/>
+                        <outlet property="taskRatioOfAllPieChartView" destination="cIB-ca-4sT" id="5Kn-XS-AM5"/>
                         <outlet property="taskRatioOfMonthPieChartView" destination="F1f-a5-Kyx" id="Jeb-gf-AOC"/>
                         <outlet property="taskRatioSubBarLabel" destination="LIu-9a-ZBk" id="lQu-u8-LnD"/>
                         <outlet property="taskRatioTopBarLabel" destination="hlq-sb-tRH" id="hex-7j-bkO"/>
@@ -574,7 +615,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-XU-bem" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1120" y="2034"/>
+            <point key="canvasLocation" x="1119.5652173913045" y="2036.0491071428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MZH-Td-1Aj">
