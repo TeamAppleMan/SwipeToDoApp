@@ -12,5 +12,6 @@ target 'SwipeToDoApp' do
   pod 'Charts'
   pod 'lottie-ios'
   pod 'RealmSwift'
+  pod 'PKHUD'
 
 end

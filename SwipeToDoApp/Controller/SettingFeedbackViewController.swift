@@ -7,31 +7,36 @@
 
 import UIKit
 import WebKit
+import PKHUD
 
-class SettingFeedbackViewController: UIViewController {
+class SettingFeedbackViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet private weak var webView: WKWebView!
-    let indicator = UIActivityIndicatorView()
-    let semaphore = DispatchSemaphore(value: 0)
+    private let contactUrl = "https://forms.gle/3aT6RegBGJ1L8KPt7"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
 
-        // TODO: 通信中にインジケーターを追加したいが、非同期処理完了時の判定に頭悩ませ中
-        //indicator.center = view.center
-        //indicator.style = .large
-        //indicator.color = UIColor(red: 44/255, green: 169/255, blue: 225/255, alpha: 1)
-        //view.addSubview(indicator)
-
-        if let url = URL(string: "https://forms.gle/3aT6RegBGJ1L8KPt7") {
+        HUD.show(.progress, onView: view)
+        if let url = URL(string: contactUrl) {
             self.webView.load(URLRequest(url: url))
-            semaphore.signal()
         } else {
-            print("URLが取得できませんでした。")
+            print("お問い合わせフォームのURLが取得できませんでした。")
         }
     }
 
-    @IBAction func didTapExitButton(_ sender: UIBarButtonItem) {
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        print("お問い合わせフォームの読み込み開始")
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("お問い合わせフォームの読み込み完了")
+        HUD.hide(animated: true)
+    }
+
+    @IBAction private func didTapExitButton(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
 
