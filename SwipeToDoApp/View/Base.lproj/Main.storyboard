@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="93.842364532019715"/>
+            <point key="canvasLocation" x="838" y="94"/>
         </scene>
         <!--カテゴリーを選択-->
         <scene sceneID="Nd6-gC-deL">
@@ -253,11 +253,204 @@
             </objects>
             <point key="canvasLocation" x="3706.4000000000001" y="863.79310344827593"/>
         </scene>
+        <!--Lottie01 View Controller-->
+        <scene sceneID="MEU-mV-IQ4">
+            <objects>
+                <viewController storyboardIdentifier="Lottie01" useStoryboardIdentifierAsRestorationIdentifier="YES" id="haP-Bn-hhQ" customClass="Lottie01ViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XWB-vl-iNt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jy-94-YYf">
+                                <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="YKB-mC-fbd"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="次へ"/>
+                                <connections>
+                                    <segue destination="AJh-69-Pgt" kind="show" id="jPe-J3-gjB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giP-ce-2pk">
+                                <rect key="frame" x="88.333333333333329" y="188" width="198.66666666666669" height="67"/>
+                                <string key="text">毎日のタスクを
+簡単登録</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qEd-Kc-Iz7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="giP-ce-2pk" firstAttribute="top" secondItem="qEd-Kc-Iz7" secondAttribute="top" constant="100" id="I0r-bp-wng"/>
+                            <constraint firstItem="6jy-94-YYf" firstAttribute="leading" secondItem="qEd-Kc-Iz7" secondAttribute="leading" constant="40" id="Krd-V9-3JB"/>
+                            <constraint firstItem="qEd-Kc-Iz7" firstAttribute="bottom" secondItem="6jy-94-YYf" secondAttribute="bottom" constant="60" id="NPz-6F-EEW"/>
+                            <constraint firstItem="giP-ce-2pk" firstAttribute="centerX" secondItem="XWB-vl-iNt" secondAttribute="centerX" id="kZ4-b0-iyk"/>
+                            <constraint firstItem="qEd-Kc-Iz7" firstAttribute="trailing" secondItem="6jy-94-YYf" secondAttribute="trailing" constant="40" id="sj6-Zr-gOR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="a8Y-oe-zuZ">
+                        <barButtonItem key="rightBarButtonItem" title="スキップ" id="IGB-bq-3tS">
+                            <connections>
+                                <action selector="didTapSkipButton:" destination="haP-Bn-hhQ" id="idw-Jx-30Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PZx-w6-2qf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="64.799999999999997" y="-766.99507389162568"/>
+        </scene>
+        <!--Lottie02 View Controller-->
+        <scene sceneID="D4z-rO-NqR">
+            <objects>
+                <viewController id="AJh-69-Pgt" customClass="Lottie02ViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FB7-m6-0qh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sy5-nl-Q3i">
+                                <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="TDH-vF-CuK"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="次へ"/>
+                                <connections>
+                                    <segue destination="jpl-aF-YAo" kind="show" id="7pL-0e-spP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP3-ta-KQq">
+                                <rect key="frame" x="88.333333333333329" y="188" width="198.66666666666669" height="67"/>
+                                <string key="text">スワイプで
+簡単タスク消費</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tvt-Ai-Nt5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tvt-Ai-Nt5" firstAttribute="trailing" secondItem="Sy5-nl-Q3i" secondAttribute="trailing" constant="40" id="3es-WM-Tfs"/>
+                            <constraint firstItem="iP3-ta-KQq" firstAttribute="top" secondItem="tvt-Ai-Nt5" secondAttribute="top" constant="100" id="9WM-Yg-UmH"/>
+                            <constraint firstItem="tvt-Ai-Nt5" firstAttribute="bottom" secondItem="Sy5-nl-Q3i" secondAttribute="bottom" constant="60" id="Y6D-fR-m7W"/>
+                            <constraint firstItem="Sy5-nl-Q3i" firstAttribute="leading" secondItem="tvt-Ai-Nt5" secondAttribute="leading" constant="40" id="YOk-Ek-3xX"/>
+                            <constraint firstItem="iP3-ta-KQq" firstAttribute="centerX" secondItem="FB7-m6-0qh" secondAttribute="centerX" id="nON-sE-0YG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="efc-e9-Nhd">
+                        <barButtonItem key="rightBarButtonItem" title="スキップ" id="COd-Rk-R7k">
+                            <connections>
+                                <action selector="didTapSkipButton:" destination="AJh-69-Pgt" id="hqw-MR-Jrt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wms-hE-e8t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1030" y="-768"/>
+        </scene>
+        <!--Lottie03 View Controller-->
+        <scene sceneID="baZ-ar-qAi">
+            <objects>
+                <viewController id="jpl-aF-YAo" customClass="Lottie03ViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iS0-Ub-Aeg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTi-El-V0f">
+                                <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hWa-Yb-3gl"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="次へ"/>
+                                <connections>
+                                    <segue destination="EH2-fT-yQl" kind="show" id="MKw-Og-Qz6"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sO-Nl-suc">
+                                <rect key="frame" x="55.666666666666657" y="188" width="263.66666666666674" height="62.333333333333343"/>
+                                <string key="text">過去のタスク分析で
+モチベーションアップ</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1uT-vp-Sjy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DTi-El-V0f" firstAttribute="leading" secondItem="1uT-vp-Sjy" secondAttribute="leading" constant="40" id="bYG-yu-0ZE"/>
+                            <constraint firstItem="5sO-Nl-suc" firstAttribute="centerX" secondItem="iS0-Ub-Aeg" secondAttribute="centerX" id="gFo-NN-fR6"/>
+                            <constraint firstItem="1uT-vp-Sjy" firstAttribute="trailing" secondItem="DTi-El-V0f" secondAttribute="trailing" constant="40" id="kM5-44-nDc"/>
+                            <constraint firstItem="5sO-Nl-suc" firstAttribute="top" secondItem="1uT-vp-Sjy" secondAttribute="top" constant="100" id="mFI-MG-jGn"/>
+                            <constraint firstItem="1uT-vp-Sjy" firstAttribute="bottom" secondItem="DTi-El-V0f" secondAttribute="bottom" constant="60" id="mKd-aN-q3n"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="1wv-Z5-nY1">
+                        <barButtonItem key="rightBarButtonItem" title="スキップ" id="Ql3-Ej-eAm">
+                            <connections>
+                                <action selector="didTapSkipButton:" destination="jpl-aF-YAo" id="DBR-uQ-m2t"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JoG-sc-Ny2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1985" y="-768"/>
+        </scene>
+        <!--Lottie04 View Controller-->
+        <scene sceneID="6FG-mu-L1Z">
+            <objects>
+                <viewController id="EH2-fT-yQl" customClass="Lottie04ViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mi0-R1-4mT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBc-jK-iT5">
+                                <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="xXV-VI-Oxi"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="はじめる"/>
+                                <connections>
+                                    <action selector="didTapStartButton:" destination="EH2-fT-yQl" eventType="touchUpInside" id="STx-bP-F77"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="さぁ、使ってみましょう！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ead-sx-lnz">
+                                <rect key="frame" x="29" y="188" width="317" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="deR-WG-smF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ead-sx-lnz" firstAttribute="centerX" secondItem="mi0-R1-4mT" secondAttribute="centerX" id="BJM-pc-utZ"/>
+                            <constraint firstItem="deR-WG-smF" firstAttribute="trailing" secondItem="uBc-jK-iT5" secondAttribute="trailing" constant="40" id="IYH-Gl-JZd"/>
+                            <constraint firstItem="Ead-sx-lnz" firstAttribute="top" secondItem="deR-WG-smF" secondAttribute="top" constant="100" id="J0J-g3-vf7"/>
+                            <constraint firstItem="deR-WG-smF" firstAttribute="bottom" secondItem="uBc-jK-iT5" secondAttribute="bottom" constant="60" id="JV3-JK-HTK"/>
+                            <constraint firstItem="uBc-jK-iT5" firstAttribute="leading" secondItem="deR-WG-smF" secondAttribute="leading" constant="40" id="RBZ-va-9hE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Bbl-Cn-XBH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OvB-oI-Eht" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3002" y="-767"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2P1-up-fkb">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="uMI-Dy-8RR" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uMI-Dy-8RR" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="fuF-EW-82O"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4mp-TL-7k3">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -825,10 +1018,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.333332061767578"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -839,7 +1032,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="10.999999999999998" width="21.333333333333314" height="21.333333333333329"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1029,6 +1222,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xj4-sE-Rfg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4490.3999999999996" y="793.5960591133005"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XtH-cE-v5S">
+            <objects>
+                <navigationController storyboardIdentifier="LottieNvigationController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="syY-XP-wEc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EaS-bb-uX3">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="haP-Bn-hhQ" kind="relationship" relationship="rootViewController" id="ypL-6U-I9y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OmT-fO-A6V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-966" y="-767"/>
         </scene>
     </scenes>
     <resources>
