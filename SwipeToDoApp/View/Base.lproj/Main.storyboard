@@ -825,10 +825,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -839,7 +839,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
+                                                    <rect key="frame" x="305.66666666666669" y="10.999999999999998" width="21.333333333333314" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -897,8 +897,8 @@
                         <constraints>
                             <constraint firstItem="wJz-cd-Cuz" firstAttribute="leading" secondItem="cbE-L6-odO" secondAttribute="leading" id="6LK-80-s3z"/>
                             <constraint firstItem="wJz-cd-Cuz" firstAttribute="trailing" secondItem="cbE-L6-odO" secondAttribute="trailing" id="TRV-og-9LU"/>
-                            <constraint firstItem="wJz-cd-Cuz" firstAttribute="bottom" secondItem="cbE-L6-odO" secondAttribute="bottom" id="e3E-vL-oRf"/>
                             <constraint firstItem="wJz-cd-Cuz" firstAttribute="top" secondItem="cbE-L6-odO" secondAttribute="top" id="jOj-4n-PZI"/>
+                            <constraint firstAttribute="bottom" secondItem="wJz-cd-Cuz" secondAttribute="bottom" id="mny-1p-DWc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="お問い合わせ" id="Vax-VO-wVx">
@@ -936,9 +936,9 @@
                         <viewLayoutGuide key="safeArea" id="nyj-Wg-u7r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="g1M-Yh-upT" firstAttribute="top" secondItem="nyj-Wg-u7r" secondAttribute="top" id="3cn-0J-mwQ"/>
+                            <constraint firstAttribute="bottom" secondItem="g1M-Yh-upT" secondAttribute="bottom" id="11E-UH-xFM"/>
                             <constraint firstItem="g1M-Yh-upT" firstAttribute="leading" secondItem="nyj-Wg-u7r" secondAttribute="leading" id="97o-qi-Oc6"/>
-                            <constraint firstItem="g1M-Yh-upT" firstAttribute="bottom" secondItem="nyj-Wg-u7r" secondAttribute="bottom" id="q5x-ut-UX5"/>
+                            <constraint firstItem="g1M-Yh-upT" firstAttribute="top" secondItem="nyj-Wg-u7r" secondAttribute="top" id="oV8-Vh-hGh"/>
                             <constraint firstItem="g1M-Yh-upT" firstAttribute="trailing" secondItem="nyj-Wg-u7r" secondAttribute="trailing" id="qG8-fs-gl0"/>
                         </constraints>
                     </view>
