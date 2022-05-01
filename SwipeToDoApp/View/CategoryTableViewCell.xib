@@ -27,12 +27,20 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXt-Mk-9m5">
+                        <rect key="frame" x="308" y="39" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="categoryImageView" destination="GKI-ma-Dyy" id="Eed-pZ-gfQ"/>
                 <outlet property="categoryNameLabel" destination="Zd1-p5-OfW" id="Tqk-qv-jt9"/>
+                <outlet property="categoryTaskCountLabel" destination="RXt-Mk-9m5" id="NqN-K6-SNc"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="92.410714285714278"/>
         </tableViewCell>
