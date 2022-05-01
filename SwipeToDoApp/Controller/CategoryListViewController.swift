@@ -14,6 +14,8 @@ class CategoryListViewController: UIViewController{
 
     var categoryList: Results<CategoryList>!
 
+    private var task: Results<Task>!
+
     override func loadView() {
         super.loadView()
 
@@ -64,8 +66,10 @@ class CategoryListViewController: UIViewController{
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        // tableViewのセルを押せなくする
+        tableView.allowsSelection = false
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryID")
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,6 +91,10 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryNameLabel.text = categoryList[indexPath.row].name
         // Data型をUIImageにキャストしている
         cell.categoryImageView.image = UIImage(data: categoryList[indexPath.row].photo!)
+        // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
+        let realm = try! Realm()
+        let filtersTask = try! realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[indexPath.row].name,false)
+        cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

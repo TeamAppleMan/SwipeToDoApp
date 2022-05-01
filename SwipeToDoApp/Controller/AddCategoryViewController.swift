@@ -40,6 +40,8 @@ class AddCategoryViewController: UIViewController {
         categoryNameTextField.delegate = self
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
+        horizontalCollectionView.decelerationRate = .fast // 動作もっさりなので早く見せる
+        horizontalCollectionView.showsHorizontalScrollIndicator = false // 下のインジケータを削除
         // アルバムボタンを押せなくする（テキストフィールドに値が入ってないため）
         albumButton.isEnabled = false
         // 押せないことをアピールするためにalpha値を0.1にしている
@@ -47,9 +49,25 @@ class AddCategoryViewController: UIViewController {
         checkPermission.checkAlbum()
         let nib = UINib(nibName: "TemplateCategoryCollectionViewCell", bundle: .main)
         horizontalCollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionID")
+        setTestLayout()
+    }
+    // 0番目のCellからスタートする
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     @IBAction private func tappedAlbumButton(_ sender: Any) {
+        // テキストフィールドが空であればアラート出す
+        if categoryNameTextField.text == ""{
+           let message = "カテゴリ名を入力してください"
+           let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+           let ok = UIAlertAction(title: "OK", style: .default,handler: nil)
+            alert.addAction(ok)
+           // アラートを表示
+           present(alert,animated: true,completion: nil)
+           return
+        }
         let sourceType: UIImagePickerController.SourceType = .photoLibrary
         createImagePicker(sourceType: sourceType)
     }
@@ -65,6 +83,16 @@ class AddCategoryViewController: UIViewController {
     // 余白をタッチしたらキーボードを閉じる処理
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    private func setTestLayout(){
+        cellWidth = UIScreen.main.bounds.width - 60
+        let testLayout = PagingPerCellFlowLayout()
+        testLayout.headerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
+        testLayout.footerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
+        testLayout.scrollDirection = .horizontal
+        testLayout.minimumLineSpacing = 16
+        testLayout.itemSize = CGSize(width: cellWidth, height: horizontalCollectionView.frame.height)
+        horizontalCollectionView.collectionViewLayout = testLayout
     }
 
 }
@@ -91,9 +119,9 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionID", for: indexPath) as! TemplateCategoryCollectionViewCell
         cell.backgroundColor = UIColor.white
-        cell.layer.cornerRadius = 12 // セルを角丸にする
-        cell.layer.shadowOpacity = 0.4 // セルの影の濃さを調整する
-        cell.layer.shadowRadius = 12 // セルの影のぼかし量を調整する
+//        cell.layer.cornerRadius = 12 // セルを角丸にする
+//        cell.layer.shadowOpacity = 0.4// セルの影の濃さを調整する
+//        cell.layer.shadowRadius = 12 // セルの影の角丸
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 10, height: 10) // 影の方向
         cell.layer.masksToBounds = false
@@ -110,7 +138,7 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
     // セルのサイズを決めるデリゲートメソッド
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         cellWidth = viewWidth - 75
-        cellHeight = viewHeight - 300
+        cellHeight = viewHeight - 400
         cellOffset = viewWidth - cellWidth
         return CGSize(width: cellWidth, height: cellHeight)
     }
@@ -161,5 +189,38 @@ extension AddCategoryViewController: UIImagePickerControllerDelegate,UINavigatio
             navigationController?.popViewController(animated: true)
         }
     }
+}
 
+/// カルーセルスワイプ時にcellが真ん中に来るように
+class PagingPerCellFlowLayout: UICollectionViewFlowLayout {
+
+   var cellWidth: CGFloat = UIScreen.main.bounds.width - 60
+   let windowWidth: CGFloat = UIScreen.main.bounds.width
+
+   override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+       if let collectionViewBounds = self.collectionView?.bounds {
+           let halfWidthOfVC = collectionViewBounds.size.width * 0.5
+           let proposedContentOffsetCenterX = proposedContentOffset.x + halfWidthOfVC
+           if let attributesForVisibleCells = self.layoutAttributesForElements(in: collectionViewBounds) {
+               var candidateAttribute: UICollectionViewLayoutAttributes?
+               for attributes in attributesForVisibleCells {
+                   let candAttr: UICollectionViewLayoutAttributes? = candidateAttribute
+                   if candAttr != nil {
+                       let a = attributes.center.x - proposedContentOffsetCenterX
+                       let b = candAttr!.center.x - proposedContentOffsetCenterX
+                       if abs(a) < abs(b) {
+                           candidateAttribute = attributes
+                       }
+                   } else {
+                       candidateAttribute = attributes
+                       continue
+                   }
+               }
+               if candidateAttribute != nil {
+                   return CGPoint(x: candidateAttribute!.center.x - halfWidthOfVC, y: proposedContentOffset.y)
+               }
+           }
+       }
+       return CGPoint.zero
+   }
 }
