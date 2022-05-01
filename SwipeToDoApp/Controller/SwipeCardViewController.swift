@@ -19,7 +19,7 @@ class SwipeCardViewController: UIViewController {
 
     private var cardTask: Results<Task>!
     public var catchTask: Results<Task>!
-    public var catchDate: Date!
+    public var catchDate: Date?
 
     var delegate: SwipeCardViewControllerDelegate?
 
@@ -35,7 +35,10 @@ class SwipeCardViewController: UIViewController {
         super.viewWillAppear(true)
         // HACK: 正直cardTaskに格納する意味はないです。。笑
         cardTask = catchTask
-        navigationItem.title = "\(catchDate.year)年\(catchDate.month)月"
+        guard let catchDate = catchDate else {
+            return
+        }
+        navigationItem.title = "\(catchDate.year)年\(catchDate.month)月\(catchDate.day)日"
     }
 
     // CalendarToDoViewControllerの画面遷移

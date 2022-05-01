@@ -34,6 +34,7 @@ class CalendarToDoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        taskTextField.isEnabled = true
         setInitCalendar()
         tableView.reloadData()
     }
@@ -57,8 +58,42 @@ class CalendarToDoViewController: UIViewController {
 
     // HACK: if文が連結していてあまり良い書き方ではない
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // セミモーダルへの画面遷移
-        if segue.identifier == "NavVCSegue"{
+        if segue.identifier == "SwipeCardSegue"{
+            let nav = segue.destination as! UINavigationController
+            let swipeCardVC = nav.topViewController as! SwipeCardViewController
+            // ナビゲーションバータイトル用に、選択された日付を渡す
+            if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
+                swipeCardVC.catchDate =  UserDefaults.standard.object(forKey: "selectedDateKey") as? Date
+            }else{
+                let calPosition = Calendar.current
+                let comp = calPosition.dateComponents(
+                    [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
+                     Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
+                     from: Date())
+                let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
+                swipeCardVC.catchDate = selectDay
+            }
+            swipeCardVC.delegate = self
+
+            // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
+            let realm = try! Realm()
+            guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
+                return
+            }
+            let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+            swipeCardVC.catchTask = filtersTask
+        }else if segue.identifier == "NavVCSegue"{
+            // テキストフィールドの値が空だったらアラートを出す
+            if taskTextField.text == ""{
+                let message = "追加するタスクを入力してください"
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default,handler: nil)
+                 alert.addAction(ok)
+                // アラートを表示
+                present(alert,animated: true,completion: nil)
+                return
+            }
+            // セミモーダル遷移
             let nav = segue.destination as! UINavigationController
             if let sheet = nav.sheetPresentationController {
                 let inputCategoryVC = nav.topViewController as! InputCategoryViewController
@@ -70,23 +105,8 @@ class CalendarToDoViewController: UIViewController {
                 sheet.preferredCornerRadius = 20.0
                 //　グラバーを表示する（上の灰色のバー）
                 sheet.prefersGrabberVisible = true
-            }
-        }else if segue.identifier == "SwipeCardSegue"{
-            let nav = segue.destination as! UINavigationController
-            let swipeCardVC = nav.topViewController as! SwipeCardViewController
-            // ナビゲーションバータイトル用に、選択された日付を渡す
-            if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
-                swipeCardVC.catchDate =  UserDefaults.standard.object(forKey: "selectedDateKey") as? Date
-            }
-            swipeCardVC.delegate = self
-
-            // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
-            let realm = try! Realm()
-            guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
                 return
             }
-            let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
-            swipeCardVC.catchTask = filtersTask
         }
     }
 
@@ -117,6 +137,8 @@ class CalendarToDoViewController: UIViewController {
 
     @IBAction private func taskDeleteButton(_ sender: Any) {
         // SwipeCardVCへ画面遷移
+        // taskTextField.isEnabledがtrueだとモーダル遷移もしてしまうため
+        taskTextField.isEnabled = false
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
