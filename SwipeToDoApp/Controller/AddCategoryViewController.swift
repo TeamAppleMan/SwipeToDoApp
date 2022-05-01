@@ -40,6 +40,8 @@ class AddCategoryViewController: UIViewController {
         categoryNameTextField.delegate = self
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
+        horizontalCollectionView.decelerationRate = .fast // 動作もっさりなので早く見せる
+        horizontalCollectionView.showsHorizontalScrollIndicator = false // 下のインジケータを削除
         // アルバムボタンを押せなくする（テキストフィールドに値が入ってないため）
         albumButton.isEnabled = false
         // 押せないことをアピールするためにalpha値を0.1にしている
@@ -161,5 +163,38 @@ extension AddCategoryViewController: UIImagePickerControllerDelegate,UINavigatio
             navigationController?.popViewController(animated: true)
         }
     }
+}
 
+/// カルーセルスワイプ時にcellが真ん中に来るように
+class PagingPerCellFlowLayout: UICollectionViewFlowLayout {
+
+   var cellWidth: CGFloat = UIScreen.main.bounds.width - 60
+   let windowWidth: CGFloat = UIScreen.main.bounds.width
+
+   override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+       if let collectionViewBounds = self.collectionView?.bounds {
+           let halfWidthOfVC = collectionViewBounds.size.width * 0.5
+           let proposedContentOffsetCenterX = proposedContentOffset.x + halfWidthOfVC
+           if let attributesForVisibleCells = self.layoutAttributesForElements(in: collectionViewBounds) {
+               var candidateAttribute: UICollectionViewLayoutAttributes?
+               for attributes in attributesForVisibleCells {
+                   let candAttr: UICollectionViewLayoutAttributes? = candidateAttribute
+                   if candAttr != nil {
+                       let a = attributes.center.x - proposedContentOffsetCenterX
+                       let b = candAttr!.center.x - proposedContentOffsetCenterX
+                       if abs(a) < abs(b) {
+                           candidateAttribute = attributes
+                       }
+                   } else {
+                       candidateAttribute = attributes
+                       continue
+                   }
+               }
+               if candidateAttribute != nil {
+                   return CGPoint(x: candidateAttribute!.center.x - halfWidthOfVC, y: proposedContentOffset.y)
+               }
+           }
+       }
+       return CGPoint.zero
+   }
 }

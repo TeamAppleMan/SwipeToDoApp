@@ -152,7 +152,7 @@ class CalendarToDoViewController: UIViewController {
     private func setTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
     }
 

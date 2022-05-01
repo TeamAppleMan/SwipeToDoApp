@@ -67,7 +67,7 @@ class CategoryListViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryID")
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
