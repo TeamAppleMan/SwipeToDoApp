@@ -577,7 +577,7 @@ class MotivationViewController: UIViewController {
         formatter.minimumFractionDigits = 0
         categoryRatioOfAllPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         categoryRatioOfAllPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        categoryRatioOfAllPieChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0)
     }
 
     // グラフを描画するときに必ずこの関数を呼ぶ
