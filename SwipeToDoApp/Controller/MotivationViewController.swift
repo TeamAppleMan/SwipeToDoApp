@@ -484,6 +484,7 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineChartView.legend.enabled = false //"■ months"のlegendの表示
         taskCountOfAllLineChartView.dragDecelerationEnabled = true //指を離してもスクロール続くか
         taskCountOfAllLineChartView.dragDecelerationFrictionCoef = 0.8 //ドラッグ時の減速スピード(0-1)
+        taskCountOfAllLineChartView.animate(xAxisDuration: 0, yAxisDuration: 1.0, easingOption: .easeOutSine)
         //chartView.chartDescription?.text = nil //Description(今回はなし)
         taskCountOfAllLineChartView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //Background Color
         taskCountOfAllLineChartView.pinchZoomEnabled = false // ピンチズームオフ
