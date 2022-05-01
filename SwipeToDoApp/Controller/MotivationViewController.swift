@@ -32,7 +32,8 @@ class MotivationViewController: UIViewController {
     @IBOutlet private weak var endTaskNumberLabel2: UILabel!
     @IBOutlet private weak var noEndTaskNumberLabel: UILabel!
 
-    @IBOutlet private weak var lineChartDescriptionLabel: UILabel!
+    @IBOutlet private weak var lineChartDescriptionTopLabel: UILabel!
+    @IBOutlet private weak var lineChartDescriptionButtomLabel: UILabel!
 
     @IBOutlet private weak var taskCountOfMonthLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfMonthPieChartView: PieChartView!
@@ -81,8 +82,9 @@ class MotivationViewController: UIViewController {
             [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
              Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
              from: Date())
-        todayDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: todayComppnent.day! + 1, hour: 0, minute: 0, second: 0 )
-        presentDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: 2, hour: 0, minute: 0, second: 0 )
+        todayDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: todayComppnent.day, hour: 0, minute: 0, second: 0 )
+        todayDate = todayDate.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
+        presentDate = Date.init(year: todayComppnent.year, month: todayComppnent.month, day: 1, hour: 0, minute: 0, second: 0 )
         self.navigationItem.title = "\(presentDate.year)年\(presentDate.month)月"
 
         // 他画面でデータ変更後にUI3へ遷移することも考えてあえてViewDidLoadではなくViewWillAppearで毎回再計算
@@ -185,7 +187,7 @@ class MotivationViewController: UIViewController {
         planTaskNumberLabel.text = String(Int(filterTasks.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
         noEndTaskNumberLabel.text = String(Int(filterTasks.count) - Int(achieveCount))
-        lineChartDescriptionLabel.text = "日付"
+        lineChartDescriptionButtomLabel.text = "日付"
         taskCountSubBarLabel.text = ""
         taskRatioSubBarLabel.text = ""
         categoryRatioSubBarLabel.text = ""
@@ -211,10 +213,16 @@ class MotivationViewController: UIViewController {
             $0 <= todayDate
         }
         // 後の計算用に
-        guard let mostOldDate = toNowAllDateList.min() else { return }
+        guard let mostOldDate = toNowAllDateList.min() else {
+            // データが１つもない場合に”データがありません”を表示させる
+            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+            createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
+            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
+            return
+        }
 
         // その差から数える月数を取得
-        let fromOldToNowMonth = mostOldDate.getMonthCount(between: mostOldDate)
+        let fromOldToNowMonth = mostOldDate.getMonthCount(fromDate: mostOldDate, toDate: todayDate)
 
         // その月の回数分だけforを回してtrueの数を調べる
         for i in 0..<fromOldToNowMonth {
@@ -264,7 +272,6 @@ class MotivationViewController: UIViewController {
         planTaskNumberLabel.text = String(Int(toNowAllDateList.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
         noEndTaskNumberLabel.text = String(Int(toNowAllDateList.count) - Int(achieveCount))
-        lineChartDescriptionLabel.text = "経過月"
         taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
         taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
         categoryRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
@@ -272,6 +279,8 @@ class MotivationViewController: UIViewController {
 
     // MARK: 月間上
     private func createTaskCountOfMonthLineChart(data: [Double]) {
+        lineChartDescriptionButtomLabel.text = "経過月"
+        lineChartDescriptionTopLabel.text = "達成タスク数"
         // プロットデータ(y軸)を保持する配列
         var dataEntries = [ChartDataEntry]()
 
@@ -413,6 +422,7 @@ class MotivationViewController: UIViewController {
 
     // MARK: 総合上
     private func createTaskCountOfAllLineChart(data: [Double]) {
+        taskCountOfAllLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
         // プロットデータ(y軸)を保持する配列
         var dataEntries = [ChartDataEntry]()
 
@@ -421,8 +431,22 @@ class MotivationViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         // グラフにデータを適用
-        taskCountOfAllLineDataSet = LineChartDataSet(entries: dataEntries, label: "SampleDataChart")
-        taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
+        // ２ヶ月以上のデータがなければ表示させない
+        if dataEntries.count >= 2 {
+            lineChartDescriptionButtomLabel.text = "経過月"
+            lineChartDescriptionTopLabel.text = "達成タスク数"
+            taskCountOfAllLineDataSet = LineChartDataSet(entries: dataEntries, label: "")
+            taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
+        } else {
+            lineChartDescriptionButtomLabel.text = ""
+            lineChartDescriptionTopLabel.text = ""
+            taskCountOfAllLineChartView.noDataText = """
+            表示できるデータ量がありません
+            ２ヶ月分以上のデータが必要です
+            """
+            return
+        }
+        //taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
 
         // X軸(xAxis)
         taskCountOfAllLineChartView.xAxis.labelPosition = .bottom // x軸ラベルをグラフの下に表示する
@@ -444,7 +468,7 @@ class MotivationViewController: UIViewController {
         // Y軸(leftAxis/rightAxis)
         taskCountOfAllLineChartView.rightAxis.enabled = false //右軸(値)の表示
         taskCountOfAllLineChartView.leftAxis.enabled = true //左軸（値)の表示
-        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 10) + 5//y左軸最大値
+        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 6) + 5//y左軸最大値
         taskCountOfAllLineChartView.leftAxis.axisMinimum = 0 //y左軸最小値
         taskCountOfAllLineChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 11) //y左軸のフォントの大きさ
         taskCountOfAllLineChartView.leftAxis.labelTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //y軸ラベルの色
@@ -472,7 +496,6 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineDataSet.fill = LinearGradientFill.init(gradient: gradient!, angle: 90.0)
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示(今回は表示しない)
         taskCountOfAllLineDataSet.lineWidth = 3.0 //線の太さ
-        taskCountOfMonthLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示taskCountOfMonthChartDataSet
         taskCountOfAllLineDataSet.mode = .cubicBezier //曲線にする
         taskCountOfAllLineDataSet.fillAlpha = 0.8 //グラフの透過率(曲線は投下しない)
