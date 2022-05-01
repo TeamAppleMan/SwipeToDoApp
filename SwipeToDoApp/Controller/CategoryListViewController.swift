@@ -66,6 +66,8 @@ class CategoryListViewController: UIViewController{
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        // tableViewのセルを押せなくする
+        tableView.allowsSelection = false
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryID")
         tableView.rowHeight = 80
     }

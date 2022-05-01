@@ -49,6 +49,12 @@ class AddCategoryViewController: UIViewController {
         checkPermission.checkAlbum()
         let nib = UINib(nibName: "TemplateCategoryCollectionViewCell", bundle: .main)
         horizontalCollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionID")
+        setTestLayout()
+    }
+    // 10番目のCellからスタートする
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     @IBAction private func tappedAlbumButton(_ sender: Any) {
@@ -67,6 +73,16 @@ class AddCategoryViewController: UIViewController {
     // 余白をタッチしたらキーボードを閉じる処理
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+    }
+    private func setTestLayout(){
+        cellWidth = UIScreen.main.bounds.width - 60
+        let testLayout = PagingPerCellFlowLayout()
+        testLayout.headerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
+        testLayout.footerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
+        testLayout.scrollDirection = .horizontal
+        testLayout.minimumLineSpacing = 16
+        testLayout.itemSize = CGSize(width: cellWidth, height: horizontalCollectionView.frame.height)
+        horizontalCollectionView.collectionViewLayout = testLayout
     }
 
 }
@@ -94,8 +110,8 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionID", for: indexPath) as! TemplateCategoryCollectionViewCell
         cell.backgroundColor = UIColor.white
         cell.layer.cornerRadius = 12 // セルを角丸にする
-        cell.layer.shadowOpacity = 0.4 // セルの影の濃さを調整する
-        cell.layer.shadowRadius = 12 // セルの影のぼかし量を調整する
+        cell.layer.shadowOpacity = 0.1// セルの影の濃さを調整する
+        cell.layer.shadowRadius = 5 // セルの影のぼかし量を調整する
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 10, height: 10) // 影の方向
         cell.layer.masksToBounds = false
@@ -112,7 +128,7 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
     // セルのサイズを決めるデリゲートメソッド
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         cellWidth = viewWidth - 75
-        cellHeight = viewHeight - 300
+        cellHeight = viewHeight - 400
         cellOffset = viewWidth - cellWidth
         return CGSize(width: cellWidth, height: cellHeight)
     }
