@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--画面2-->
+        <!--タスク-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CalendarToDoViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41K-1E-g0r">
-                                        <rect key="frame" x="173" y="32" width="111" height="35"/>
+                                        <rect key="frame" x="173" y="32" width="111" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="タスク消化">
@@ -59,7 +59,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="taskDeleteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fbD-ev-SYd"/>
-                                            <segue destination="zGJ-1a-SpB" kind="show" identifier="SwipeCardSegue" id="xkg-ij-ynJ"/>
+                                            <segue destination="6gr-8s-lP8" kind="presentation" identifier="SwipeCardSegue" id="Gbh-h7-Iir"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -74,7 +74,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="画面2" id="FMD-hR-ZCr"/>
+                    <tabBarItem key="tabBarItem" title="タスク" image="pencil" catalog="system" id="FMD-hR-ZCr"/>
                     <connections>
                         <outlet property="calendar" destination="Kdf-Ih-wP4" id="2M5-O8-b1u"/>
                         <outlet property="dateLabel" destination="6rY-KI-B85" id="Wwa-9k-Zv0"/>
@@ -165,7 +165,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="カテゴリ一覧" id="sWk-gb-e0X">
-                        <barButtonItem key="leftBarButtonItem" image="wrench.fill" catalog="system" id="jZa-iy-Aep">
+                        <barButtonItem key="leftBarButtonItem" image="gearshape" catalog="system" id="jZa-iy-Aep">
                             <connections>
                                 <segue destination="KCX-O7-z7c" kind="presentation" id="MXn-Gm-dFI"/>
                             </connections>
@@ -462,8 +462,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="spY-Fo-fmw" kind="relationship" relationship="viewControllers" id="W4q-iq-fXX"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="OMB-Th-1x1"/>
+                        <segue destination="spY-Fo-fmw" kind="relationship" relationship="viewControllers" id="W4q-iq-fXX"/>
                         <segue destination="gc5-lS-mua" kind="relationship" relationship="viewControllers" id="pqz-sy-P1x"/>
                     </connections>
                 </tabBarController>
@@ -839,64 +839,11 @@
             </objects>
             <point key="canvasLocation" x="1821.5999999999999" y="87.931034482758619"/>
         </scene>
-        <!--Swipe Card View Controller-->
-        <scene sceneID="Rcx-eh-hlL">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="gNS-Qe-s1D" customClass="SwipeCardViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="AJn-CV-8YC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E1r-qG-ByO" customClass="VerticalCardSwiper" customModule="VerticalCardSwiper">
-                                <rect key="frame" x="0.0" y="56" width="375" height="645"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwH-cp-mMi">
-                                        <rect key="frame" x="271" y="668" width="78" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="checkmark.circle" title="">
-                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="tappedSwipeRightButton:" destination="gNS-Qe-s1D" eventType="touchUpInside" id="WRL-JW-Ym8"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="SUh-Va-C93"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="4xx-vO-Mct">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="D1E-GT-bLM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="yg4-Jg-zMH">
-                                <rect key="frame" x="16" y="6" width="55" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" title="">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="tappedBackButton:" destination="gNS-Qe-s1D" eventType="touchUpInside" id="thc-gY-9Pm"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="cardSwiper" destination="E1r-qG-ByO" id="dZY-Ix-XDZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lcQ-fq-HwL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5432.8000000000002" y="793.5960591133005"/>
-        </scene>
-        <!--画面1-->
+        <!--カテゴリ-->
         <scene sceneID="7fz-Jo-GxW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="spY-Fo-fmw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="画面1" id="nyV-pB-v6p"/>
+                    <tabBarItem key="tabBarItem" title="カテゴリ" image="photo" catalog="system" id="nyV-pB-v6p"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VhM-al-e0e">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -911,11 +858,11 @@
             </objects>
             <point key="canvasLocation" x="1690.4000000000001" y="863.79310344827593"/>
         </scene>
-        <!--画面3-->
+        <!--モチベーション-->
         <scene sceneID="tmQ-fg-YuB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gc5-lS-mua" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="画面3" id="Waf-dv-TgA"/>
+                    <tabBarItem key="tabBarItem" title="モチベーション" image="chart.xyaxis.line" catalog="system" id="Waf-dv-TgA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tAL-M4-Yjy">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1023,10 +970,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.333332061767578"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1037,7 +984,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="10.999999999999998" width="21.333333333333314" height="21.333333333333329"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1153,7 +1100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZvU-LX-9Yc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8364" y="1157.1428571428571"/>
+            <point key="canvasLocation" x="9306.3999999999996" y="1157.1428571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPU-Fc-UYQ">
@@ -1207,26 +1154,39 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y38-0U-a4R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7453.6000000000004" y="1157.1428571428571"/>
+            <point key="canvasLocation" x="8396" y="1157.1428571428571"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dPH-pW-ttZ">
+        <!--Swipe Card View Controller-->
+        <scene sceneID="dzO-Ou-NuI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="zGJ-1a-SpB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="UbY-MC-Fpa"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g7n-Fb-2Mg">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController id="2bH-xN-OMK" customClass="SwipeCardViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PDM-eq-mPZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ds-PK-0AS" customClass="VerticalCardSwiper" customModule="VerticalCardSwiper">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pdr-lf-fNA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Rto-86-On7">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="Ulz-Bw-Gi6">
+                            <connections>
+                                <action selector="tappedBackButton:" destination="2bH-xN-OMK" id="A76-Gd-Bmi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <segue destination="gNS-Qe-s1D" kind="relationship" relationship="rootViewController" id="HLa-4X-W84"/>
+                        <outlet property="cardSwiper" destination="3ds-PK-0AS" id="4Az-kH-NMz"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xj4-sE-Rfg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QX2-82-urd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4490.3999999999996" y="793.5960591133005"/>
+            <point key="canvasLocation" x="5472.8000000000002" y="793.5960591133005"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XtH-cE-v5S">
@@ -1246,13 +1206,33 @@
             </objects>
             <point key="canvasLocation" x="-966" y="-767"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FuM-RC-uJb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="6gr-8s-lP8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="fA3-n2-kAa"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qep-OD-NCJ">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2bH-xN-OMK" kind="relationship" relationship="rootViewController" id="gUF-4i-W8z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="npU-Pv-PBK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4662" y="794"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" width="11" height="11"/>
-        <image name="chevron.backward" width="5" height="9"/>
+        <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="plus.viewfinder" catalog="system" width="128" height="115"/>
-        <image name="wrench.fill" catalog="system" width="128" height="125"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
