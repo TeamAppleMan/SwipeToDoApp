@@ -796,13 +796,17 @@
                     </navigationItem>
                     <size key="freeformSize" width="377" height="1593"/>
                     <connections>
+                        <outlet property="afterMonthButton" destination="bAr-hz-I6h" id="JNU-D8-UAu"/>
+                        <outlet property="beforeMonthButton" destination="fHU-cT-6CV" id="SRE-6y-x4Y"/>
                         <outlet property="categoryRatioOfAllPieChartView" destination="EDA-tI-0GQ" id="c2x-iw-C73"/>
                         <outlet property="categoryRatioOfMonthPieChartView" destination="cUN-Tr-nvx" id="cg8-rD-RsP"/>
                         <outlet property="categoryRatioSubBarLabel" destination="1Yw-6D-yS8" id="1jl-xb-TiC"/>
                         <outlet property="categoryRatioTopBarLabel" destination="dxi-uy-X61" id="3oK-Ry-Sdb"/>
+                        <outlet property="endTaskLabel" destination="lzO-X7-1MP" id="NvM-et-OYG"/>
                         <outlet property="endTaskNumberLabel1" destination="9oO-xZ-nMj" id="ZhN-kf-cbf"/>
                         <outlet property="endTaskNumberLabel2" destination="hQk-Zd-Ih9" id="AdG-fA-UPq"/>
-                        <outlet property="lineChartDescriptionLabel" destination="siK-vF-Wh9" id="xFN-fe-7V5"/>
+                        <outlet property="lineChartDescriptionButtomLabel2" destination="siK-vF-Wh9" id="xFN-fe-7V5"/>
+                        <outlet property="lineChartDescriptionTopLabel2" destination="bwP-mX-hx7" id="c1Y-lK-7Sh"/>
                         <outlet property="noEndTaskNumberLabel" destination="lIQ-6b-gEl" id="bT4-Fe-d10"/>
                         <outlet property="planTaskNumberLabel" destination="8MC-jl-5xT" id="ceF-u8-ZPY"/>
                         <outlet property="taskCountOfAllLineChartView" destination="hgH-df-XqC" id="MmH-Ek-1m9"/>
@@ -970,10 +974,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -984,7 +988,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

@@ -17,6 +17,8 @@ class MotivationViewController: UIViewController {
     private var presentDate: Date!
     private var todayDate: Date!
 
+    @IBOutlet private weak var beforeMonthButton: UIBarButtonItem!
+    @IBOutlet private weak var afterMonthButton: UIBarButtonItem!
     @IBOutlet private weak var taskRangeSegmentedControl: UISegmentedControl!
 
     // 赤・青・緑のトップバーのLabel
@@ -27,12 +29,14 @@ class MotivationViewController: UIViewController {
     @IBOutlet private weak var taskRatioSubBarLabel: UILabel!
     @IBOutlet private weak var categoryRatioSubBarLabel: UILabel!
 
+    @IBOutlet private weak var endTaskLabel: UILabel!
     @IBOutlet private weak var endTaskNumberLabel1: UILabel!
     @IBOutlet private weak var planTaskNumberLabel: UILabel!
     @IBOutlet private weak var endTaskNumberLabel2: UILabel!
     @IBOutlet private weak var noEndTaskNumberLabel: UILabel!
 
-    @IBOutlet private weak var lineChartDescriptionLabel: UILabel!
+    @IBOutlet private weak var lineChartDescriptionTopLabel2: UILabel!
+    @IBOutlet private weak var lineChartDescriptionButtomLabel2: UILabel!
 
     @IBOutlet private weak var taskCountOfMonthLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfMonthPieChartView: PieChartView!
@@ -185,7 +189,7 @@ class MotivationViewController: UIViewController {
         planTaskNumberLabel.text = String(Int(filterTasks.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
         noEndTaskNumberLabel.text = String(Int(filterTasks.count) - Int(achieveCount))
-        lineChartDescriptionLabel.text = "日付"
+        lineChartDescriptionButtomLabel2.text = "日付"
         taskCountSubBarLabel.text = ""
         taskRatioSubBarLabel.text = ""
         categoryRatioSubBarLabel.text = ""
@@ -211,7 +215,13 @@ class MotivationViewController: UIViewController {
             $0 <= todayDate
         }
         // 後の計算用に
-        guard let mostOldDate = toNowAllDateList.min() else { return }
+        guard let mostOldDate = toNowAllDateList.min() else {
+            // データがない場合に”データがありません”と表示させるため
+            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+            createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
+            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
+            return
+        }
 
         // その差から数える月数を取得
         let fromOldToNowMonth = mostOldDate.getMonthCount(between: mostOldDate)
@@ -264,7 +274,7 @@ class MotivationViewController: UIViewController {
         planTaskNumberLabel.text = String(Int(toNowAllDateList.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
         noEndTaskNumberLabel.text = String(Int(toNowAllDateList.count) - Int(achieveCount))
-        lineChartDescriptionLabel.text = "経過月"
+        lineChartDescriptionButtomLabel2.text = "経過月"
         taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
         taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
         categoryRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
@@ -432,7 +442,6 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineChartView.xAxis.axisLineColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //x軸の色
         taskCountOfAllLineChartView.xAxis.axisLineWidth = CGFloat(1) //x軸の太さ
         // x軸に表示させるラベルの数をデータの数によって変える
-
         if data.count <= 3 {
             taskCountOfAllLineChartView.xAxis.labelCount = Int(2)
         } else if 3 < data.count && data.count <= 12 {
@@ -559,6 +568,9 @@ class MotivationViewController: UIViewController {
     // グラフを描画するときに必ずこの関数を呼ぶ
     private func presentMonthOrAll(isMonth: Bool) {
         if isMonth {
+            beforeMonthButton.isEnabled = true
+            afterMonthButton.isEnabled = true
+            self.navigationItem.title = "\(presentDate.year)年\(presentDate.month)月"
             taskRatioOfMonthPieChartView.isHidden = false
             taskCountOfMonthLineChartView.isHidden = false
             categoryRatioOfMonthPieChartView.isHidden = false
@@ -567,6 +579,9 @@ class MotivationViewController: UIViewController {
             categoryRatioOfAllPieChartView.isHidden = true
             calculateMonth()
         } else {
+            beforeMonthButton.isEnabled = false
+            afterMonthButton.isEnabled = false
+            self.navigationItem.title = "総合"
             taskRatioOfMonthPieChartView.isHidden = true
             taskCountOfMonthLineChartView.isHidden = true
             categoryRatioOfMonthPieChartView.isHidden = true
