@@ -20,8 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-Lf-dxl">
-                        <rect key="frame" x="105.5" y="129" width="89" height="42"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                        <rect key="frame" x="112" y="132" width="76.5" height="36"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
