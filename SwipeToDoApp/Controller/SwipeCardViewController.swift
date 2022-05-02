@@ -8,6 +8,7 @@
 import UIKit
 import VerticalCardSwiper
 import RealmSwift
+import PKHUD
 
 protocol SwipeCardViewControllerDelegate{
     func catchDidSwipeCardData(catchTask: Results<Task>)
@@ -15,8 +16,8 @@ protocol SwipeCardViewControllerDelegate{
 
 class SwipeCardViewController: UIViewController {
 
-    @IBOutlet private var cardSwiper: VerticalCardSwiper!
-
+    @IBOutlet var cardSwiper: VerticalCardSwiper!
+    
     private var cardTask: Results<Task>!
     public var catchTask: Results<Task>!
     public var catchDate: Date?
@@ -42,18 +43,11 @@ class SwipeCardViewController: UIViewController {
     }
 
     // CalendarToDoViewControllerの画面遷移
+
     @IBAction func tappedBackButton(_ sender: Any) {
         // カードで更新したtaskデータをCalendarToDoViewControllerに渡し、tableViewをリロードするという意図があります
         delegate?.catchDidSwipeCardData(catchTask: cardTask)
         dismiss(animated: true)
-    }
-
-    // ボタンで右スワイプ（左スワイプは何も起きないようになっている）
-    @IBAction func tappedSwipeRightButton(_ sender: Any) {
-        // 自動右スワイプ
-        if let currentIndex = cardSwiper.focussedCardIndex {
-            _ = cardSwiper.swipeCardAwayProgrammatically(at: currentIndex, to: .Right)
-        }
     }
 }
 extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiperDatasource{
@@ -83,6 +77,9 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             try! realm.write{
                 cardTask[index].isDone = true
             }
+            HUD.flash(.labeledSuccess(title: "タスク消化", subtitle: "お疲れ様でした...！"), delay: 0.5)
+        }else if swipeDirection == .Left{
+            HUD.flash(.labeledError(title: "無効", subtitle: "この操作は現在無効です"), delay: 0.5)
         }
     }
 }

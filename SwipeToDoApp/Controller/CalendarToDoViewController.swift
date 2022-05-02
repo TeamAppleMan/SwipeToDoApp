@@ -28,22 +28,27 @@ class CalendarToDoViewController: UIViewController {
         let realm = try! Realm()
         task = realm.objects(Task.self) // Taskの保存
         setTableView()
-        setCalendar()
         setTextField()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         taskTextField.isEnabled = true
-        setInitCalendar()
+        setCalendar()
         tableView.reloadData()
     }
 
     // HACK: setCalendarと内容が少し被ってしまっている。少し冗長になってしまっている。前田さん作のDateのextensionを使用すればもう少し短くなるかも？？。
-    private func setInitCalendar(){
+    private func setCalendar(){
+        calendar.delegate = self
+        calendar.scope = .week
+        calendar.locale = Locale(identifier: "ja")
         // 最新で選択したカレンダーの日付をデフォルトで選択された状態にする。（スワイプ画面から戻ってきたときこの方が自然だから）
         if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
-            calendar.select(UserDefaults.standard.object(forKey: "selectedDateKey") as! Date)
+            let selectedDate = UserDefaults.standard.object(forKey: "selectedDateKey") as! Date
+            calendar.select(selectedDate)
+            taskTextField.placeholder = "\(selectedDate.month)月\(selectedDate.day)日のタスクを追加"
+            dateLabel.text = "\(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         }else{
             let calPosition = Calendar.current
             // 現在の年・月・日・時刻を取得
@@ -53,6 +58,8 @@ class CalendarToDoViewController: UIViewController {
                  from: Date())
             let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
             calendar.select(selectDay)
+            taskTextField.placeholder = "\(selectDay!.month)月\(selectDay!.day)日のタスクを追加"
+            dateLabel.text = "\(selectDay!.year)年\(selectDay!.month)月\(selectDay!.day)日"
         }
     }
 
@@ -140,22 +147,6 @@ class CalendarToDoViewController: UIViewController {
         // taskTextField.isEnabledがtrueだとモーダル遷移もしてしまうため
         taskTextField.isEnabled = false
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
-    }
-
-    private func setCalendar(){
-        calendar.delegate = self
-        calendar.scope = .week
-        calendar.locale = Locale(identifier: "ja")
-        // 現在の国を取得（場所によって現在時刻が変わるため）
-        let calPosition = Calendar.current
-        // 現在の年・月・日・時刻を取得
-        let comp = calPosition.dateComponents(
-            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-             Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
-             from: Date())
-        // 動くテキストフィールドに取得した日時を表示
-        taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
-        dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
     }
 
     private func setTextField(){

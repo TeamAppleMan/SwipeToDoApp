@@ -87,8 +87,8 @@ class AddCategoryViewController: UIViewController {
     private func setTestLayout(){
         cellWidth = UIScreen.main.bounds.width - 60
         let testLayout = PagingPerCellFlowLayout()
-        testLayout.headerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
-        testLayout.footerReferenceSize = CGSize(width: 20, height: horizontalCollectionView.frame.height)
+        testLayout.headerReferenceSize = CGSize(width: 30, height: horizontalCollectionView.frame.height)
+        testLayout.footerReferenceSize = CGSize(width: 30, height: horizontalCollectionView.frame.height)
         testLayout.scrollDirection = .horizontal
         testLayout.minimumLineSpacing = 16
         testLayout.itemSize = CGSize(width: cellWidth, height: horizontalCollectionView.frame.height)
@@ -119,9 +119,9 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionID", for: indexPath) as! TemplateCategoryCollectionViewCell
         cell.backgroundColor = UIColor.white
-//        cell.layer.cornerRadius = 12 // セルを角丸にする
-//        cell.layer.shadowOpacity = 0.4// セルの影の濃さを調整する
-//        cell.layer.shadowRadius = 12 // セルの影の角丸
+        cell.layer.cornerRadius = 12 // セルを角丸にする
+        cell.layer.shadowOpacity = 0.4// セルの影の濃さを調整する
+        cell.layer.shadowRadius = 12 // セルの影の角丸
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 10, height: 10) // 影の方向
         cell.layer.masksToBounds = false
@@ -133,12 +133,12 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
 
     // セル同士の間隔を決めるデリゲートメソッド
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 30
+        return 25
     }
     // セルのサイズを決めるデリゲートメソッド
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        cellWidth = viewWidth - 75
-        cellHeight = viewHeight - 400
+        cellWidth = viewWidth - 120
+        cellHeight = viewHeight - 450
         cellOffset = viewWidth - cellWidth
         return CGSize(width: cellWidth, height: cellHeight)
     }
