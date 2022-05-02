@@ -72,7 +72,7 @@ extension Date {
     // 引数が含む月〜現在の月までが何ヶ月あるかを取得
     func getMonthCount(between fromDate: Date) -> Int {
         guard let monthsLeft = calendar.dateComponents([.month], from: fromDate, to: Date()).month else { return 0 }
-        return monthsLeft + 1
+        return monthsLeft + 2
     }
 
     // 「Data型.year」などでInt型で値を取得できるコード
