@@ -12,154 +12,150 @@ import RealmSwift
 
 class CalendarToDoViewController: UIViewController {
 
-    @IBOutlet private var calendar: FSCalendar!
-    @IBOutlet private var tableView: UITableView!
-    @IBOutlet private var taskTextField: MDCOutlinedTextField!
-    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet private weak var calendar: FSCalendar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var beforeDayButton: UIButton!
+    @IBOutlet private weak var afterDayButton: UIButton!
+    @IBOutlet private weak var addTaskTextField: UITextField!
+    @IBOutlet private weak var taskCardView: UIView!
+    @IBOutlet private weak var taskCardTitleLabel: UILabel!
+    @IBOutlet private weak var addTaskButton: UIButton!
+    @IBOutlet private weak var swipeTaskButton: UIButton!
 
     private var task: Results<Task>!
     private var categoryList: Results<CategoryList>!
+    private var selectedDate: Date!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addTaskTextField.delegate = self
         // RealmのファイルURLを表示する
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-
         let realm = try! Realm()
-        task = realm.objects(Task.self) // Taskの保存
+        task = realm.objects(Task.self)
+
+        addTaskButton.isEnabled = false
+
+        setCalendar()
         setTableView()
-        setTextField()
+        setView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        taskTextField.isEnabled = true
-        setCalendar()
-        tableView.reloadData()
-    }
-
-    // HACK: setCalendarと内容が少し被ってしまっている。少し冗長になってしまっている。前田さん作のDateのextensionを使用すればもう少し短くなるかも？？。
-    private func setCalendar(){
-        calendar.delegate = self
-        calendar.scope = .week
-        calendar.locale = Locale(identifier: "ja")
-        // 最新で選択したカレンダーの日付をデフォルトで選択された状態にする。（スワイプ画面から戻ってきたときこの方が自然だから）
-        if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
-            let selectedDate = UserDefaults.standard.object(forKey: "selectedDateKey") as! Date
-            calendar.select(selectedDate)
-            taskTextField.placeholder = "\(selectedDate.month)月\(selectedDate.day)日のタスクを追加"
-            dateLabel.text = "\(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
-        }else{
-            let calPosition = Calendar.current
-            // 現在の年・月・日・時刻を取得
-            let comp = calPosition.dateComponents(
-                [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-                 Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
-                 from: Date())
-            let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
-            calendar.select(selectDay)
-            taskTextField.placeholder = "\(selectDay!.month)月\(selectDay!.day)日のタスクを追加"
-            dateLabel.text = "\(selectDay!.year)年\(selectDay!.month)月\(selectDay!.day)日"
-        }
+        addTaskTextField.isEnabled = true
+        // tableView.reloadData()
     }
 
     // HACK: if文が連結していてあまり良い書き方ではない
+    // →「guard let」を使うことで解決しました！（Kota）
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SwipeCardSegue"{
+
+        if segue.identifier == "SwipeCardSegue" {
             let nav = segue.destination as! UINavigationController
             let swipeCardVC = nav.topViewController as! SwipeCardViewController
-            // ナビゲーションバータイトル用に、選択された日付を渡す
-            if UserDefaults.standard.object(forKey: "selectedDateKey") != nil{
-                swipeCardVC.catchDate =  UserDefaults.standard.object(forKey: "selectedDateKey") as? Date
-            }else{
-                let calPosition = Calendar.current
-                let comp = calPosition.dateComponents(
-                    [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-                     Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
-                     from: Date())
-                let selectDay = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
-                swipeCardVC.catchDate = selectDay
-            }
+            swipeCardVC.catchDate = selectedDate
             swipeCardVC.delegate = self
-
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
             let realm = try! Realm()
-            guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-                return
-            }
-            let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+            let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", selectedDate!, false)
             swipeCardVC.catchTask = filtersTask
-        }else if segue.identifier == "NavVCSegue"{
-            // テキストフィールドの値が空だったらアラートを出す
-            if taskTextField.text == ""{
-                let message = "追加するタスクを入力してください"
-                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "OK", style: .default,handler: nil)
-                 alert.addAction(ok)
-                // アラートを表示
-                present(alert,animated: true,completion: nil)
+        }
+
+        if segue.identifier == "NavVCSegue" {
+            guard let inputTask = addTaskTextField.text, !inputTask.isEmpty else {
                 return
             }
-            // セミモーダル遷移
             let nav = segue.destination as! UINavigationController
-            if let sheet = nav.sheetPresentationController {
-                let inputCategoryVC = nav.topViewController as! InputCategoryViewController
-                inputCategoryVC.catchTask = taskTextField.text ?? "aaa"
-                sheet.detents = [.medium()]
-                //モーダル出現後も親ビュー操作可能にする
-                sheet.largestUndimmedDetentIdentifier = .medium
-                // 角丸の半径を変更する
-                sheet.preferredCornerRadius = 20.0
-                //　グラバーを表示する（上の灰色のバー）
-                sheet.prefersGrabberVisible = true
-                return
-            }
+            guard let sheet = nav.sheetPresentationController  else { return }
+            let inputCategoryVC = nav.topViewController as! InputCategoryViewController
+            inputCategoryVC.catchTask = addTaskTextField.text ?? ""
+            sheet.detents = [.medium()]
+            //モーダル出現後も親ビュー操作不可能にする
+            sheet.largestUndimmedDetentIdentifier = .large
+            // 角丸の半径
+            sheet.preferredCornerRadius = 20.0
+            // 上の灰色のバー
+            sheet.prefersGrabberVisible = true
         }
+
     }
 
-    // モーダル遷移先のCancelButtonを押すと、帰ってくる処理
-    @IBAction func exitCancel(segue: UIStoryboardSegue){
-    }
 
-    @IBAction func exitSave(segue: UIStoryboardSegue){
-        print("saveButton")
-        let inputCategoryVC = segue.source as! InputCategoryViewController
 
-        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
-
-        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return
-        }
-        let realm = try! Realm()
-        categoryList = realm.objects(CategoryList.self)
-        // 新しいタスクの初期化（isRepeatedとisDoneはfalseにしている）
-        let newTodo = Task.init(value: ["date": nowSelectedDate,"detail": taskTextField.text ?? "","category": categoryList[selectedIndexNumber].name,"isRepeated": false,"isDone": false,"photo": categoryList[selectedIndexNumber].photo!])
-        try! realm.write{
-            realm.add(newTodo)
-        }
-        taskTextField.text = ""
-        // 追加されたTaskをtableViewに反映するために、tableView.reloadData()している
+    @IBAction private func didTapBeforeDayButton(_ sender: Any) {
+        selectedDate = selectedDate.added(year: 0, month: 0, day: -1, hour: 0, minute: 0, second: 0)
+        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         tableView.reloadData()
+        calendar.setCurrentPage(selectedDate, animated: true)
+        calendar.select(selectedDate, scrollToDate: true)
+    }
+
+    @IBAction private func didTapAfterDayButton(_ sender: Any) {
+        selectedDate = selectedDate.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
+        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
+        tableView.reloadData()
+        calendar.setCurrentPage(selectedDate, animated: true)
+        calendar.select(selectedDate, scrollToDate: true)
+    }
+
+    @IBAction private func didTapAddButton(_ sender: Any) {
+        // 文字を選択しながらモーダル遷移した場合挙動が不自然に変わる対処
+        addTaskTextField.isEnabled = false
+        performSegue(withIdentifier: "NavVCSegue", sender: nil)
+        addTaskTextField.isEnabled = true
     }
 
     @IBAction private func taskDeleteButton(_ sender: Any) {
         // SwipeCardVCへ画面遷移
         // taskTextField.isEnabledがtrueだとモーダル遷移もしてしまうため
-        taskTextField.isEnabled = false
+        // addTaskTextField.isEnabled = false
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
     }
 
-    private func setTextField(){
-        taskTextField.delegate = self
-        taskTextField.label.text = "追加するタスクを入力"
-        // TextFieldが選択されていない状態の枠と文字の色
-        taskTextField.setOutlineColor(.gray, for: .normal)
-        taskTextField.setFloatingLabelColor(.gray, for: .normal)
+    // textFieldに文字が入力されていればボタンを表示する
+    @IBAction func changedTextField(_ sender: Any) {
+        if addTaskTextField.text == "" {
+            addTaskButton.isEnabled = false
+        } else {
+            addTaskButton.isEnabled = true
+        }
+    }
 
-        // 編集中の枠と文字の色
-        taskTextField.setNormalLabelColor(.gray, for: .normal)
-        taskTextField.setOutlineColor(.blue, for: .editing)
-        taskTextField.setFloatingLabelColor(.blue, for: .editing)
+    private func setView() {
+        beforeDayButton.layer.borderColor = UIColor.darkGray.cgColor
+        beforeDayButton.layer.borderWidth = 1.0
+        beforeDayButton.layer.cornerRadius = 8.0
+        afterDayButton.layer.borderColor = UIColor.darkGray.cgColor
+        afterDayButton.layer.borderWidth = 1.0
+        afterDayButton.layer.cornerRadius = 8.0
+        taskCardView.layer.cornerRadius = 10
+        taskCardView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        taskCardView.layer.shadowColor = UIColor.black.cgColor
+        taskCardView.layer.shadowOpacity = 0.4
+        taskCardView.layer.shadowRadius = 3
+        taskCardTitleLabel.clipsToBounds = true
+        taskCardTitleLabel.layer.cornerRadius = 10
+        taskCardTitleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        swipeTaskButton.layer.cornerRadius = 5
+    }
+
+    // HACK:  setCalendarと内容が被っている。冗長になってしまっている。Dateのextensionを使用すればもう少し短くなるかも
+    private func setCalendar() {
+        calendar.delegate = self
+        calendar.scope = .month
+        calendar.locale = Locale(identifier: "ja")
+        calendar.locale  = .current
+        //現在の年・月・日・時刻を取得
+        let calPosition = Calendar.current
+        let comp = calPosition.dateComponents(
+            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
+             Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
+            from: Date())
+        selectedDate = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
+        calendar.select(selectedDate)
+        dateLabel.text = "   \(selectedDate!.year)年\(selectedDate!.month)月\(selectedDate!.day)日"
     }
 
     private func setTableView(){
@@ -173,6 +169,25 @@ class CalendarToDoViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+
+    @IBAction func exitCancel(segue: UIStoryboardSegue){
+    }
+
+    @IBAction func exitSave(segue: UIStoryboardSegue){
+        print("saveButton")
+        let inputCategoryVC = segue.source as! InputCategoryViewController
+        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
+        let realm = try! Realm()
+        categoryList = realm.objects(CategoryList.self)
+        // 新しいタスクの初期化（isRepeatedとisDoneはfalseにしている）
+        let newTask = Task.init(value: ["date": selectedDate!, "detail": addTaskTextField.text ?? "", "category": categoryList[selectedIndexNumber].name, "isRepeated": false, "isDone": false, "photo": categoryList[selectedIndexNumber].photo!])
+        try! realm.write{
+            realm.add(newTask)
+        }
+        addTaskTextField.text = ""
+        // 追加されたTaskをtableViewに反映するために、tableView.reloadData()している
+        tableView.reloadData()
+    }
 }
 
 extension CalendarToDoViewController: UITextFieldDelegate {
@@ -181,32 +196,24 @@ extension CalendarToDoViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+
 }
+
 extension CalendarToDoViewController: FSCalendarDelegate {
     // カレンダーの日付をタップした時に、カードに日付情報を反映させる処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        // 選択されたカレンダーの日付ごとに、TableViewの表示を変更するためのtableView.reloadData()
+        selectedDate = date
+        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         tableView.reloadData()
-        let calPosition = Calendar.current
-        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return
-        }
-        // Swipe画面から戻ってきた時にカレンダーの選択をselectedDateにするためにselectedDateを保存
-        UserDefaults.standard.set(selectedDate,forKey: "selectedDateKey")
-        let comp = calPosition.dateComponents( [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second], from: date)
-
-        taskTextField.placeholder = "\(comp.month!)月\(comp.day!)日のタスクを追加"
-        dateLabel.text = "\(comp.year!)年\(comp.month!)月\(comp.day!)日"
     }
+
 }
+
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let realm = try! Realm()
-        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return 0
-        }
-        let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+        let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", selectedDate!, false)
         return filtersTask.count
     }
 
@@ -215,15 +222,13 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         // 日付レベルでフィルタリング
         let realm = try! Realm()
-        guard let selectedDate = calendar.selectedDate, let nowSelectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) else {
-            return cell
-        }
-        let filtersTask = try! realm.objects(Task.self).filter("date==%@ && isDone==%@",nowSelectedDate,false)
+        let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", selectedDate!, false)
         let object = filtersTask[indexPath.row]
         cell.detailLabel.text = object.detail
         cell.categoryLabel.text = object.category
         return cell
     }
+
 }
 
 extension CalendarToDoViewController: SwipeCardViewControllerDelegate{
@@ -233,4 +238,3 @@ extension CalendarToDoViewController: SwipeCardViewControllerDelegate{
         tableView.reloadData()
     }
 }
-

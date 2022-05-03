@@ -26,7 +26,7 @@ class InputCategoryViewController: UIViewController {
         categoryList = realm.objects(CategoryList.self)
         tableView.delegate = self
         tableView.dataSource = self
-        selectedLabel.text = "「\(catchTask)」のカテゴリーを選択してください"
+        selectedLabel.text = "「\(catchTask)」のカテゴリーを選択してください。"
     }
 }
 
