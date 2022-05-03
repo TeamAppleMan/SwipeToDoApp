@@ -54,7 +54,7 @@ class AddCategoryViewController: UIViewController {
     // 0番目のCellからスタートする
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        horizontalCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     @IBAction private func tappedAlbumButton(_ sender: Any) {
