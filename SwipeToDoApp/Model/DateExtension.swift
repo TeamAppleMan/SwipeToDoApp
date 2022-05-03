@@ -12,7 +12,7 @@ extension Date {
     var calendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = .current
-        calendar.locale   = .current
+        //calendar.locale   = .current
         return calendar
     }
 

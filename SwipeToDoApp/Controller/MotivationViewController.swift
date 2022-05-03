@@ -30,6 +30,9 @@ class MotivationViewController: UIViewController {
     @IBOutlet private weak var categoryRatioSubBarLabel: UILabel!
 
     @IBOutlet private weak var endTaskLabel: UILabel!
+    @IBOutlet private weak var inputTaskLabel: UILabel!
+    @IBOutlet private weak var endTaskLabel2: UILabel!
+    @IBOutlet private weak var notEndTaskLabel: UILabel!
     @IBOutlet private weak var endTaskNumberLabel1: UILabel!
     @IBOutlet private weak var planTaskNumberLabel: UILabel!
     @IBOutlet private weak var endTaskNumberLabel2: UILabel!
@@ -71,6 +74,10 @@ class MotivationViewController: UIViewController {
         categoryRatioTopBarLabel.layer.cornerRadius = 15
         categoryRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         categoryRatioTopBarLabel.clipsToBounds = true
+        endTaskLabel.layer.borderWidth = 1.0
+        endTaskLabel.layer.borderColor = UIColor.systemGray4.cgColor
+        endTaskLabel.layer.cornerRadius = 10
+//        endTaskLabel.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -275,9 +282,9 @@ class MotivationViewController: UIViewController {
         endTaskNumberLabel2.text = String(Int(achieveCount))
         noEndTaskNumberLabel.text = String(Int(toNowAllDateList.count) - Int(achieveCount))
         lineChartDescriptionButtomLabel2.text = "経過月"
-        taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
-        taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
-        categoryRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜現在"
+        taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
+        taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
+        categoryRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
     }
 
     // MARK: 月間上
