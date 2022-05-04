@@ -24,8 +24,24 @@ class CalendarToDoViewController: UIViewController {
     @IBOutlet private weak var swipeTaskButton: UIButton!
 
     private var task: Results<Task>!
+    private var filtersTask: Results<Task>!
     private var categoryList: Results<CategoryList>!
     private var selectedDate: Date!
+
+
+    override func loadView() {
+        super.loadView()
+        print("aaa")
+        // Lottieを表示するか否かの判定
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunchKey"
+
+        if !userDefaults.bool(forKey: firstLunchKey) {
+            print(userDefaults.bool(forKey: firstLunchKey))
+            let navigationController = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as! UINavigationController
+            self.present(navigationController, animated: true, completion: nil)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +52,7 @@ class CalendarToDoViewController: UIViewController {
         task = realm.objects(Task.self)
 
         addTaskButton.isEnabled = false
-
+        tableView.allowsSelection = false
         setCalendar()
         setTableView()
         setView()
@@ -45,7 +61,6 @@ class CalendarToDoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addTaskTextField.isEnabled = true
-        // tableView.reloadData()
     }
 
     // HACK: if文が連結していてあまり良い書き方ではない
@@ -82,22 +97,18 @@ class CalendarToDoViewController: UIViewController {
 
     }
 
-
-
     @IBAction private func didTapBeforeDayButton(_ sender: Any) {
         selectedDate = selectedDate.added(year: 0, month: 0, day: -1, hour: 0, minute: 0, second: 0)
-        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
+        dateLabel.text = "    \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         tableView.reloadData()
-        calendar.setCurrentPage(selectedDate, animated: true)
-        calendar.select(selectedDate, scrollToDate: true)
+        setCalendarDate(date: selectedDate)
     }
 
     @IBAction private func didTapAfterDayButton(_ sender: Any) {
         selectedDate = selectedDate.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
-        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
+        dateLabel.text = "    \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         tableView.reloadData()
-        calendar.setCurrentPage(selectedDate, animated: true)
-        calendar.select(selectedDate, scrollToDate: true)
+        setCalendarDate(date: selectedDate)
     }
 
     @IBAction private func didTapAddButton(_ sender: Any) {
@@ -148,20 +159,18 @@ class CalendarToDoViewController: UIViewController {
         calendar.locale = Locale(identifier: "ja")
         calendar.locale  = .current
         //現在の年・月・日・時刻を取得
-        let calPosition = Calendar.current
-        let comp = calPosition.dateComponents(
-            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,
-             Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
-            from: Date())
-        selectedDate = calPosition.date(from: DateComponents(year: comp.year, month: comp.month, day: comp.day))
-        calendar.select(selectedDate)
-        dateLabel.text = "   \(selectedDate!.year)年\(selectedDate!.month)月\(selectedDate!.day)日"
+        // なぜ下でうまくいくのかさっぱりわからない。
+        selectedDate = Date()
+        selectedDate = selectedDate.added(year: 0, month: 0, day: 0, hour: 9, minute: 0, second: 0)
+        selectedDate = selectedDate.fixed(year: selectedDate.year, month: selectedDate.month, day: selectedDate.day, hour: 15, minute: 00, second: 00).added(year: 0, month: 0, day: 0, hour: 9, minute: 0, second: 0)
+        setCalendarDate(date: selectedDate)
+        dateLabel.text = "    \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
     }
 
     private func setTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 80
+        tableView.rowHeight = 50
         tableView.register(UINib(nibName: "addedToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "addedToDoID")
     }
 
@@ -171,6 +180,14 @@ class CalendarToDoViewController: UIViewController {
     }
 
     @IBAction func exitCancel(segue: UIStoryboardSegue){
+    }
+
+    private func setCalendarDate(date: Date) {
+        calendar.select(date.added(year:0, month:0, day:-1, hour:0, minute:0, second:0))
+    }
+
+    private func getCalendarDate() -> Date {
+        calendar.selectedDate!.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
     }
 
     @IBAction func exitSave(segue: UIStoryboardSegue){
@@ -185,6 +202,7 @@ class CalendarToDoViewController: UIViewController {
             realm.add(newTask)
         }
         addTaskTextField.text = ""
+        addTaskButton.isEnabled = false
         // 追加されたTaskをtableViewに反映するために、tableView.reloadData()している
         tableView.reloadData()
     }
@@ -202,33 +220,42 @@ extension CalendarToDoViewController: UITextFieldDelegate {
 extension CalendarToDoViewController: FSCalendarDelegate {
     // カレンダーの日付をタップした時に、カードに日付情報を反映させる処理
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDate = date
-        dateLabel.text = "   \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
+        selectedDate = getCalendarDate()
+        dateLabel.text = "    \(selectedDate.year)年\(selectedDate.month)月\(selectedDate.day)日"
         tableView.reloadData()
     }
 
 }
 
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
+        // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された)であるtaskをフィルタリングしてtableViewに反映
         let realm = try! Realm()
-        let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", selectedDate!, false)
+        filtersTask = realm.objects(Task.self).filter("date==%@", selectedDate!, false)
         return filtersTask.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
-        // 日付レベルでフィルタリング
-        let realm = try! Realm()
-        let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", selectedDate!, false)
         let object = filtersTask[indexPath.row]
         cell.detailLabel.text = object.detail
         cell.categoryLabel.text = object.category
+        cell.checkImage.isHidden = !object.isDone
         return cell
     }
 
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let realm = try! Realm()
+            try! realm.write{
+                let object = filtersTask[indexPath.row]
+                realm.delete(object)
+            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 extension CalendarToDoViewController: SwipeCardViewControllerDelegate{

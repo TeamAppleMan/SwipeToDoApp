@@ -16,20 +16,6 @@ class CategoryListViewController: UIViewController{
 
     private var task: Results<Task>!
 
-    override func loadView() {
-        super.loadView()
-
-        // Lottieを表示するか否かの判定
-        let userDefaults = UserDefaults.standard
-        let firstLunchKey = "firstLunchKey"
-
-        if !userDefaults.bool(forKey: firstLunchKey) {
-            print(userDefaults.bool(forKey: firstLunchKey))
-        let navigationController = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as! UINavigationController
-        self.present(navigationController, animated: true, completion: nil)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         let realm = try! Realm()
@@ -97,6 +83,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let realm = try! Realm()
