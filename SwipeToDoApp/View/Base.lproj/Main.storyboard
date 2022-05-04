@@ -53,7 +53,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="taskDeleteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fbD-ev-SYd"/>
-                                            <segue destination="6gr-8s-lP8" kind="show" identifier="SwipeCardSegue" id="bJA-o0-rmZ"/>
+                                            <segue destination="6gr-8s-lP8" kind="presentation" identifier="SwipeCardSegue" id="PT3-Le-ptF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNt-OT-zd0">
@@ -1089,10 +1089,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1103,7 +1103,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1279,30 +1279,38 @@
         <scene sceneID="dzO-Ou-NuI">
             <objects>
                 <viewController id="2bH-xN-OMK" customClass="SwipeCardViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="PDM-eq-mPZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                    <view key="view" contentMode="scaleToFill" id="PDM-eq-mPZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ds-PK-0AS" customClass="VerticalCardSwiper" customModule="VerticalCardSwiper">
-                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BqM-x2-Q7Y" customClass="PastelView" customModule="Pastel">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ds-PK-0AS" customClass="VerticalCardSwiper" customModule="VerticalCardSwiper">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="3ds-PK-0AS" secondAttribute="height" multiplier="125:234" id="kcz-l6-f6E"/>
+                                    <constraint firstAttribute="width" secondItem="3ds-PK-0AS" secondAttribute="height" multiplier="375:724" id="vEm-YE-kUx"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Pdr-lf-fNA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3ds-PK-0AS" firstAttribute="leading" secondItem="Pdr-lf-fNA" secondAttribute="leading" id="4ma-Ai-p2S"/>
-                            <constraint firstItem="3ds-PK-0AS" firstAttribute="top" secondItem="Pdr-lf-fNA" secondAttribute="top" id="6Iz-23-5ZJ"/>
-                            <constraint firstItem="3ds-PK-0AS" firstAttribute="trailing" secondItem="Pdr-lf-fNA" secondAttribute="trailing" id="7gv-7Q-vCX"/>
-                            <constraint firstItem="3ds-PK-0AS" firstAttribute="centerY" secondItem="PDM-eq-mPZ" secondAttribute="centerY" id="9vp-zG-31P"/>
-                            <constraint firstItem="3ds-PK-0AS" firstAttribute="centerX" secondItem="PDM-eq-mPZ" secondAttribute="centerX" id="xDk-6C-uPJ"/>
+                            <constraint firstItem="BqM-x2-Q7Y" firstAttribute="top" secondItem="PDM-eq-mPZ" secondAttribute="top" id="9Gf-Tv-Or6"/>
+                            <constraint firstAttribute="bottom" secondItem="BqM-x2-Q7Y" secondAttribute="bottom" id="BEc-7x-mI9"/>
+                            <constraint firstAttribute="bottom" secondItem="3ds-PK-0AS" secondAttribute="bottom" id="EFM-jh-uxE"/>
+                            <constraint firstItem="3ds-PK-0AS" firstAttribute="top" secondItem="Pdr-lf-fNA" secondAttribute="top" id="ctS-aU-mCm"/>
+                            <constraint firstItem="3ds-PK-0AS" firstAttribute="leading" secondItem="Pdr-lf-fNA" secondAttribute="leading" id="fYt-7u-dWO"/>
+                            <constraint firstItem="BqM-x2-Q7Y" firstAttribute="leading" secondItem="Pdr-lf-fNA" secondAttribute="leading" id="jUu-Q8-Efu"/>
+                            <constraint firstItem="3ds-PK-0AS" firstAttribute="trailing" secondItem="Pdr-lf-fNA" secondAttribute="trailing" id="tHV-cn-WlD"/>
+                            <constraint firstItem="BqM-x2-Q7Y" firstAttribute="trailing" secondItem="Pdr-lf-fNA" secondAttribute="trailing" id="v6t-Ts-vS4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rto-86-On7">
                         <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="Ulz-Bw-Gi6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="tappedBackButton:" destination="2bH-xN-OMK" id="A76-Gd-Bmi"/>
                             </connections>
@@ -1310,6 +1318,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cardSwiper" destination="3ds-PK-0AS" id="4Az-kH-NMz"/>
+                        <outlet property="pastelView" destination="BqM-x2-Q7Y" id="yyw-6Y-kPO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QX2-82-urd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

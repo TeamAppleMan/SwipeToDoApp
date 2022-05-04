@@ -650,6 +650,7 @@ PODS:
   - MotionAnimator (4.0.1):
     - MotionInterchange (~> 3.0)
   - MotionInterchange (3.0.0)
+  - Pastel (0.6.0)
   - PKHUD (5.3.0)
   - Realm (10.25.2):
     - Realm/Headers (= 10.25.2)
@@ -664,6 +665,7 @@ DEPENDENCIES:
   - FSCalendar
   - lottie-ios
   - MaterialComponents
+  - Pastel
   - PKHUD
   - RealmSwift
   - VerticalCardSwiper
@@ -678,6 +680,7 @@ SPEC REPOS:
     - MDFTextAccessibility
     - MotionAnimator
     - MotionInterchange
+    - Pastel
     - PKHUD
     - Realm
     - RealmSwift
@@ -693,12 +696,13 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
+  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   Realm: 978303663d0509166498f423d112e5ee97d4c91b
   RealmSwift: a0c30c1efc49e928a0a6f8fb141bb2629616d79b
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   VerticalCardSwiper: 68df635b354500f86934ea044ade37a264c044c6
 
-PODFILE CHECKSUM: bb396659c4e1d75d681619bbffefe7e6726e9980
+PODFILE CHECKSUM: bbeda54f62ae6824dcb2c50c8c66730710094457
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.10.2
