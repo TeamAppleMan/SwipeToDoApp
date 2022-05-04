@@ -31,7 +31,7 @@ class SwipeCardViewController: UIViewController {
         cardSwiper.delegate = self
         cardSwiper.datasource = self
         cardSwiper.topInset = 25 // トップのViewの間隔
-        cardSwiper.visibleNextCardHeight = 60 // 次にカードが見れ隠れする高さ
+        cardSwiper.visibleNextCardHeight = 80 // 次にカードが見れ隠れする高さ
         cardSwiper.register(nib:UINib(nibName: "CardViewCell", bundle: nil), forCellWithReuseIdentifier: "CardViewID")
         cardSwiper.reloadData()
         setBackgroundColor()
@@ -41,10 +41,6 @@ class SwipeCardViewController: UIViewController {
         super.viewWillAppear(true)
         // HACK: 正直cardTaskに格納する意味はないです。。笑
         cardTask = catchTask
-        guard let catchDate = catchDate else {
-            return
-        }
-        navigationItem.title = "\(catchDate.year)年\(catchDate.month)月\(catchDate.day)日"
     }
 
     // CalendarToDoViewControllerの画面遷移
@@ -63,7 +59,6 @@ class SwipeCardViewController: UIViewController {
 
         // Custom Color
         pastelView.setColors([UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1.0),
-                              UIColor(red: 127/255, green: 127/255, blue: 127/255, alpha: 1.0),
                               UIColor(red: 0/255, green: 0/255, blue: 255/255, alpha: 1.0)])
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
@@ -84,6 +79,11 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             // カテゴリー写真を暗くする
             cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: UIImage(data: object.photo!)!, level: 0.5)
             cardCell.categoryLabel.text = object.category
+            guard let catchDate = catchDate else {
+                cardCell.dateLabel.text = ""
+                return cardCell
+            }
+            cardCell.dateLabel.text = "\(catchDate.month)月\(catchDate.day)日"
             return cardCell
         }
         return CardCell()
@@ -96,9 +96,9 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             try! realm.write{
                 cardTask[index].isDone = true
             }
-            HUD.flash(.labeledSuccess(title: "タスク消化", subtitle: "お疲れ様でした...！"), delay: 0.5)
+            HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 1)
         }else if swipeDirection == .Left{
-            HUD.flash(.labeledError(title: "無効", subtitle: "この操作は現在無効です"), delay: 0.5)
+            HUD.flash(.labeledError(title: "無効", subtitle: "この操作は現在無効です"), delay: 1)
         }
     }
 }
