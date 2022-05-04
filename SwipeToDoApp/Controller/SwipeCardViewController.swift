@@ -36,12 +36,24 @@ class SwipeCardViewController: UIViewController {
         cardSwiper.reloadData()
         setBackgroundColor()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        //フォアグラウンド時の処理
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(SwipeCardViewController.viewWillEnterForeground(_:)),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         // HACK: 正直cardTaskに格納する意味はないです。。笑
         cardTask = catchTask
+    }
+    //アプリがフォアグラウンド時(ホーム画面からアプリをタップした時でもBackgroundColorをパステルカラーにする
+    @objc func viewWillEnterForeground(_ notification: Notification?) {
+        if (self.isViewLoaded && (self.view.window != nil)) {
+            setBackgroundColor()
+        }
     }
 
     // CalendarToDoViewControllerの画面遷移
@@ -53,10 +65,10 @@ class SwipeCardViewController: UIViewController {
     }
     private func setBackgroundColor(){
         // Custom Direction
-        pastelView.startPastelPoint = .bottomLeft
-        pastelView.endPastelPoint = .topRight
+        pastelView.startPastelPoint = .topLeft
+        pastelView.endPastelPoint = .bottomRight
         // 色変化の間隔[s]
-        pastelView.animationDuration = 3.0
+        pastelView.animationDuration = 7.0
 
         // Custom Color
         pastelView.setColors([UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1.0),
