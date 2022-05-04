@@ -95,6 +95,17 @@ class AddCategoryViewController: UIViewController {
         horizontalCollectionView.collectionViewLayout = testLayout
     }
 
+
+    @IBAction func changedTextField(_ sender: Any) {
+        if categoryNameTextField.text == "" {
+            albumButton.isEnabled = false
+            albumButton.alpha = 0.1
+        } else {
+            albumButton.isEnabled = true
+            albumButton.alpha = 1
+        }
+    }
+
 }
 
 extension AddCategoryViewController: UITextFieldDelegate{

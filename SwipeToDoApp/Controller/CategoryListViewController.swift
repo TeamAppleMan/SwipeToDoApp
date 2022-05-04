@@ -97,6 +97,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let realm = try! Realm()
