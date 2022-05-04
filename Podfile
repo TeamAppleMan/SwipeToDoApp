@@ -14,5 +14,6 @@ target 'SwipeToDoApp' do
   pod 'RealmSwift'
   pod 'PKHUD'
   pod 'Pastel'
+  pod 'DSFloatingButton'
 
 end

@@ -35,6 +35,7 @@ class SwipeCardViewController: UIViewController {
         cardSwiper.register(nib:UINib(nibName: "CardViewCell", bundle: nil), forCellWithReuseIdentifier: "CardViewID")
         cardSwiper.reloadData()
         setBackgroundColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 
     override func viewWillAppear(_ animated: Bool) {

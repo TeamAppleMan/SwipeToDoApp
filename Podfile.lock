@@ -3,6 +3,7 @@ PODS:
     - Charts/Core (= 4.0.2)
   - Charts/Core (4.0.2):
     - SwiftAlgorithms (~> 1.0)
+  - DSFloatingButton (1.0.1)
   - FSCalendar (2.8.4)
   - lottie-ios (3.3.0)
   - MaterialComponents (124.2.0):
@@ -662,6 +663,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DSFloatingButton
   - FSCalendar
   - lottie-ios
   - MaterialComponents
@@ -673,6 +675,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Charts
+    - DSFloatingButton
     - FSCalendar
     - lottie-ios
     - MaterialComponents
@@ -689,6 +692,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
+  DSFloatingButton: 2611b44e75736cd2f2686691ee4d2c16f2b62391
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
@@ -703,6 +707,6 @@ SPEC CHECKSUMS:
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   VerticalCardSwiper: 68df635b354500f86934ea044ade37a264c044c6
 
-PODFILE CHECKSUM: bbeda54f62ae6824dcb2c50c8c66730710094457
+PODFILE CHECKSUM: 0e172458ca590c4374014eb0256798f90fd13543
 
 COCOAPODS: 1.10.2
