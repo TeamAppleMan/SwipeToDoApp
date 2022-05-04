@@ -9,8 +9,10 @@ import UIKit
 
 class addedToDoTableViewCell: UITableViewCell {
 
-    @IBOutlet var detailLabel: UILabel!
-    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var checkImage: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

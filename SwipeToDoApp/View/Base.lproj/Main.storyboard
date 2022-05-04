@@ -44,12 +44,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41K-1E-g0r">
-                                        <rect key="frame" x="191" y="16" width="101" height="35"/>
+                                        <rect key="frame" x="187" y="16" width="105" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" title="やることSwipe">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="11"/>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>

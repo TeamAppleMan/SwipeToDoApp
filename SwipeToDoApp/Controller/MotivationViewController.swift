@@ -231,7 +231,7 @@ class MotivationViewController: UIViewController {
         }
 
         // その差から数える月数を取得
-        let fromOldToNowMonth = mostOldDate.getMonthCount(between: mostOldDate)
+        let fromOldToNowMonth = mostOldDate.getMonthCount(fromDate: mostOldDate)
 
         // その月の回数分だけforを回してtrueの数を調べる
         for i in 0..<fromOldToNowMonth {

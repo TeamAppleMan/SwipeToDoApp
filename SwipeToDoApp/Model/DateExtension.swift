@@ -75,29 +75,35 @@ extension Date {
         return monthsLeft + 2
     }
 
+    // 引数が含む月〜現在の月までが何ヶ月あるかを取得
+    func getMonthCount(fromDate: Date) -> Int {
+        guard let monthsLeft = calendar.dateComponents([.month], from: fromDate, to: Date()).month else { return 0 }
+        return monthsLeft + 2
+    }
+
     // 「Data型.year」などでInt型で値を取得できるコード
     var year: Int {
-        return calendar.component(.year, from: self)
+        return calendar.component(.year, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
     var month: Int {
-        return calendar.component(.month, from: self)
+        return calendar.component(.month, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
     var day: Int {
-        return calendar.component(.day, from: self)
+        return calendar.component(.day, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
     var hour: Int {
-        return calendar.component(.hour, from: self)
+        return calendar.component(.hour, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
     var minute: Int {
-        return calendar.component(.minute, from: self)
+        return calendar.component(.minute, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
     var second: Int {
-        return calendar.component(.second, from: self)
+        return calendar.component(.second, from: self.added(year: 0, month: 0, day: 0, hour: -9, minute: 0, second: 0))
     }
 
 }
