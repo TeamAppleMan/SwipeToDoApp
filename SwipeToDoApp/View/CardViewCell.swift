@@ -1,8 +1,8 @@
 //
-//  CardViewCell.swift
+//  CardViewCell2.swift
 //  SwipeToDoApp
 //
-//  Created by 近藤米功 on 2022/04/21.
+//  Created by 近藤米功 on 2022/05/04.
 //
 
 import UIKit
@@ -10,16 +10,17 @@ import VerticalCardSwiper
 
 class CardViewCell: CardCell {
 
+
     @IBOutlet var categoryPhotoImageView: UIImageView!
     @IBOutlet var categoryLabel: UILabel!
     @IBOutlet var detailTextView: UITextView!
+    @IBOutlet var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        categoryLabel.textColor = .white
-        detailTextView.textColor = .white
         // 写真を角丸に設定
         categoryPhotoImageView.layer.cornerRadius = 12
     }
+
     // ライブラリのコードからそのまま拝借
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -60,5 +61,6 @@ class CardViewCell: CardCell {
         UIGraphicsEndImageContext()
         return toReturn
     }
-    
+
 }
+

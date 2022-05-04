@@ -22,8 +22,6 @@
 		95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */; };
 		95979D132812857F00E1457E /* TemplateCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */; };
 		95979D15281287F000E1457E /* CheckPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95979D14281287F000E1457E /* CheckPermission.swift */; };
-		95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB1281121CA0025C9A1 /* CardViewCell.swift */; };
-		95A29BB4281121CA0025C9A1 /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95A29BB2281121CA0025C9A1 /* CardViewCell.xib */; };
 		95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */; };
 		95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A4990628157A0700B84AC9 /* DataUtils.swift */; };
 		95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A499082815FD8B00B84AC9 /* DateExtension.swift */; };
@@ -39,6 +37,8 @@
 		95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */; };
 		95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */; };
 		95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF92810EAE700960B82 /* CategoryList.swift */; };
+		95D7E9C62822449A00AC8FDB /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D7E9C42822449A00AC8FDB /* CardViewCell.swift */; };
+		95D7E9C72822449A00AC8FDB /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D7E9C52822449A00AC8FDB /* CardViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +58,6 @@
 		95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TemplateCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		95979D14281287F000E1457E /* CheckPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPermission.swift; sourceTree = "<group>"; };
-		95A29BB1281121CA0025C9A1 /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
-		95A29BB2281121CA0025C9A1 /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		95A29BB5281123CC0025C9A1 /* SwipeCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeCardViewController.swift; sourceTree = "<group>"; };
 		95A4990628157A0700B84AC9 /* DataUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtils.swift; sourceTree = "<group>"; };
 		95A499082815FD8B00B84AC9 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -77,6 +75,8 @@
 		95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addedToDoTableViewCell.xib; sourceTree = "<group>"; };
 		95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCategoryViewController.swift; sourceTree = "<group>"; };
 		95D6EBF92810EAE700960B82 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
+		95D7E9C42822449A00AC8FDB /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
+		95D7E9C52822449A00AC8FDB /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		A1E1B9EA56197EC8A09A4A01 /* Pods-SwipeToDoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.release.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,12 +131,12 @@
 				95D6EBC6280F976C00960B82 /* LaunchScreen.storyboard */,
 				95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */,
 				95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */,
-				95A29BB1281121CA0025C9A1 /* CardViewCell.swift */,
-				95A29BB2281121CA0025C9A1 /* CardViewCell.xib */,
 				95979D0A28127C0E00E1457E /* CategoryTableViewCell.swift */,
 				95979D0B28127C0E00E1457E /* CategoryTableViewCell.xib */,
 				95979D102812857F00E1457E /* TemplateCategoryCollectionViewCell.swift */,
 				95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */,
+				95D7E9C42822449A00AC8FDB /* CardViewCell.swift */,
+				95D7E9C52822449A00AC8FDB /* CardViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,12 +251,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D6EBC8280F976C00960B82 /* LaunchScreen.storyboard in Resources */,
+				95D7E9C72822449A00AC8FDB /* CardViewCell.xib in Resources */,
 				95979D132812857F00E1457E /* TemplateCategoryCollectionViewCell.xib in Resources */,
 				95D6EBC5280F976C00960B82 /* Assets.xcassets in Resources */,
 				95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */,
 				95979D0D28127C0E00E1457E /* CategoryTableViewCell.xib in Resources */,
 				95D6EBC3280F976B00960B82 /* Main.storyboard in Resources */,
-				95A29BB4281121CA0025C9A1 /* CardViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +313,6 @@
 				95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */,
 				95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */,
 				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
-				95A29BB3281121CA0025C9A1 /* CardViewCell.swift in Sources */,
 				87E259EC281D4BBD006D431F /* Lottie03ViewController.swift in Sources */,
 				95979D15281287F000E1457E /* CheckPermission.swift in Sources */,
 				87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */,
@@ -325,6 +324,7 @@
 				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
 				87E259EA281D4BA8006D431F /* Lottie02ViewController.swift in Sources */,
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
+				95D7E9C62822449A00AC8FDB /* CardViewCell.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
 				87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */,
 				95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */,

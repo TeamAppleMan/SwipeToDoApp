@@ -3,6 +3,7 @@ PODS:
     - Charts/Core (= 4.0.2)
   - Charts/Core (4.0.2):
     - SwiftAlgorithms (~> 1.0)
+  - DSFloatingButton (1.0.1)
   - FSCalendar (2.8.4)
   - lottie-ios (3.3.0)
   - MaterialComponents (124.2.0):
@@ -650,6 +651,7 @@ PODS:
   - MotionAnimator (4.0.1):
     - MotionInterchange (~> 3.0)
   - MotionInterchange (3.0.0)
+  - Pastel (0.6.0)
   - PKHUD (5.3.0)
   - Realm (10.25.2):
     - Realm/Headers (= 10.25.2)
@@ -661,9 +663,11 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DSFloatingButton
   - FSCalendar
   - lottie-ios
   - MaterialComponents
+  - Pastel
   - PKHUD
   - RealmSwift
   - VerticalCardSwiper
@@ -671,6 +675,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Charts
+    - DSFloatingButton
     - FSCalendar
     - lottie-ios
     - MaterialComponents
@@ -678,6 +683,7 @@ SPEC REPOS:
     - MDFTextAccessibility
     - MotionAnimator
     - MotionInterchange
+    - Pastel
     - PKHUD
     - Realm
     - RealmSwift
@@ -686,6 +692,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
+  DSFloatingButton: 2611b44e75736cd2f2686691ee4d2c16f2b62391
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
   MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
@@ -693,12 +700,13 @@ SPEC CHECKSUMS:
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
   MotionAnimator: 5f99d7c9592928c0f28a66283eda9c3b657dc480
   MotionInterchange: 13adae439b377e31d1674cc165539d50e1d1566a
+  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   Realm: 978303663d0509166498f423d112e5ee97d4c91b
   RealmSwift: a0c30c1efc49e928a0a6f8fb141bb2629616d79b
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   VerticalCardSwiper: 68df635b354500f86934ea044ade37a264c044c6
 
-PODFILE CHECKSUM: bb396659c4e1d75d681619bbffefe7e6726e9980
+PODFILE CHECKSUM: 0e172458ca590c4374014eb0256798f90fd13543
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.10.2

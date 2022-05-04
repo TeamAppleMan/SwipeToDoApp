@@ -13,5 +13,7 @@ target 'SwipeToDoApp' do
   pod 'lottie-ios'
   pod 'RealmSwift'
   pod 'PKHUD'
+  pod 'Pastel'
+  pod 'DSFloatingButton'
 
 end
