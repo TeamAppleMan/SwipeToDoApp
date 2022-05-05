@@ -13,7 +13,7 @@ import RealmSwift
 class CalendarToDoViewController: UIViewController {
 
     @IBOutlet private weak var calendar: FSCalendar!
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private(set) weak var tableView: UITableView! // CategoryListViewControllerがアクセスするためprivate(set)にした
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var beforeDayButton: UIButton!
     @IBOutlet private weak var afterDayButton: UIButton!
@@ -38,7 +38,7 @@ class CalendarToDoViewController: UIViewController {
 
         if !userDefaults.bool(forKey: firstLunchKey) {
             print(userDefaults.bool(forKey: firstLunchKey))
-            let navigationController = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as! UINavigationController
+            let navigationController = storyboard?.instantiateViewController(withIdentifier: "LottieNavigationController") as! UINavigationController
             self.present(navigationController, animated: true, completion: nil)
         }
     }
@@ -70,7 +70,6 @@ class CalendarToDoViewController: UIViewController {
         if segue.identifier == "SwipeCardSegue" {
             let nav = segue.destination as! UINavigationController
             let swipeCardVC = nav.topViewController as! SwipeCardViewController
-            swipeCardVC.catchDate = selectedDate
             swipeCardVC.delegate = self
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
             let realm = try! Realm()

@@ -8,13 +8,16 @@
 import UIKit
 import RealmSwift
 
-class CategoryListViewController: UIViewController{
+class CategoryListViewController: UIViewController, SwipeCardViewControllerDelegate{
+
 
     @IBOutlet var tableView: UITableView!
 
     var categoryList: Results<CategoryList>!
 
     private var task: Results<Task>!
+
+    private var selectedIndexNumber: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +55,6 @@ class CategoryListViewController: UIViewController{
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        // tableViewのセルを押せなくする
-        tableView.allowsSelection = false
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryID")
         tableView.rowHeight = 80
     }
@@ -62,7 +63,21 @@ class CategoryListViewController: UIViewController{
         if segue.identifier == "AddCategorySegue"{
             let addCategoryVC = segue.destination as! AddCategoryViewController
             addCategoryVC.delegate = self
+        }else if segue.identifier == "SwipeCardSegue"{
+            let nav = segue.destination as! UINavigationController
+            let swipeCardVC = nav.topViewController as! SwipeCardViewController
+            swipeCardVC.delegate = self
+            let realm = try! Realm()
+            let filtersTask = try! realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[selectedIndexNumber].name,false)
+            swipeCardVC.catchTask = filtersTask
         }
+    }
+    func catchDidSwipeCardData(catchTask: Results<Task>) {
+        // カレンダー画面のTableViewをリロードする
+        guard let calendarToDoVC = tabBarController?.viewControllers?[0] as? CalendarToDoViewController else{
+            return
+        }
+        calendarToDoVC.tableView.reloadData()
     }
     
 }
@@ -94,6 +109,11 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    // セルをタップした時にスワイプ画面に画面遷移する
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexNumber = indexPath.row
+        performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
+    }
 }
 extension CategoryListViewController: AddCategoryViewControllerDelegate{
     // AddCategoryViewControllerDelegateによるデリゲートメソッド: 新規カテゴリを追加した時に呼ばれる
@@ -106,6 +126,4 @@ extension CategoryListViewController: AddCategoryViewControllerDelegate{
         // 新しくカテゴリが追加されたので、カテゴリリストの更新を行う
         tableView.reloadData()
     }
-
-
 }
