@@ -12,7 +12,7 @@
         <!--やること-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CalendarToDoViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="calendarToDoID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="CalendarToDoViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -290,11 +290,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Jld-Zf-T13" id="5Qx-4w-Ssf"/>
+                        <segue destination="6gr-8s-lP8" kind="show" identifier="SwipeCardSegue" id="P6k-QB-WtV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1B7-dO-kR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="863.79310344827593"/>
+            <point key="canvasLocation" x="2900" y="1199"/>
         </scene>
         <!--Add Category View Controller-->
         <scene sceneID="teA-eT-nCQ">
@@ -397,7 +398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtf-LB-8Sb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3706.4000000000001" y="863.79310344827593"/>
+            <point key="canvasLocation" x="4042" y="1199"/>
         </scene>
         <!--Lottie01 View Controller-->
         <scene sceneID="MEU-mV-IQ4">
@@ -1005,7 +1006,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hu-Zk-ljw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1690.4000000000001" y="863.79310344827593"/>
+            <point key="canvasLocation" x="1690" y="1118"/>
         </scene>
         <!--モチベーション-->
         <scene sceneID="tmQ-fg-YuB">
@@ -1167,7 +1168,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhS-OV-oUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5439.130434782609" y="1595.7589285714284"/>
+            <point key="canvasLocation" x="5388" y="2520"/>
         </scene>
         <!--お問い合わせ-->
         <scene sceneID="oBi-Hn-4XL">
@@ -1267,7 +1268,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oYw-U3-hVO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4528.985507246377" y="1595.7589285714284"/>
+            <point key="canvasLocation" x="4526" y="2520"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1BV-cv-afF">
@@ -1353,7 +1354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QX2-82-urd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5472.8000000000002" y="793.5960591133005"/>
+            <point key="canvasLocation" x="4745" y="437"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XtH-cE-v5S">
@@ -1390,9 +1391,17 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npU-Pv-PBK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4662" y="794"/>
+            <point key="canvasLocation" x="3870" y="438"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="41K-1E-g0r">
+            <size key="intrinsicContentSize" width="103" height="27.333333333333332"/>
+        </designable>
+    </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="PT3-Le-ptF"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>

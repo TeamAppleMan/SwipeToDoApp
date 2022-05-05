@@ -22,7 +22,6 @@ class SwipeCardViewController: UIViewController {
 
     private var cardTask: Results<Task>!
     public var catchTask: Results<Task>!
-    public var catchDate: Date?
 
     var delegate: SwipeCardViewControllerDelegate?
 
@@ -92,11 +91,8 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             // カテゴリー写真を暗くする
             cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: UIImage(data: object.photo!)!, level: 0.5)
             cardCell.categoryLabel.text = object.category
-            guard let catchDate = catchDate else {
-                cardCell.dateLabel.text = ""
-                return cardCell
-            }
-            cardCell.dateLabel.text = "\(catchDate.month)月\(catchDate.day)日"
+            let catchDate: Date = object.date
+            cardCell.dateLabel.text = "\(catchDate.year)年\(catchDate.month)月\(catchDate.day)日"
             return cardCell
         }
         return CardCell()

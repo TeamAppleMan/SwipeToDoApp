@@ -32,15 +32,15 @@
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqR-WN-Lrd">
-                        <rect key="frame" x="226" y="580" width="101" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfy-rv-ist">
                         <rect key="frame" x="23" y="452" width="294" height="42"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqR-WN-Lrd">
+                        <rect key="frame" x="120" y="572" width="200" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -56,11 +56,11 @@
                 <constraint firstItem="nWg-h6-UZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="OkB-FD-7Bb"/>
                 <constraint firstAttribute="bottom" secondItem="iUp-gc-b4R" secondAttribute="bottom" id="X6D-tH-gEt"/>
                 <constraint firstItem="nWg-h6-UZU" firstAttribute="top" secondItem="cfy-rv-ist" secondAttribute="bottom" constant="2" id="YPc-D5-oVz"/>
-                <constraint firstItem="IqR-WN-Lrd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="226" id="aPD-CQ-ZBM"/>
+                <constraint firstItem="IqR-WN-Lrd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="120" id="aPD-CQ-ZBM"/>
                 <constraint firstItem="iUp-gc-b4R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ey7-2Q-RZi"/>
                 <constraint firstItem="iUp-gc-b4R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="flX-Au-AGM"/>
-                <constraint firstAttribute="bottom" secondItem="IqR-WN-Lrd" secondAttribute="bottom" constant="12" id="jfd-Go-09b"/>
-                <constraint firstAttribute="trailing" secondItem="IqR-WN-Lrd" secondAttribute="trailing" constant="13" id="xme-Na-74m"/>
+                <constraint firstAttribute="bottom" secondItem="IqR-WN-Lrd" secondAttribute="bottom" constant="20" id="jfd-Go-09b"/>
+                <constraint firstAttribute="trailing" secondItem="IqR-WN-Lrd" secondAttribute="trailing" constant="20" id="xme-Na-74m"/>
             </constraints>
             <size key="customSize" width="296" height="206"/>
             <connections>
