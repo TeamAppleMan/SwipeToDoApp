@@ -74,10 +74,6 @@ class MotivationViewController: UIViewController {
         categoryRatioTopBarLabel.layer.cornerRadius = 15
         categoryRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         categoryRatioTopBarLabel.clipsToBounds = true
-        endTaskLabel.layer.borderWidth = 1.0
-        endTaskLabel.layer.borderColor = UIColor.systemGray4.cgColor
-        endTaskLabel.layer.cornerRadius = 10
-//        endTaskLabel.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -223,7 +219,6 @@ class MotivationViewController: UIViewController {
         }
         // 後の計算用に
         guard let mostOldDate = toNowAllDateList.min() else {
-            // データがない場合に”データがありません”と表示させるため
             createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
             createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
             createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
@@ -243,7 +238,14 @@ class MotivationViewController: UIViewController {
             endTaskcount += Double(endTaskOfMonthly.count)
             taskCountOfAllChartData.append(endTaskcount)
         }
-        createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+        print(fromOldToNowMonth)
+
+        // もしデータが１ヶ月未満であればデータを表示しない
+        if fromOldToNowMonth <= 1 {
+            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+        } else {
+            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+        }
 
         //　達成率（円グラフ）計算
         let achieveCount = taskCountOfAllChartData.max() ?? 0
@@ -296,8 +298,9 @@ class MotivationViewController: UIViewController {
             let dataEntry = ChartDataEntry(x: Double(xValue), y: yValue)
             dataEntries.append(dataEntry)
         }
+
         // グラフにデータを適用
-        taskCountOfMonthLineDataSet = LineChartDataSet(entries: dataEntries, label: "SampleDataChart")
+        taskCountOfMonthLineDataSet = LineChartDataSet(entries: dataEntries, label: "")
         taskCountOfMonthLineChartView.data = LineChartData(dataSet: taskCountOfMonthLineDataSet)
 
         // X軸(xAxis)
@@ -326,7 +329,7 @@ class MotivationViewController: UIViewController {
         // その他の変更
         taskCountOfMonthLineChartView.noDataFont = UIFont.systemFont(ofSize: 30) //Noデータ時の表示フォント
         taskCountOfMonthLineChartView.noDataTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //Noデータ時の文字色
-        taskCountOfMonthLineChartView.noDataText = "Keep Waiting" //Noデータ時に表示する文字
+        taskCountOfMonthLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
         taskCountOfMonthLineChartView.legend.enabled = false //"■ months"のlegendの表示
         taskCountOfMonthLineChartView.dragDecelerationEnabled = true //指を離してもスクロール続くか
         taskCountOfMonthLineChartView.dragDecelerationFrictionCoef = 0.8 //ドラッグ時の減速スピード(0-1)
@@ -430,6 +433,7 @@ class MotivationViewController: UIViewController {
 
     // MARK: 総合上
     private func createTaskCountOfAllLineChart(data: [Double]) {
+
         // プロットデータ(y軸)を保持する配列
         var dataEntries = [ChartDataEntry]()
 
@@ -437,9 +441,24 @@ class MotivationViewController: UIViewController {
             let dataEntry = ChartDataEntry(x: Double(xValue), y: yValue)
             dataEntries.append(dataEntry)
         }
-        // グラフにデータを適用
-        taskCountOfAllLineDataSet = LineChartDataSet(entries: dataEntries, label: "SampleDataChart")
-        taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
+
+        // ２ヶ月以上のデータがなければ表示させない
+        if dataEntries.count >= 2 {
+            //lineChartDescriptionButtomLabel.text = "経過月"
+            //lineChartDescriptionTopLabel.text = "達成タスク数"
+            taskCountOfAllLineDataSet = LineChartDataSet(entries: dataEntries, label: "")
+            taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
+        } else {
+            //lineChartDescriptionButtomLabel.text = ""
+            //lineChartDescriptionTopLabel.text = ""
+            print("通貨")
+            taskCountOfAllLineChartView.noDataText = """
+                   表示できるデータ量がありません
+                   ２ヶ月分以上のデータが必要です
+                   """
+            return
+        }
+
 
         // X軸(xAxis)
         taskCountOfAllLineChartView.xAxis.labelPosition = .bottom // x軸ラベルをグラフの下に表示する
@@ -488,7 +507,7 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineDataSet.fill = LinearGradientFill.init(gradient: gradient!, angle: 90.0)
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示(今回は表示しない)
         taskCountOfAllLineDataSet.lineWidth = 3.0 //線の太さ
-        taskCountOfMonthLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
+        taskCountOfAllLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示taskCountOfMonthChartDataSet
         taskCountOfAllLineDataSet.mode = .cubicBezier //曲線にする
         taskCountOfAllLineDataSet.fillAlpha = 0.8 //グラフの透過率(曲線は投下しない)
