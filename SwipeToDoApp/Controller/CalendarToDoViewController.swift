@@ -29,22 +29,26 @@ class CalendarToDoViewController: UIViewController {
     private var selectedDate: Date!
 
 
-    override func loadView() {
-        super.loadView()
-        print("aaa")
-        // Lottieを表示するか否かの判定
-        let userDefaults = UserDefaults.standard
-        let firstLunchKey = "firstLunchKey"
+//    override func loadView() {
+//        super.loadView()
+//        print("aaa")
+//        // Lottieを表示するか否かの判定
+//        let userDefaults = UserDefaults.standard
+//        let firstLunchKey = "firstLunchKey"
+//
+//        if !userDefaults.bool(forKey: firstLunchKey) {
+//            print(userDefaults.bool(forKey: firstLunchKey))
+//            if let lottieNC = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as? UINavigationController,
+//                       let _ = lottieNC.topViewController as? Lottie01ViewController {
+//                        present(lottieNC, animated: true, completion: nil)
+//                    }
+//        }
+//    }
 
-        if !userDefaults.bool(forKey: firstLunchKey) {
-            print(userDefaults.bool(forKey: firstLunchKey))
-            let navigationController = storyboard?.instantiateViewController(withIdentifier: "LottieNavigationController") as! UINavigationController
-            self.present(navigationController, animated: true, completion: nil)
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         addTaskTextField.delegate = self
         // RealmのファイルURLを表示する
         print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -60,6 +64,19 @@ class CalendarToDoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+
+        // Lottieを表示するか否かの判定
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunchKey"
+        if !userDefaults.bool(forKey: firstLunchKey) {
+            print(userDefaults.bool(forKey: firstLunchKey))
+            if let lottieNC = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as? UINavigationController,
+                       let _ = lottieNC.topViewController as? Lottie01ViewController {
+                present(lottieNC, animated: true, completion: nil)
+                print("ffdfs")
+            }
+        }
+
         addTaskTextField.isEnabled = true
     }
 
