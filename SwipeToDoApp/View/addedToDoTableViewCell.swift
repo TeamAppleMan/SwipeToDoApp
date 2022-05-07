@@ -9,26 +9,16 @@ import UIKit
 
 class addedToDoTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var checkImage: UIImageView!
-    @IBOutlet weak var notCheckImage: UIImageView!
+    @IBOutlet private weak var detailLabel: UILabel!
+    @IBOutlet private weak var categoryLabel: UILabel!
+    @IBOutlet private weak var checkImage: UIImageView!
+    @IBOutlet private weak var notCheckImage: UIImageView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    private func congifure(detail: String, category: String, isDone: Bool) {
+    func congifure(detail: String, category: String, isDone: Bool) {
         detailLabel.text = detail
-        categoryLabel.text = 
-        
+        categoryLabel.text = category
+        checkImage.isHidden = !isDone
+        notCheckImage.isHidden = isDone
     }
-    
+
 }

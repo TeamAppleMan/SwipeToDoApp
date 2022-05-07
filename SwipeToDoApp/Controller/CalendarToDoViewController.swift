@@ -237,9 +237,7 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         let object = filtersTask[indexPath.row]
-        cell.detailLabel.text = object.detail
-        cell.categoryLabel.text = object.category
-        cell.checkImage.isHidden = !object.isDone
+        cell.congifure(detail: object.detail, category: object.category, isDone: object.isDone)
         return cell
     }
 
