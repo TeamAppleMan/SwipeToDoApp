@@ -12,7 +12,7 @@ import PKHUD
 class SettingMethodOfOperationViewController: UIViewController, WKUIDelegate, WKNavigationDelegate  {
 
     @IBOutlet private weak var webView: WKWebView!
-    private let operationUrl = "https://local-tumbleweed-7ea.notion.site/d20077be02e243568132ff53b58874d2"
+    private let operationUrl = "https://local-tumbleweed-7ea.notion.site/SwipeToDo-ea54cf669ca246a997f091803dbbb04e"
 
     override func viewDidLoad() {
         super.viewDidLoad()
