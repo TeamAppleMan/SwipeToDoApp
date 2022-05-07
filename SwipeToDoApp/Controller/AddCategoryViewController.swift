@@ -24,7 +24,7 @@ class AddCategoryViewController: UIViewController {
 
     // HACK: テンプレートカテゴリ 要検討案件です〜
     private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
-    private var templateCategoryNameArray: [String] = ["料理","読書","PC買い物","勉強","仮眠","子育て","副業"]
+    private var templateCategoryNameArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
 
     // CollectionView関連の変数
     private var viewWidth: CGFloat!
@@ -38,7 +38,7 @@ class AddCategoryViewController: UIViewController {
         viewWidth = view.frame.width
         viewHeight = view.frame.height
         cellWidth = viewWidth/1.5
-        cellHeight = viewHeight/1.8
+        cellHeight = viewHeight/2.5
         cellOffset = viewWidth-cellWidth
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
