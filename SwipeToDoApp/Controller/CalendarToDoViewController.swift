@@ -32,6 +32,8 @@ class CalendarToDoViewController: UIViewController {
         super.viewDidLoad()
 
         addTaskTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         // RealmのファイルURLを表示する
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         let realm = try! Realm()
@@ -57,6 +59,35 @@ class CalendarToDoViewController: UIViewController {
                        let _ = lottieNC.topViewController as? Lottie01ViewController {
                 present(lottieNC, animated: true, completion: nil)
             }
+        }
+
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+
+        let noneMoveHeight = view.frame.origin.y + view.frame.size.height - keyboardSize.height
+        let textFieldMidY = taskCardView.frame.origin.y + addTaskTextField.frame.origin.y + addTaskTextField.frame.size.height
+
+        print(noneMoveHeight)
+        print(textFieldMidY)
+        if noneMoveHeight <= textFieldMidY {
+            if view.frame.origin.y == 0 {
+                view.frame.origin.y -= textFieldMidY - noneMoveHeight + 25
+            }
+        } else {
+            print("キーボードを動かす必要なし")
+        }
+
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
         }
 
     }
