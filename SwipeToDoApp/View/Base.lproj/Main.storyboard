@@ -743,11 +743,6 @@
                                                     <constraint firstItem="hgH-df-XqC" firstAttribute="top" secondItem="ooL-cq-vyv" secondAttribute="bottom" constant="43" id="wnT-iQ-bxw"/>
                                                     <constraint firstItem="ooL-cq-vyv" firstAttribute="leading" secondItem="oFc-Uj-BaJ" secondAttribute="leading" id="wxa-Cy-PTN"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4WN-gu-o3F">
                                                 <rect key="frame" x="25" y="496" width="327" height="495"/>
@@ -870,11 +865,6 @@
                                                     <constraint firstAttribute="height" constant="495" id="uRC-nT-wdm"/>
                                                     <constraint firstAttribute="trailing" secondItem="lIQ-6b-gEl" secondAttribute="trailing" constant="55" id="vjX-HH-mBp"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2z-0T-Knj">
                                                 <rect key="frame" x="25" y="1016" width="327" height="365"/>
@@ -928,14 +918,9 @@
                                                     <constraint firstItem="cUN-Tr-nvx" firstAttribute="top" secondItem="dxi-uy-X61" secondAttribute="bottom" constant="40" id="rNb-No-VW1"/>
                                                     <constraint firstAttribute="trailing" secondItem="cUN-Tr-nvx" secondAttribute="trailing" constant="20" id="s9Y-hS-x0B"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1450" id="10k-7q-0gg"/>
                                             <constraint firstItem="4WN-gu-o3F" firstAttribute="top" secondItem="oFc-Uj-BaJ" secondAttribute="bottom" constant="25" id="9uW-1V-qqY"/>
@@ -953,7 +938,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="pqk-Bz-qfn" firstAttribute="width" secondItem="KPi-qT-tQe" secondAttribute="width" id="8QB-YH-2HD"/>
                                     <constraint firstItem="pqk-Bz-qfn" firstAttribute="top" secondItem="KPi-qT-tQe" secondAttribute="top" id="D89-pD-KkR"/>
@@ -966,7 +951,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vfs-DA-Sqt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vfs-DA-Sqt" firstAttribute="trailing" secondItem="KPi-qT-tQe" secondAttribute="trailing" id="Qpi-1K-XOb"/>
                             <constraint firstItem="KPi-qT-tQe" firstAttribute="leading" secondItem="vfs-DA-Sqt" secondAttribute="leading" id="bRC-R9-SRD"/>
@@ -990,10 +975,12 @@
                     <connections>
                         <outlet property="afterMonthButton" destination="bAr-hz-I6h" id="JNU-D8-UAu"/>
                         <outlet property="beforeMonthButton" destination="fHU-cT-6CV" id="SRE-6y-x4Y"/>
+                        <outlet property="buttomView" destination="v2z-0T-Knj" id="LKl-Nc-cNx"/>
                         <outlet property="categoryRatioOfAllPieChartView" destination="EDA-tI-0GQ" id="c2x-iw-C73"/>
                         <outlet property="categoryRatioOfMonthPieChartView" destination="cUN-Tr-nvx" id="cg8-rD-RsP"/>
                         <outlet property="categoryRatioSubBarLabel" destination="1Yw-6D-yS8" id="1jl-xb-TiC"/>
                         <outlet property="categoryRatioTopBarLabel" destination="dxi-uy-X61" id="3oK-Ry-Sdb"/>
+                        <outlet property="centerView" destination="4WN-gu-o3F" id="7dF-h7-PRY"/>
                         <outlet property="endTaskLabel" destination="lzO-X7-1MP" id="NvM-et-OYG"/>
                         <outlet property="endTaskLabel2" destination="WI1-Ad-VNM" id="3n8-dP-DUB"/>
                         <outlet property="endTaskNumberLabel1" destination="9oO-xZ-nMj" id="ZhN-kf-cbf"/>
@@ -1014,6 +1001,7 @@
                         <outlet property="taskRatioOfMonthPieChartView" destination="F1f-a5-Kyx" id="Jeb-gf-AOC"/>
                         <outlet property="taskRatioSubBarLabel" destination="LIu-9a-ZBk" id="lQu-u8-LnD"/>
                         <outlet property="taskRatioTopBarLabel" destination="hlq-sb-tRH" id="hex-7j-bkO"/>
+                        <outlet property="topView" destination="oFc-Uj-BaJ" id="gce-fg-mId"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-XU-bem" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
