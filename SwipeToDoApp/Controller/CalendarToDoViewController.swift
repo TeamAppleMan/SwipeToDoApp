@@ -28,24 +28,6 @@ class CalendarToDoViewController: UIViewController {
     private var categoryList: Results<CategoryList>!
     private var selectedDate: Date!
 
-
-//    override func loadView() {
-//        super.loadView()
-//        print("aaa")
-//        // Lottieを表示するか否かの判定
-//        let userDefaults = UserDefaults.standard
-//        let firstLunchKey = "firstLunchKey"
-//
-//        if !userDefaults.bool(forKey: firstLunchKey) {
-//            print(userDefaults.bool(forKey: firstLunchKey))
-//            if let lottieNC = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as? UINavigationController,
-//                       let _ = lottieNC.topViewController as? Lottie01ViewController {
-//                        present(lottieNC, animated: true, completion: nil)
-//                    }
-//        }
-//    }
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,6 +46,7 @@ class CalendarToDoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        addTaskTextField.isEnabled = true
 
         // Lottieを表示するか否かの判定
         let userDefaults = UserDefaults.standard
@@ -73,11 +56,9 @@ class CalendarToDoViewController: UIViewController {
             if let lottieNC = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as? UINavigationController,
                        let _ = lottieNC.topViewController as? Lottie01ViewController {
                 present(lottieNC, animated: true, completion: nil)
-                print("ffdfs")
             }
         }
 
-        addTaskTextField.isEnabled = true
     }
 
     // HACK: if文が連結していてあまり良い書き方ではない
@@ -101,7 +82,7 @@ class CalendarToDoViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             guard let sheet = nav.sheetPresentationController  else { return }
             let inputCategoryVC = nav.topViewController as! InputCategoryViewController
-            inputCategoryVC.catchTask = addTaskTextField.text ?? ""
+            inputCategoryVC.configure(task: addTaskTextField.text ?? "")
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作不可能にする
             sheet.largestUndimmedDetentIdentifier = .large

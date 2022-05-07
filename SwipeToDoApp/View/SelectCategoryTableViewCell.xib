@@ -9,30 +9,30 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectCategoryID" rowHeight="60" id="KGk-i7-Jjw" customClass="SelectCategoryTableViewCell" customModule="SwipeToDoApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectCategoryID" rowHeight="40" id="KGk-i7-Jjw" customClass="SelectCategoryTableViewCell" customModule="SwipeToDoApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y9K-Xi-Mcz">
-                        <rect key="frame" x="10" y="10" width="26" height="26"/>
+                        <rect key="frame" x="10" y="12" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Y9K-Xi-Mcz" secondAttribute="height" multiplier="1:1" id="0qI-Ah-KjR"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kue-oR-QFT">
-                        <rect key="frame" x="46" y="12.5" width="264" height="21"/>
+                        <rect key="frame" x="50" y="14" width="260" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Kue-oR-QFT" firstAttribute="leading" secondItem="Y9K-Xi-Mcz" secondAttribute="trailing" constant="10" id="Kmc-Z4-dIb"/>
-                    <constraint firstAttribute="bottom" secondItem="Y9K-Xi-Mcz" secondAttribute="bottom" constant="10" id="PJb-uF-chF"/>
-                    <constraint firstItem="Y9K-Xi-Mcz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cLC-ZI-Njm"/>
+                    <constraint firstItem="Kue-oR-QFT" firstAttribute="leading" secondItem="Y9K-Xi-Mcz" secondAttribute="trailing" constant="15" id="Kmc-Z4-dIb"/>
+                    <constraint firstAttribute="bottom" secondItem="Y9K-Xi-Mcz" secondAttribute="bottom" constant="12" id="PJb-uF-chF"/>
+                    <constraint firstItem="Y9K-Xi-Mcz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="cLC-ZI-Njm"/>
                     <constraint firstItem="Y9K-Xi-Mcz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="j6V-JB-ChE"/>
                     <constraint firstAttribute="trailing" secondItem="Kue-oR-QFT" secondAttribute="trailing" constant="10" id="kB3-39-zqT"/>
                     <constraint firstItem="Kue-oR-QFT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wFT-Ux-plZ"/>
@@ -43,7 +43,7 @@
                 <outlet property="imagePhoto" destination="Y9K-Xi-Mcz" id="sJx-DA-X9F"/>
                 <outlet property="name" destination="Kue-oR-QFT" id="ABa-1d-3W1"/>
             </connections>
-            <point key="canvasLocation" x="-40.579710144927539" y="104.46428571428571"/>
+            <point key="canvasLocation" x="-40.579710144927539" y="105.46875"/>
         </tableViewCell>
     </objects>
 </document>
