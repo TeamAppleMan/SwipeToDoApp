@@ -12,6 +12,7 @@ class CategoryTableViewCell: UITableViewCell {
     @IBOutlet var categoryImageView: UIImageView!
     @IBOutlet var categoryNameLabel: UILabel!
     @IBOutlet var categoryTaskCountLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setCircleImageView()
@@ -21,7 +22,8 @@ class CategoryTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    private func setCircleImageView(){
+
+    private func setCircleImageView() {
         // ImageViewを円形にする
         categoryImageView.layer.cornerRadius = categoryImageView.frame.width/2
         categoryImageView.clipsToBounds = true

@@ -69,7 +69,7 @@
                 <outlet property="dateLabel" destination="IqR-WN-Lrd" id="fQi-9J-ues"/>
                 <outlet property="detailTextView" destination="nWg-h6-UZU" id="I64-cH-XV7"/>
             </connections>
-            <point key="canvasLocation" x="-40.579710144927539" y="141.29464285714286"/>
+            <point key="canvasLocation" x="-39" y="139"/>
         </collectionViewCell>
     </objects>
 </document>

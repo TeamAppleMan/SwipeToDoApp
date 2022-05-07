@@ -32,12 +32,20 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DrJ-2w-mEj">
-                        <rect key="frame" x="10" y="16" width="18" height="14.5"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DrJ-2w-mEj">
+                        <rect key="frame" x="10" y="14.5" width="18" height="17"/>
                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="18" id="biI-s6-RxD"/>
                             <constraint firstAttribute="height" constant="18" id="xKr-cp-hta"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eyN-hK-uBD">
+                        <rect key="frame" x="10" y="14.5" width="18" height="17"/>
+                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="18" id="4Zx-Pb-qIW"/>
+                            <constraint firstAttribute="height" constant="18" id="QTS-D0-s8T"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -47,9 +55,12 @@
                     <constraint firstAttribute="bottom" secondItem="taX-cr-mDv" secondAttribute="bottom" id="BDw-fh-qGN"/>
                     <constraint firstItem="z06-YD-i0n" firstAttribute="leading" secondItem="taX-cr-mDv" secondAttribute="trailing" id="JQ7-OC-6Hi"/>
                     <constraint firstItem="DrJ-2w-mEj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KUg-2W-HpQ"/>
+                    <constraint firstItem="eyN-hK-uBD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KaS-iA-1ZN"/>
                     <constraint firstAttribute="bottom" secondItem="z06-YD-i0n" secondAttribute="bottom" id="LqW-Bm-OlZ"/>
+                    <constraint firstItem="taX-cr-mDv" firstAttribute="leading" secondItem="eyN-hK-uBD" secondAttribute="trailing" constant="8" id="OHR-0s-Wyw"/>
                     <constraint firstItem="DrJ-2w-mEj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ZWv-oZ-boL"/>
                     <constraint firstAttribute="trailing" secondItem="z06-YD-i0n" secondAttribute="trailing" constant="10" id="bgD-zg-CPx"/>
+                    <constraint firstItem="eyN-hK-uBD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="n9u-cp-N2N"/>
                     <constraint firstItem="z06-YD-i0n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uQA-bN-JYm"/>
                 </constraints>
             </tableViewCellContentView>
@@ -59,12 +70,14 @@
                 <outlet property="categoryLabel" destination="z06-YD-i0n" id="PVM-UR-Dqh"/>
                 <outlet property="checkImage" destination="DrJ-2w-mEj" id="PbS-J2-YMl"/>
                 <outlet property="detailLabel" destination="taX-cr-mDv" id="DBH-sn-pjy"/>
+                <outlet property="notCheckImage" destination="eyN-hK-uBD" id="FVX-ih-p6N"/>
             </connections>
             <point key="canvasLocation" x="-94.20289855072464" y="52.901785714285715"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
