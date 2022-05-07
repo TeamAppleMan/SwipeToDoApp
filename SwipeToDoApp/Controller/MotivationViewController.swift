@@ -447,7 +447,7 @@ class MotivationViewController: UIViewController {
         var dataEntries = [ChartDataEntry]()
 
         for (xValue, yValue) in data.enumerated() {
-            let dataEntry = ChartDataEntry(x: Double(xValue), y: yValue)
+            let dataEntry = ChartDataEntry(x: Double(xValue+1), y: yValue)
             dataEntries.append(dataEntry)
         }
 
@@ -479,7 +479,7 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineChartView.xAxis.axisLineColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //x軸の色
         taskCountOfAllLineChartView.xAxis.axisLineWidth = CGFloat(1)
         //x軸の太さ
-        taskCountOfAllLineChartView.rightAxis.axisMinimum = 1 //y左軸最小値
+        taskCountOfAllLineChartView.xAxis.axisMinimum = 1
         // x軸に表示させるラベルの数をデータの数によって変える
         if data.count <= 3 {
             taskCountOfAllLineChartView.xAxis.labelCount = Int(2)
