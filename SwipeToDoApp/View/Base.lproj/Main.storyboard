@@ -1170,10 +1170,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1184,7 +1184,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1259,7 +1259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4cH-fM-UnG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7421.739130434783" y="1897.7678571428571"/>
+            <point key="canvasLocation" x="7422" y="2993"/>
         </scene>
         <!--操作方法-->
         <scene sceneID="AOr-SI-SHx">
@@ -1270,37 +1270,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-Yh-upT">
-                                <rect key="frame" x="0.0" y="56" width="375" height="702"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="658"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LR3-hD-auY">
+                                <rect key="frame" x="0.0" y="714" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem width="19" style="plain" systemItem="fixedSpace" id="dHm-AF-EFG"/>
+                                    <barButtonItem title="Item" image="chevron.backward" catalog="system" id="LoT-tw-SPG">
+                                        <connections>
+                                            <action selector="didTapBackButton:" destination="cQd-3c-259" id="zP6-GH-3tz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="48" style="plain" systemItem="fixedSpace" id="xUQ-zt-l0m"/>
+                                    <barButtonItem title="Item" image="chevron.forward" catalog="system" id="7WW-ZX-Yna">
+                                        <connections>
+                                            <action selector="didTapForwardButton:" destination="cQd-3c-259" id="hhR-rF-VH7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nyj-Wg-u7r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="g1M-Yh-upT" secondAttribute="bottom" id="11E-UH-xFM"/>
+                            <constraint firstItem="LR3-hD-auY" firstAttribute="trailing" secondItem="nyj-Wg-u7r" secondAttribute="trailing" id="84p-ib-rSq"/>
                             <constraint firstItem="g1M-Yh-upT" firstAttribute="leading" secondItem="nyj-Wg-u7r" secondAttribute="leading" id="97o-qi-Oc6"/>
+                            <constraint firstItem="LR3-hD-auY" firstAttribute="leading" secondItem="nyj-Wg-u7r" secondAttribute="leading" id="EMP-5D-HlC"/>
+                            <constraint firstItem="LR3-hD-auY" firstAttribute="top" secondItem="g1M-Yh-upT" secondAttribute="bottom" id="f8o-VX-Nmd"/>
                             <constraint firstItem="g1M-Yh-upT" firstAttribute="top" secondItem="nyj-Wg-u7r" secondAttribute="top" id="oV8-Vh-hGh"/>
+                            <constraint firstItem="nyj-Wg-u7r" firstAttribute="bottom" secondItem="LR3-hD-auY" secondAttribute="bottom" id="opQ-8G-jr5"/>
                             <constraint firstItem="g1M-Yh-upT" firstAttribute="trailing" secondItem="nyj-Wg-u7r" secondAttribute="trailing" id="qG8-fs-gl0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="操作方法" id="y6A-hS-4i3">
-                        <barButtonItem key="leftBarButtonItem" title="戻る" id="k4M-C0-39u">
+                        <barButtonItem key="leftBarButtonItem" image="xmark" catalog="system" id="k4M-C0-39u">
                             <connections>
                                 <action selector="didTapExitButton:" destination="cQd-3c-259" id="Wfq-pR-Ynv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="LoT-tw-SPG" id="08h-0I-uem"/>
+                        <outlet property="forwardButton" destination="7WW-ZX-Yna" id="soe-ID-e2j"/>
                         <outlet property="webView" destination="g1M-Yh-upT" id="QiZ-Yq-7aJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZvU-LX-9Yc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7422" y="1156"/>
+            <point key="canvasLocation" x="7453.6000000000004" y="2322.4137931034484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPU-Fc-UYQ">
@@ -1336,7 +1358,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NaT-vD-ZRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6511.594202898551" y="1897.7678571428571"/>
+            <point key="canvasLocation" x="6338" y="2993"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="G0L-rq-kMy">
@@ -1354,7 +1376,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y38-0U-a4R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6511" y="1157"/>
+            <point key="canvasLocation" x="6337" y="2323"/>
         </scene>
         <!--やることSwipe-->
         <scene sceneID="dzO-Ou-NuI">
@@ -1454,6 +1476,8 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
