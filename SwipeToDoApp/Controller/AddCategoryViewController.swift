@@ -12,19 +12,19 @@ protocol AddCategoryViewControllerDelegate{
 class AddCategoryViewController: UIViewController {
 
     @IBOutlet private var horizontalCollectionView: UICollectionView!
-    @IBOutlet private var categoryNameTextField: UITextField!
-    @IBOutlet private var albumButton: UIButton!
 
     var delegate: AddCategoryViewControllerDelegate?
 
     var checkPermission = CheckPermission()
 
+    var createdCategoryName: String = ""
+
     // 追加するカテゴリ名
     var addedCategoryList: CategoryList = CategoryList(value: [])
 
     // HACK: テンプレートカテゴリ 要検討案件です〜
-    private var templatePhotoArray: [String] = ["programming","cooking","imac","manran","mtg","coffee"]
-    private var templateCategoryNameArray: [String] = ["プログラミング","料理","PC作業","運動","打ち合わせ","勉強"]
+    private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
+    private var templateCategoryNameArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
 
     // CollectionView関連の変数
     private var viewWidth: CGFloat!
@@ -37,40 +37,24 @@ class AddCategoryViewController: UIViewController {
         super.viewDidLoad()
         viewWidth = view.frame.width
         viewHeight = view.frame.height
-        categoryNameTextField.delegate = self
+        cellWidth = viewWidth/1.5
+        cellHeight = viewHeight/2.5
+        cellOffset = viewWidth-cellWidth
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
         horizontalCollectionView.decelerationRate = .fast // 動作もっさりなので早く見せる
         horizontalCollectionView.showsHorizontalScrollIndicator = false // 下のインジケータを削除
-        // アルバムボタンを押せなくする（テキストフィールドに値が入ってないため）
-        albumButton.isEnabled = false
-        // 押せないことをアピールするためにalpha値を0.1にしている
-        albumButton.alpha = 0.1
         checkPermission.checkAlbum()
         let nib = UINib(nibName: "TemplateCategoryCollectionViewCell", bundle: .main)
         horizontalCollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionID")
         setTestLayout()
     }
-    // 0番目のCellからスタートする
+    // 4番目のCellからスタートする
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        horizontalCollectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .centeredHorizontally, animated: false)
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 3, section: 0), at: .centeredHorizontally, animated: false)
     }
 
-    @IBAction private func tappedAlbumButton(_ sender: Any) {
-        // テキストフィールドが空であればアラート出す
-        if categoryNameTextField.text == ""{
-           let message = "カテゴリ名を入力してください"
-           let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-           let ok = UIAlertAction(title: "OK", style: .default,handler: nil)
-            alert.addAction(ok)
-           // アラートを表示
-           present(alert,animated: true,completion: nil)
-           return
-        }
-        let sourceType: UIImagePickerController.SourceType = .photoLibrary
-        createImagePicker(sourceType: sourceType)
-    }
     // アルバムを開くメソッド
     private func createImagePicker(sourceType: UIImagePickerController.SourceType){
         let albumImagePicker = UIImagePickerController()
@@ -85,43 +69,49 @@ class AddCategoryViewController: UIViewController {
         view.endEditing(true)
     }
     private func setTestLayout(){
-        cellWidth = UIScreen.main.bounds.width - 60
         let testLayout = PagingPerCellFlowLayout()
         testLayout.headerReferenceSize = CGSize(width: 30, height: horizontalCollectionView.frame.height)
         testLayout.footerReferenceSize = CGSize(width: 30, height: horizontalCollectionView.frame.height)
         testLayout.scrollDirection = .horizontal
         testLayout.minimumLineSpacing = 16
-        testLayout.itemSize = CGSize(width: cellWidth, height: horizontalCollectionView.frame.height)
+        testLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         horizontalCollectionView.collectionViewLayout = testLayout
     }
 
+    @IBAction private func tappedAlbumButton(_ sender: Any) {
+        // アラートを出す
+        categoryCreateAlert()
+    }
 
-    @IBAction func changedTextField(_ sender: Any) {
-        if categoryNameTextField.text == "" {
-            albumButton.isEnabled = false
-            albumButton.alpha = 0.1
-        } else {
-            albumButton.isEnabled = true
-            albumButton.alpha = 1
+    private func categoryCreateAlert(){
+        let alertController = UIAlertController(title: "オリジナルカテゴリの作成", message: "カテゴリ名を入力してください", preferredStyle: .alert)
+        // OKが押されたら写真モードに遷移
+        let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
+            if let str = alertController.textFields?[0].text{
+                self.createdCategoryName = str
+            }
+            let sourceType: UIImagePickerController.SourceType = .photoLibrary
+            self.createImagePicker(sourceType: sourceType)
         }
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .default) { (cancel) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        // アラートにテキストフィールドを追記
+        alertController.addTextField(configurationHandler: {(textField:UITextField!) -> Void in
+              // ここでテキストフィールドのカスタマイズができる
+              textField.placeholder = ""
+              textField.keyboardType = .default
+
+        })
+        //OKとCANCELを表示追加し、アラートを表示
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
+
 
 }
 
-extension AddCategoryViewController: UITextFieldDelegate{
-    // テキストを編集するたびに呼ばれるデリゲートメソッド
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // カテゴリ名がテキストフィールドに入力されるとアルバムボタンを押せるようにする
-        albumButton.isEnabled = true
-        // アルバムボタンを押せるとアピールするためにalpha値をデフォルトの1に戻す
-        albumButton.alpha = 1
-        return true
-    }
-    // Returnを押した時にキーボードを閉じる
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-    }
-}
 extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return templatePhotoArray.count
@@ -190,7 +180,7 @@ extension AddCategoryViewController: UIImagePickerControllerDelegate,UINavigatio
     // アルバムで画像を選択した時に呼ばれるデリゲートメソッド
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickerImage = info[.editedImage] as? UIImage{
-            let categoryName: String = categoryNameTextField.text ?? ""
+            let categoryName: String = createdCategoryName
             let categoryPhoto: UIImage = pickerImage
             addedCategoryList.name = categoryName
             addedCategoryList.photo = categoryPhoto.pngData()
