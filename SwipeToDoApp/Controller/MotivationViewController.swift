@@ -477,7 +477,9 @@ class MotivationViewController: UIViewController {
         // taskCountOfAllLineChartView.xAxis.labelCount = Int(2) //x軸に表示するラベルの数
         taskCountOfAllLineChartView.xAxis.labelTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //x軸ラベルの色
         taskCountOfAllLineChartView.xAxis.axisLineColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //x軸の色
-        taskCountOfAllLineChartView.xAxis.axisLineWidth = CGFloat(1) //x軸の太さ
+        taskCountOfAllLineChartView.xAxis.axisLineWidth = CGFloat(1)
+        //x軸の太さ
+        taskCountOfAllLineChartView.rightAxis.axisMinimum = 1 //y左軸最小値
         // x軸に表示させるラベルの数をデータの数によって変える
         if data.count <= 3 {
             taskCountOfAllLineChartView.xAxis.labelCount = Int(2)
@@ -505,8 +507,6 @@ class MotivationViewController: UIViewController {
         taskCountOfAllLineChartView.noDataTextColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //Noデータ時の文字色
         taskCountOfAllLineChartView.legend.enabled = false //"■ months"のlegendの表示
         taskCountOfAllLineChartView.dragDecelerationEnabled = true //指を離してもスクロール続くか
-        taskCountOfAllLineChartView.dragDecelerationFrictionCoef = 0.8 //ドラッグ時の減速スピード(0-1)
-        //chartView.chartDescription?.text = nil //Description(今回はなし)
         taskCountOfAllLineChartView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) //Background Color
         taskCountOfAllLineChartView.pinchZoomEnabled = false // ピンチズームオフ
         taskCountOfAllLineChartView.doubleTapToZoomEnabled = false // ダブルタップズームtaskCountOfMonthLineChartView
@@ -517,6 +517,7 @@ class MotivationViewController: UIViewController {
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
         taskCountOfAllLineDataSet.fill = LinearGradientFill.init(gradient: gradient!, angle: 90.0)
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示(今回は表示しない)
+        taskCountOfAllLineChartView.animate(xAxisDuration: 0, yAxisDuration: 1.0, easingOption: .easeOutBack)
         taskCountOfAllLineDataSet.lineWidth = 3.0 //線の太さ
         taskCountOfAllLineChartView.noDataText = "表示できるデータがありません" //Noデータ時に表示する文字
         taskCountOfAllLineDataSet.drawCirclesEnabled = false //プロットの表示taskCountOfMonthChartDataSet
@@ -599,7 +600,7 @@ class MotivationViewController: UIViewController {
         formatter.minimumFractionDigits = 0
         categoryRatioOfAllPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         categoryRatioOfAllPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        categoryRatioOfAllPieChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0)
     }
 
     // グラフを描画するときに必ずこの関数を呼ぶ
