@@ -10,6 +10,8 @@
 		7468F9A9C611488EF671A986 /* Pods_SwipeToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */; };
 		87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802033281BB328006228A9 /* SettingTableViewController.swift */; };
 		87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */; };
+		87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */; };
+		87ACCF412825F32F00135AE7 /* SelectCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */; };
 		87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */; };
 		87E259E8281D4B99006D431F /* Lottie01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E7281D4B99006D431F /* Lottie01ViewController.swift */; };
 		87E259EA281D4BA8006D431F /* Lottie02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */; };
@@ -46,6 +48,8 @@
 		7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87802033281BB328006228A9 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFeedbackViewController.swift; sourceTree = "<group>"; };
+		87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMethodOfOperationViewController.swift; sourceTree = "<group>"; };
 		87E259E7281D4B99006D431F /* Lottie01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie01ViewController.swift; sourceTree = "<group>"; };
 		87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie02ViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				95979D112812857F00E1457E /* TemplateCategoryCollectionViewCell.xib */,
 				95D7E9C42822449A00AC8FDB /* CardViewCell.swift */,
 				95D7E9C52822449A00AC8FDB /* CardViewCell.xib */,
+				87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */,
+				87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95D6EBC8280F976C00960B82 /* LaunchScreen.storyboard in Resources */,
+				87ACCF412825F32F00135AE7 /* SelectCategoryTableViewCell.xib in Resources */,
 				95D7E9C72822449A00AC8FDB /* CardViewCell.xib in Resources */,
 				95979D132812857F00E1457E /* TemplateCategoryCollectionViewCell.xib in Resources */,
 				95D6EBC5280F976C00960B82 /* Assets.xcassets in Resources */,
@@ -315,6 +322,7 @@
 				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
 				87E259EC281D4BBD006D431F /* Lottie03ViewController.swift in Sources */,
 				95979D15281287F000E1457E /* CheckPermission.swift in Sources */,
+				87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */,
 				87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */,
 				95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */,
 				87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */,

@@ -15,6 +15,7 @@ class MotivationViewController: UIViewController {
     private var categoryLists: Results<CategoryList>!
     private var tasks: Results<Task>!
     private var presentDate: Date!
+    private var notAchieveData: [Data] = []
     private var todayDate: Date!
 
     @IBOutlet private weak var beforeMonthButton: UIBarButtonItem!
@@ -39,6 +40,7 @@ class MotivationViewController: UIViewController {
     @IBOutlet private weak var noEndTaskNumberLabel: UILabel!
 
     @IBOutlet private weak var lineChartDescriptionTopLabel2: UILabel!
+    @IBOutlet private weak var lineChartNoDataLabel: UILabel!
     @IBOutlet private weak var lineChartDescriptionButtomLabel2: UILabel!
 
     @IBOutlet private weak var taskCountOfMonthLineChartView: LineChartView!
@@ -122,6 +124,13 @@ class MotivationViewController: UIViewController {
     }
 
     @IBAction func didChangedSegmentedControl(_ sender: UISegmentedControl) {
+
+        lineChartNoDataLabel.text = ""
+        lineChartDescriptionButtomLabel2.isHidden = false
+        lineChartDescriptionTopLabel2.isHidden = false
+        endTaskLabel.isHidden = false
+        endTaskNumberLabel1.isHidden = false
+
         switch sender.selectedSegmentIndex {
         case 0:
             presentMonthOrAll(isMonth: true)
@@ -130,6 +139,7 @@ class MotivationViewController: UIViewController {
         default:
             print("segmentedControlerでエラー")
         }
+
     }
 
     private func calculateMonth() {
@@ -171,14 +181,18 @@ class MotivationViewController: UIViewController {
         }
 
         // カテゴリー割合計算
+        var count = 0
         for category in categoryLists {
             // カテゴリをfilterしてappend
             eachCategoryTasks = filterTasks.filter{
                 $0.category == category.name
             }
+            count += eachCategoryTasks.count
             categoryRatioNoDateCheck.append(eachCategoryTasks.count)
             categoryRatioOfMonthPieData.append(PieChartDataEntry(value: Double(eachCategoryTasks.count), label: category.name))
         }
+
+        categoryRatioOfMonthPieData.append(PieChartDataEntry(value: achieveCount-Double(count), label: "未カテゴリー"))
 
         if categoryRatioNoDateCheck.reduce(0, +) == 0 {
             // "データがありません"と表示させるために意図的に空にする
@@ -200,7 +214,6 @@ class MotivationViewController: UIViewController {
 
     func calculateAll() {
         var allDateList: [Date] = []
-        var toNowAllDateList: [Date] = []
         var endTaskcount = 0.0
         var eachCategoryTasks: [Task] = []
         var categoryRatioNoDateCheck: [Int] = []
@@ -214,19 +227,12 @@ class MotivationViewController: UIViewController {
             allDateList.append(task.date)
         }
 
-        toNowAllDateList = allDateList.filter{
-            $0 <= todayDate
-        }
+        if allDateList.isEmpty { return }
         // 後の計算用に
-        guard let mostOldDate = toNowAllDateList.min() else {
-            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
-            createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
-            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
-            return
-        }
-
+        guard let mostOldDate = allDateList.min(), let mostLatestDate = allDateList.max() else { return }
         // その差から数える月数を取得
-        let fromOldToNowMonth = mostOldDate.getMonthCount(fromDate: mostOldDate)
+
+        let fromOldToNowMonth = mostOldDate.getMonthCount(fromDate: mostOldDate, toDate: mostLatestDate)
 
         // その月の回数分だけforを回してtrueの数を調べる
         for i in 0..<fromOldToNowMonth {
@@ -238,19 +244,12 @@ class MotivationViewController: UIViewController {
             endTaskcount += Double(endTaskOfMonthly.count)
             taskCountOfAllChartData.append(endTaskcount)
         }
-        print(fromOldToNowMonth)
-
-        // もしデータが１ヶ月未満であればデータを表示しない
-        if fromOldToNowMonth <= 1 {
-            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
-        } else {
-            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
-        }
+        createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
 
         //　達成率（円グラフ）計算
         let achieveCount = taskCountOfAllChartData.max() ?? 0
-        if toNowAllDateList.count != 0 {
-            let achieveRatio = ( achieveCount / Double(toNowAllDateList.count) ) * 100
+        if allDateList.count != 0 {
+            let achieveRatio = ( achieveCount / Double(allDateList.count) ) * 100
             taskRatioOfAllPieData = [
                 PieChartDataEntry(value: Double(achieveRatio), label: "達成"),
                 PieChartDataEntry(value: Double(100 - achieveRatio), label: "未達成")
@@ -263,13 +262,17 @@ class MotivationViewController: UIViewController {
         }
 
         //　達成カテゴリ率（円グラフ）計算
+        var count = 0
         for category in categoryLists {
             eachCategoryTasks = tasks.filter{
                 $0.category == category.name
             }
+            count += eachCategoryTasks.count
             categoryRatioNoDateCheck.append(eachCategoryTasks.count)
             categoryRatioOfAllPieData.append(PieChartDataEntry(value: Double(eachCategoryTasks.count), label: category.name))
         }
+
+        categoryRatioOfAllPieData.append(PieChartDataEntry(value: achieveCount-Double(count), label: "未カテゴリー"))
 
         if categoryRatioNoDateCheck.reduce(0, +) == 0 {
             // "データがありません"と表示させるために意図的に空にする
@@ -280,9 +283,9 @@ class MotivationViewController: UIViewController {
         }
 
         endTaskNumberLabel1.text = String(Int(achieveCount))
-        planTaskNumberLabel.text = String(Int(toNowAllDateList.count))
+        planTaskNumberLabel.text = String(Int(allDateList.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
-        noEndTaskNumberLabel.text = String(Int(toNowAllDateList.count) - Int(achieveCount))
+        noEndTaskNumberLabel.text = String(Int(allDateList.count) - Int(achieveCount))
         lineChartDescriptionButtomLabel2.text = "経過月"
         taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
         taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
@@ -444,21 +447,23 @@ class MotivationViewController: UIViewController {
 
         // ２ヶ月以上のデータがなければ表示させない
         if dataEntries.count >= 2 {
-            //lineChartDescriptionButtomLabel.text = "経過月"
-            //lineChartDescriptionTopLabel.text = "達成タスク数"
+            lineChartDescriptionButtomLabel2.text = "経過月"
+            lineChartDescriptionTopLabel2.text = "達成タスク数"
             taskCountOfAllLineDataSet = LineChartDataSet(entries: dataEntries, label: "")
             taskCountOfAllLineChartView.data = LineChartData(dataSet: taskCountOfAllLineDataSet)
         } else {
-            //lineChartDescriptionButtomLabel.text = ""
-            //lineChartDescriptionTopLabel.text = ""
-            print("通貨")
-            taskCountOfAllLineChartView.noDataText = """
+            lineChartNoDataLabel.text = """
                    表示できるデータ量がありません
-                   ２ヶ月分以上のデータが必要です
+                   ２ヶ月以上の達成データが必要です
                    """
+            lineChartDescriptionButtomLabel2.isHidden = true
+            lineChartDescriptionTopLabel2.isHidden = true
+            endTaskLabel.isHidden = true
+            endTaskNumberLabel1.isHidden = true
+
+            taskCountOfAllLineChartView.isHidden = true
             return
         }
-
 
         // X軸(xAxis)
         taskCountOfAllLineChartView.xAxis.labelPosition = .bottom // x軸ラベルをグラフの下に表示する
@@ -593,6 +598,7 @@ class MotivationViewController: UIViewController {
 
     // グラフを描画するときに必ずこの関数を呼ぶ
     private func presentMonthOrAll(isMonth: Bool) {
+        lineChartNoDataLabel.text = ""
         if isMonth {
             beforeMonthButton.isEnabled = true
             afterMonthButton.isEnabled = true

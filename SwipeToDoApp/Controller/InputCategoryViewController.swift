@@ -9,24 +9,31 @@ import UIKit
 import RealmSwift
 
 class InputCategoryViewController: UIViewController {
-    // CandarToDoViewControllerから受け取ったタスク名
-    var catchTask: String = ""
 
-    // HACK: カプセル化するか怪しかったので一旦なしで。
-    var selectedIndexNumber: Int = 0
+    private var catchTask: String = ""
+    private var selectedIndexNumber: Int = 0
+    private var categoryList: Results<CategoryList>!
 
     @IBOutlet private var tableView: UITableView!
-    private var categoryList: Results<CategoryList>!
-    @IBOutlet private var selectedLabel: UILabel!
+    //@IBOutlet private var selectedLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "SelectCategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SelectCategoryID")
+        tableView.rowHeight = 80
         // relamで保存されたcategoryListの読み込み
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
         tableView.delegate = self
         tableView.dataSource = self
-        selectedLabel.text = "「\(catchTask)」のカテゴリーを選択してください。"
+//        selectedLabel.text = """
+//            のカテゴリーを選択してください。
+//            """
+    }
+
+    func configure(task: String, index: Int) {
+        catchTask = task
+        selectedIndexNumber = index
     }
 }
 
@@ -43,5 +50,24 @@ extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
+    }
+}
+
+// Labelの一部分だけ太くする
+extension UILabel {
+    func addUinit(unit: String, size: CGFloat) {
+        guard let label = self.text else {
+            return
+        }
+        // 単位との間隔
+        let mainString = NSMutableAttributedString(string: label + " ")
+        let unitString = NSMutableAttributedString(
+            string: unit,
+            attributes: [.font: UIFont.systemFont(ofSize: size)])
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(mainString)
+        attributedString.append(unitString)
+
+        self.attributedText = attributedString
     }
 }

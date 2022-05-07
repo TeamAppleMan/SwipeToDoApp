@@ -76,9 +76,12 @@ extension Date {
     }
 
     // 引数が含む月〜現在の月までが何ヶ月あるかを取得
-    func getMonthCount(fromDate: Date) -> Int {
-        guard let monthsLeft = calendar.dateComponents([.month], from: fromDate, to: Date()).month else { return 0 }
-        return monthsLeft + 2
+    func getMonthCount(fromDate: Date, toDate: Date) -> Int {
+        //TODO: やらねば
+        let fixFromDate = fromDate.fixed(year: fromDate.year, month: fromDate.month, day: 1, hour: 15, minute: 00, second: 00)
+        let fixToDate = toDate.fixed(year: toDate.year, month: toDate.month, day: 1, hour: 15, minute: 00, second: 00)
+        guard let monthsLeft = calendar.dateComponents([.month], from: fixFromDate, to: fixToDate).month else { return 0 }
+        return monthsLeft + 1
     }
 
     // 「Data型.year」などでInt型で値を取得できるコード
