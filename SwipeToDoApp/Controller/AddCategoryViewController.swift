@@ -23,8 +23,8 @@ class AddCategoryViewController: UIViewController {
     var addedCategoryList: CategoryList = CategoryList(value: [])
 
     // HACK: テンプレートカテゴリ 要検討案件です〜
-    private var templatePhotoArray: [String] = ["programming","cooking","imac","manran","mtg","coffee"]
-    private var templateCategoryNameArray: [String] = ["プログラミング","料理","PC作業","運動","打ち合わせ","勉強"]
+    private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
+    private var templateCategoryNameArray: [String] = ["料理","読書","PC買い物","勉強","仮眠","子育て","副業"]
 
     // CollectionView関連の変数
     private var viewWidth: CGFloat!
@@ -52,7 +52,7 @@ class AddCategoryViewController: UIViewController {
     // 4番目のCellからスタートする
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        horizontalCollectionView.scrollToItem(at: IndexPath(row: 4, section: 0), at: .centeredHorizontally, animated: false)
+        horizontalCollectionView.scrollToItem(at: IndexPath(row: 3, section: 0), at: .centeredHorizontally, animated: false)
     }
 
     // アルバムを開くメソッド
