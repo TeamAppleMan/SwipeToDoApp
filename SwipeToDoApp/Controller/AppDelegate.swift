@@ -11,6 +11,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunch"
+        let firstLunch = [firstLunchKey: false]
+        userDefaults.register(defaults: firstLunch)
+
         // Override point for customization after application launch.
         return true
     }

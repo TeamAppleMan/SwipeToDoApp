@@ -44,16 +44,18 @@ class CalendarToDoViewController: UIViewController {
         setCalendar()
         setTableView()
         setView()
+
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        addTaskTextField.isEnabled = true
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         // Lottieを表示するか否かの判定
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunchKey"
+        print(userDefaults.bool(forKey: firstLunchKey))
         if !userDefaults.bool(forKey: firstLunchKey) {
+            print("kokoha")
             print(userDefaults.bool(forKey: firstLunchKey))
             if let lottieNC = storyboard?.instantiateViewController(withIdentifier: "LottieNvigationController") as? UINavigationController,
                        let _ = lottieNC.topViewController as? Lottie01ViewController {
@@ -61,6 +63,11 @@ class CalendarToDoViewController: UIViewController {
             }
         }
 
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        addTaskTextField.isEnabled = true
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
