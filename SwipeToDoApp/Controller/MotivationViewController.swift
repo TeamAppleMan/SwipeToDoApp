@@ -227,7 +227,13 @@ class MotivationViewController: UIViewController {
             allDateList.append(task.date)
         }
 
-        if allDateList.isEmpty { return }
+        if allDateList.isEmpty {
+            createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
+            createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
+            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
+            return
+        }
+
         // 後の計算用に
         guard let mostOldDate = allDateList.min(), let mostLatestDate = allDateList.max() else { return }
         // その差から数える月数を取得
