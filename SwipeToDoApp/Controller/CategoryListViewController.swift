@@ -36,22 +36,6 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
         tableView.reloadData()
     }
 
-    // HACK: 少し冗長すぎる気がする
-    // 初期状態の設定または、カテゴリリストがないときはデフォルトの設定にする
-    private func initCategory(realm: Realm){
-        let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
-        let imageShopping: Data! = (UIImage(named: "仕事"))?.pngData()
-        let imageMtg: Data! = (UIImage(named: "家事"))?.pngData()
-        let programming: CategoryList! = CategoryList.init(value: ["name": "運動","photo": imageProgramming!])
-        let shopping: CategoryList! = CategoryList.init(value: ["name": "仕事","photo": imageShopping!])
-        let mtg: CategoryList! = CategoryList.init(value: ["name": "家事","photo": imageMtg!])
-        try! realm.write{
-            realm.add(programming)
-            realm.add(shopping)
-            realm.add(mtg)
-        }
-    }
-
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self

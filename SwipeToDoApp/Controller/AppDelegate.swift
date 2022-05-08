@@ -6,11 +6,29 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        let realm = try! Realm()
+        let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
+        let imageShopping: Data! = (UIImage(named: "仕事"))?.pngData()
+        let imageMtg: Data! = (UIImage(named: "家事"))?.pngData()
+        let programming: CategoryList! = CategoryList.init(value: ["name": "運動","photo": imageProgramming!])
+        let shopping: CategoryList! = CategoryList.init(value: ["name": "仕事","photo": imageShopping!])
+        let mtg: CategoryList! = CategoryList.init(value: ["name": "家事","photo": imageMtg!])
+        do {
+            try realm.write{
+                realm.add(programming)
+                realm.add(shopping)
+                realm.add(mtg)
+            }
+        } catch {
+            print("AppDelegateでrealmエラー")
+        }
 
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch"

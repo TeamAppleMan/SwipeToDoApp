@@ -23,6 +23,7 @@ class InputCategoryViewController: UIViewController {
         // relamで保存されたcategoryListの読み込み
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
+        print(categoryList.count)
         tableView.delegate = self
         tableView.dataSource = self
     }
