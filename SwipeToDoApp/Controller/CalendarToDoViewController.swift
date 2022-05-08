@@ -10,7 +10,7 @@ import FSCalendar
 import MaterialComponents
 import RealmSwift
 
-class CalendarToDoViewController: UIViewController {
+class CalendarToDoViewController: UIViewController, InputCategoryViewControllerDelegate {
 
     @IBOutlet private weak var calendar: FSCalendar!
     @IBOutlet private(set) weak var tableView: UITableView! // CategoryListViewControllerがアクセスするためprivate(set)にした
@@ -51,7 +51,6 @@ class CalendarToDoViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         // Lottieを表示するか否かの判定
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunchKey"
@@ -122,6 +121,7 @@ class CalendarToDoViewController: UIViewController {
             let nav = segue.destination as! UINavigationController
             guard let sheet = nav.sheetPresentationController  else { return }
             let inputCategoryVC = nav.topViewController as! InputCategoryViewController
+            inputCategoryVC.delegate = self
             inputCategoryVC.configure(task: addTaskTextField.text ?? "")
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作不可能にする
@@ -233,19 +233,14 @@ class CalendarToDoViewController: UIViewController {
         calendar.selectedDate!.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
     }
 
-    @IBAction func exitSave(segue: UIStoryboardSegue){
-        let inputCategoryVC = segue.source as! InputCategoryViewController
-        let selectedIndexNumber = inputCategoryVC.selectedIndexNumber
+    func addNewDate(detail: String, index: Int) {
         let realm = try! Realm()
-        categoryList = realm.objects(CategoryList.self)
-        // 新しいタスクの初期化（isRepeatedとisDoneはfalseにしている）
-        let newTask = Task.init(value: ["date": selectedDate!, "detail": addTaskTextField.text ?? "", "category": categoryList[selectedIndexNumber].name, "isRepeated": false, "isDone": false, "photo": categoryList[selectedIndexNumber].photo!])
+        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": categoryList[index].name, "isRepeated": false, "isDone": false, "photo": categoryList[index].photo!])
         try! realm.write{
             realm.add(newTask)
         }
         addTaskTextField.text = ""
         addTaskButton.isEnabled = false
-        // 追加されたTaskをtableViewに反映するために、tableView.reloadData()している
         tableView.reloadData()
         calendar.reloadData()
     }
