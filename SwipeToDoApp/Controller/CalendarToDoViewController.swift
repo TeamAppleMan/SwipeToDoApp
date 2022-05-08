@@ -184,15 +184,15 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         afterDayButton.layer.borderColor = UIColor.darkGray.cgColor
         afterDayButton.layer.borderWidth = 1.0
         afterDayButton.layer.cornerRadius = 8.0
-        taskCardView.layer.cornerRadius = 10
+        taskCardView.layer.cornerRadius = 12
         taskCardView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         taskCardView.layer.shadowColor = UIColor.black.cgColor
         taskCardView.layer.shadowOpacity = 0.4
         taskCardView.layer.shadowRadius = 3
         taskCardTitleLabel.clipsToBounds = true
-        taskCardTitleLabel.layer.cornerRadius = 10
+        taskCardTitleLabel.layer.cornerRadius = 12
         taskCardTitleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        swipeTaskButton.layer.cornerRadius = 5
+        swipeTaskButton.layer.cornerRadius = 12
     }
 
     // HACK:  setCalendarと内容が被っている。冗長になってしまっている。Dateのextensionを使用すればもう少し短くなるかも

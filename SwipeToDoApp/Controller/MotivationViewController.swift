@@ -70,33 +70,33 @@ class MotivationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        topView.layer.cornerRadius = 10
+        topView.layer.cornerRadius = 12
         topView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         topView.layer.shadowColor = UIColor.black.cgColor
         topView.layer.shadowOpacity = 0.4
         topView.layer.shadowRadius = 3
 
-        centerView.layer.cornerRadius = 10
+        centerView.layer.cornerRadius = 12
         centerView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         centerView.layer.shadowColor = UIColor.black.cgColor
         centerView.layer.shadowOpacity = 0.4
         centerView.layer.shadowRadius = 3
 
-        buttomView.layer.cornerRadius = 10
+        buttomView.layer.cornerRadius = 12
         buttomView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         buttomView.layer.shadowColor = UIColor.black.cgColor
         buttomView.layer.shadowOpacity = 0.4
         buttomView.layer.shadowRadius = 3
 
         // 赤・青・緑部分を角丸にする
-        taskCountTopBarLabel.layer.cornerRadius = 10
+        taskCountTopBarLabel.layer.cornerRadius = 12
         taskCountTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskCountTopBarLabel.clipsToBounds = true
 
-        taskRatioTopBarLabel.layer.cornerRadius = 10
+        taskRatioTopBarLabel.layer.cornerRadius = 12
         taskRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskRatioTopBarLabel.clipsToBounds = true
-        categoryRatioTopBarLabel.layer.cornerRadius = 10
+        categoryRatioTopBarLabel.layer.cornerRadius = 12
         categoryRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         categoryRatioTopBarLabel.clipsToBounds = true
     }
