@@ -60,10 +60,13 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddCategorySegue"{
+
+        if segue.identifier == "AddCategorySegue" {
             let addCategoryVC = segue.destination as! AddCategoryViewController
             addCategoryVC.delegate = self
-        }else if segue.identifier == "SwipeCardSegue"{
+        }
+
+        if segue.identifier == "SwipeCardSegue" {
             let nav = segue.destination as! UINavigationController
             let swipeCardVC = nav.topViewController as! SwipeCardViewController
             swipeCardVC.delegate = self
@@ -71,10 +74,12 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
             let filtersTask = try! realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[selectedIndexNumber].name,false)
             swipeCardVC.catchTask = filtersTask
         }
+
     }
+
     func catchDidSwipeCardData(catchTask: Results<Task>) {
         // カレンダー画面のTableViewをリロードする
-        guard let calendarToDoVC = tabBarController?.viewControllers?[0] as? CalendarToDoViewController else{
+        guard let calendarToDoVC = tabBarController?.viewControllers?[0] as? CalendarToDoViewController else {
             return
         }
         calendarToDoVC.tableView.reloadData()

@@ -92,6 +92,7 @@ class MotivationViewController: UIViewController {
         taskCountTopBarLabel.layer.cornerRadius = 10
         taskCountTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskCountTopBarLabel.clipsToBounds = true
+
         taskRatioTopBarLabel.layer.cornerRadius = 10
         taskRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskRatioTopBarLabel.clipsToBounds = true

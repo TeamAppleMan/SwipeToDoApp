@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7468F9A9C611488EF671A986 /* Pods_SwipeToDoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */; };
+		8700281A282762A800C9BDC1 /* EditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87002819282762A800C9BDC1 /* EditCategoryViewController.swift */; };
+		873789872827427900DC09DF /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873789862827427900DC09DF /* TaskEditViewController.swift */; };
 		87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802033281BB328006228A9 /* SettingTableViewController.swift */; };
 		87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */; };
 		87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */; };
@@ -46,6 +48,8 @@
 /* Begin PBXFileReference section */
 		038BF23017AD2660309CB535 /* Pods-SwipeToDoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.debug.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7A74EDF1225C719C56A96B83 /* Pods_SwipeToDoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeToDoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87002819282762A800C9BDC1 /* EditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewController.swift; sourceTree = "<group>"; };
+		873789862827427900DC09DF /* TaskEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
 		87802033281BB328006228A9 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFeedbackViewController.swift; sourceTree = "<group>"; };
 		87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */,
 				87E259EB281D4BBD006D431F /* Lottie03ViewController.swift */,
 				87E259ED281D4BCA006D431F /* Lottie04ViewController.swift */,
+				873789862827427900DC09DF /* TaskEditViewController.swift */,
+				87002819282762A800C9BDC1 /* EditCategoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 				95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */,
 				95D6EBD0280FA91000960B82 /* Task.swift in Sources */,
 				87E259EA281D4BA8006D431F /* Lottie02ViewController.swift in Sources */,
+				8700281A282762A800C9BDC1 /* EditCategoryViewController.swift in Sources */,
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
 				95D7E9C62822449A00AC8FDB /* CardViewCell.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
@@ -339,6 +346,7 @@
 				87E259EE281D4BCA006D431F /* Lottie04ViewController.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
 				95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */,
+				873789872827427900DC09DF /* TaskEditViewController.swift in Sources */,
 				95979D0C28127C0E00E1457E /* CategoryTableViewCell.swift in Sources */,
 				87E259E8281D4B99006D431F /* Lottie01ViewController.swift in Sources */,
 			);

@@ -27,6 +27,8 @@ class CalendarToDoViewController: UIViewController {
     private var filtersTask: Results<Task>!
     private var categoryList: Results<CategoryList>!
     private var selectedDate: Date!
+    private var editGiveTask: Task?
+    private var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,7 @@ class CalendarToDoViewController: UIViewController {
         tasks = realm.objects(Task.self)
 
         addTaskButton.isEnabled = false
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         setCalendar()
         setTableView()
         setView()
@@ -67,7 +69,9 @@ class CalendarToDoViewController: UIViewController {
         addTaskTextField.isEnabled = true
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
+        categoryList = realm.objects(CategoryList.self)
         calendar.reloadData()
+        tableView.reloadData()
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -126,6 +130,12 @@ class CalendarToDoViewController: UIViewController {
             sheet.preferredCornerRadius = 20.0
             // 上の灰色のバー
             sheet.prefersGrabberVisible = true
+        }
+
+        if segue.identifier == "EditSegue" {
+            let nav = segue.destination as! UINavigationController
+            let nextVC = nav.topViewController as! TaskEditViewController
+            nextVC.configure(task: editGiveTask!, tasks: filtersTask, index: index)
         }
 
     }
@@ -239,6 +249,7 @@ class CalendarToDoViewController: UIViewController {
         tableView.reloadData()
         calendar.reloadData()
     }
+
 }
 
 extension CalendarToDoViewController: UITextFieldDelegate {
@@ -282,7 +293,6 @@ extension CalendarToDoViewController: FSCalendarDelegate, FSCalendarDataSource {
 extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された)であるtaskをフィルタリングしてtableViewに反映
         let realm = try! Realm()
         filtersTask = realm.objects(Task.self).filter("date==%@", selectedDate!, false)
         return filtersTask.count
@@ -305,6 +315,13 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        editGiveTask = filtersTask[indexPath.row]
+        index = indexPath.row
+        performSegue(withIdentifier: "EditSegue", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
