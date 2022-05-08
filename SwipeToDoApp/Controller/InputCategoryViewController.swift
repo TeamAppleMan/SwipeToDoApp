@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol InputCategoryViewControllerDelegate: AnyObject {
+    func addNewDate(detail: String, index: Int)
+}
+
 class InputCategoryViewController: UIViewController {
 
     private var catchTask: String = ""
@@ -15,6 +19,7 @@ class InputCategoryViewController: UIViewController {
     private var categoryList: Results<CategoryList>!
 
     @IBOutlet private var tableView: UITableView!
+    weak var delegate: InputCategoryViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,17 +28,15 @@ class InputCategoryViewController: UIViewController {
         // relamで保存されたcategoryListの読み込み
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
-        print(categoryList.count)
-        tableView.delegate = self
-        tableView.dataSource = self
     }
 
     func configure(task: String) {
         catchTask = task
     }
+
 }
 
-extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate{
+extension InputCategoryViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         categoryList.count
@@ -49,6 +52,9 @@ extension InputCategoryViewController: UITableViewDataSource,UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
+        delegate.addNewDate(detail: catchTask, index: selectedIndexNumber)
+        dismiss(animated: true, completion: nil)
     }
 
 }
+

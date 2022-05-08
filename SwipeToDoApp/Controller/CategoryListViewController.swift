@@ -23,7 +23,7 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
         super.viewDidLoad()
         let realm = try! Realm()
         categoryList = realm.objects(CategoryList.self)
-
+        // カテゴリリストが空の状態（初期状態orカテゴリを全部消した時)はカテゴリーリストを初期化する
         tableView.reloadData()
         setTableView()
     }

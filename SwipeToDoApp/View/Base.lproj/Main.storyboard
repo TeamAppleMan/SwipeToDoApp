@@ -245,7 +245,7 @@
             </objects>
             <point key="canvasLocation" x="887" y="63"/>
         </scene>
-        <!--カテゴリーを選択-->
+        <!--カテゴリー選択-->
         <scene sceneID="Nd6-gC-deL">
             <objects>
                 <viewController id="Es4-U2-plC" customClass="InputCategoryViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -266,6 +266,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Es4-U2-plC" id="e6g-GM-ipC"/>
+                                    <outlet property="delegate" destination="Es4-U2-plC" id="3c9-lT-rUk"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kVL-Wt-Hwb"/>
@@ -277,15 +281,10 @@
                             <constraint firstItem="Sl5-wM-pg3" firstAttribute="leading" secondItem="kVL-Wt-Hwb" secondAttribute="leading" id="wqY-2h-RtJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="カテゴリーを選択" id="hdP-r8-2tn">
+                    <navigationItem key="navigationItem" title="カテゴリー選択" id="hdP-r8-2tn">
                         <barButtonItem key="leftBarButtonItem" title="キャンセル" id="iR4-kA-5vV">
                             <connections>
                                 <segue destination="ArA-sE-PW4" kind="unwind" unwindAction="exitCancelWithSegue:" id="hFp-cH-bxd"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="保存" id="I6p-jQ-32j">
-                            <connections>
-                                <segue destination="ArA-sE-PW4" kind="unwind" unwindAction="exitSaveWithSegue:" id="fsc-AQ-ZSR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1332,10 +1331,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="42.666667938232422"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1346,7 +1345,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1672,7 +1671,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="P6k-QB-WtV"/>
+        <segue reference="PT3-Le-ptF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
