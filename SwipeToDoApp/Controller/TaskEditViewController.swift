@@ -12,6 +12,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskTextField: UITextField!
+    @IBOutlet private weak var segmentedControll: UISegmentedControl!
     @IBOutlet private weak var categoryButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!
     private var getFiltersTask: Results<Task>!
@@ -35,6 +36,12 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         categoryButton.layer.cornerRadius = 8.0
         categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
         categoryButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
+        if catchTask.isDone == false {
+            segmentedControll.selectedSegmentIndex = 0
+        } else {
+            segmentedControll.selectedSegmentIndex = 1
+        }
 
         taskTextField.text = catchTask.detail
 
@@ -77,6 +84,10 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     @IBAction private func didTapSaveButton(_ sender: Any) {
+        let text = taskTextField.text ?? ""
+        if text.isEmpty == true {
+            return
+        }
         saveAleart()
     }
 
@@ -101,8 +112,8 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         let ok = UIAlertAction(title: "OK", style: .default) { [self] (action) in
             let realm = try! Realm()
             let target = getFiltersTask[indexNumber]
-            guard let text = taskTextField.text else {
-                print("値から")
+            let text = taskTextField.text ?? ""
+            if text.isEmpty == true {
                 return
             }
 
@@ -110,6 +121,11 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
                 try realm.write {
                     target.detail = text
                     target.category = selectCategory
+                    if segmentedControll.selectedSegmentIndex == 0 {
+                        target.isDone = false
+                    } else {
+                        target.isDone = true
+                    }
                 }
             } catch {
                 print("画面１のタスク編集画面でRealmエラー")

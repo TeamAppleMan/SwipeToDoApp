@@ -655,7 +655,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eP-ce-Jxz">
-                                <rect key="frame" x="312" y="203" width="45" height="31"/>
+                                <rect key="frame" x="312" y="223" width="45" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="Ncd-lN-1yB"/>
                                 </constraints>
@@ -669,24 +669,42 @@
                                     <action selector="didTapDeleteButton:" destination="Kvr-yy-RQf" eventType="touchUpInside" id="xHy-I4-orb"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JWl-HD-ubI">
+                                <rect key="frame" x="18" y="223" width="274" height="32"/>
+                                <segments>
+                                    <segment title="未達成"/>
+                                    <segment title="達成"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="達成状況" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-5I-UOL">
+                                <rect key="frame" x="18.000000000000004" y="202.66666666666666" width="49.333333333333343" height="14.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mYb-m2-Jo4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8eP-ce-Jxz" firstAttribute="top" secondItem="vf4-ak-AbB" secondAttribute="bottom" constant="70" id="0I7-rl-3fY"/>
+                            <constraint firstItem="8eP-ce-Jxz" firstAttribute="top" secondItem="vf4-ak-AbB" secondAttribute="bottom" constant="90" id="0I7-rl-3fY"/>
                             <constraint firstItem="Gf7-w5-Ey6" firstAttribute="top" secondItem="mYb-m2-Jo4" secondAttribute="top" constant="80" id="29N-Df-pNV"/>
                             <constraint firstItem="zMh-5Y-MgY" firstAttribute="centerX" secondItem="Aov-lC-Iww" secondAttribute="centerX" id="AQ9-EG-P3h"/>
+                            <constraint firstItem="JWl-HD-ubI" firstAttribute="top" secondItem="8Bn-gF-CKd" secondAttribute="bottom" constant="90" id="CLD-Qi-jgW"/>
+                            <constraint firstItem="JWl-HD-ubI" firstAttribute="leading" secondItem="mYb-m2-Jo4" secondAttribute="leading" constant="18" id="L6N-QS-F5M"/>
                             <constraint firstItem="Gf7-w5-Ey6" firstAttribute="leading" secondItem="mYb-m2-Jo4" secondAttribute="leading" constant="18" id="NGq-LR-S88"/>
                             <constraint firstItem="r8R-A2-Ixb" firstAttribute="top" secondItem="mYb-m2-Jo4" secondAttribute="top" constant="80" id="Nfs-Uc-yK2"/>
                             <constraint firstItem="r8R-A2-Ixb" firstAttribute="leading" secondItem="Gf7-w5-Ey6" secondAttribute="trailing" constant="10" id="TcN-mo-GJG"/>
                             <constraint firstItem="zMh-5Y-MgY" firstAttribute="top" secondItem="mYb-m2-Jo4" secondAttribute="top" id="U8E-eA-roN"/>
+                            <constraint firstItem="8eP-ce-Jxz" firstAttribute="leading" secondItem="JWl-HD-ubI" secondAttribute="trailing" constant="20" id="X5a-2U-Z8w"/>
                             <constraint firstItem="mYb-m2-Jo4" firstAttribute="trailing" secondItem="r8R-A2-Ixb" secondAttribute="trailing" constant="18" id="f36-0S-nHp"/>
                             <constraint firstItem="r8R-A2-Ixb" firstAttribute="top" secondItem="vf4-ak-AbB" secondAttribute="bottom" constant="3" id="gI4-RR-KCO"/>
                             <constraint firstItem="8Bn-gF-CKd" firstAttribute="leading" secondItem="mYb-m2-Jo4" secondAttribute="leading" constant="18" id="gY7-aV-nJS"/>
                             <constraint firstItem="mYb-m2-Jo4" firstAttribute="trailing" secondItem="8eP-ce-Jxz" secondAttribute="trailing" constant="18" id="mwI-0d-xSn"/>
                             <constraint firstItem="vf4-ak-AbB" firstAttribute="leading" secondItem="8Bn-gF-CKd" secondAttribute="trailing" constant="10" id="neb-PU-Cgu"/>
+                            <constraint firstItem="3ju-5I-UOL" firstAttribute="leading" secondItem="mYb-m2-Jo4" secondAttribute="leading" constant="18" id="oEf-8s-Y8h"/>
                             <constraint firstItem="mYb-m2-Jo4" firstAttribute="trailing" secondItem="vf4-ak-AbB" secondAttribute="trailing" constant="18" id="wyJ-Nb-ttm"/>
                             <constraint firstItem="Gf7-w5-Ey6" firstAttribute="top" secondItem="8Bn-gF-CKd" secondAttribute="bottom" constant="3" id="x4R-CO-IHk"/>
+                            <constraint firstItem="JWl-HD-ubI" firstAttribute="top" secondItem="3ju-5I-UOL" secondAttribute="bottom" constant="6" id="zcg-wa-GPA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="編集" id="BhU-Ne-PtM">
@@ -705,6 +723,7 @@
                         <outlet property="categoryButton" destination="r8R-A2-Ixb" id="fXs-7q-2gD"/>
                         <outlet property="dateLabel" destination="zMh-5Y-MgY" id="erv-Fj-3vh"/>
                         <outlet property="deleteButton" destination="8eP-ce-Jxz" id="4hl-i1-Ypv"/>
+                        <outlet property="segmentedControll" destination="JWl-HD-ubI" id="MlZ-yr-xTv"/>
                         <outlet property="taskTextField" destination="Gf7-w5-Ey6" id="yD1-rU-WZL"/>
                     </connections>
                 </viewController>
@@ -1325,10 +1344,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="42.666667938232422"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1339,7 +1358,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
