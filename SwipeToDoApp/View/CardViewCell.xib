@@ -29,12 +29,12 @@
                             <constraint firstAttribute="height" constant="86" id="ZJh-tG-K7e"/>
                         </constraints>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfy-rv-ist">
-                        <rect key="frame" x="23" y="452" width="294" height="42"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                        <rect key="frame" x="23" y="458" width="294" height="36"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>

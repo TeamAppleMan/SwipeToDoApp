@@ -10,17 +10,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCollectionID" id="gTV-IL-0wX" customClass="TemplateCategoryCollectionViewCell" customModule="SwipeToDoApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcI-j1-d3T">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-Lf-dxl">
-                        <rect key="frame" x="20" y="132" width="160" height="36"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gy3-Lf-dxl">
+                        <rect key="frame" x="82" y="132" width="76.5" height="36"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -32,20 +32,18 @@
                 <constraint firstAttribute="trailing" secondItem="fcI-j1-d3T" secondAttribute="trailing" id="3co-gI-9uI"/>
                 <constraint firstItem="fcI-j1-d3T" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3v4-bo-J4K"/>
                 <constraint firstAttribute="bottom" secondItem="fcI-j1-d3T" secondAttribute="bottom" id="C8F-zG-ZKt"/>
-                <constraint firstAttribute="bottom" secondItem="gy3-Lf-dxl" secondAttribute="bottom" constant="132" id="QdM-mB-HCR"/>
+                <constraint firstItem="gy3-Lf-dxl" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ha5-7Y-Q7f"/>
+                <constraint firstItem="gy3-Lf-dxl" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="KJ8-bh-bpx"/>
                 <constraint firstItem="fcI-j1-d3T" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="UZz-TS-YOK"/>
                 <constraint firstItem="fcI-j1-d3T" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="WpR-DS-IfQ"/>
-                <constraint firstItem="gy3-Lf-dxl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="132" id="XYQ-X7-Enm"/>
-                <constraint firstItem="gy3-Lf-dxl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Xa1-Xl-n30"/>
-                <constraint firstAttribute="trailing" secondItem="gy3-Lf-dxl" secondAttribute="trailing" constant="20" id="i7f-sE-5kP"/>
                 <constraint firstItem="fcI-j1-d3T" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="riX-hZ-e24"/>
             </constraints>
-            <size key="customSize" width="300" height="334"/>
+            <size key="customSize" width="340" height="334"/>
             <connections>
                 <outlet property="backgroundImageView" destination="fcI-j1-d3T" id="iMe-nM-spe"/>
                 <outlet property="categoryNameLabel" destination="gy3-Lf-dxl" id="xOd-6P-fKR"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="69.642857142857139"/>
+            <point key="canvasLocation" x="166.66666666666669" y="69.642857142857139"/>
         </collectionViewCell>
     </objects>
 </document>

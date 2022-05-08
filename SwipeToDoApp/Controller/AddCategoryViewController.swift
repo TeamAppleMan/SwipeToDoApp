@@ -23,8 +23,8 @@ class AddCategoryViewController: UIViewController {
     var addedCategoryList: CategoryList = CategoryList(value: [])
 
     // HACK: テンプレートカテゴリ 要検討案件です〜
-    private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
-    private var templateCategoryNameArray: [String] = ["料理","読書","買い物","勉強","仮眠","子育て","副業"]
+    private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","子育て","副業"]
+    private var templateCategoryNameArray: [String] = ["料理","読書","買い物","勉強","子育て","副業"]
 
     // CollectionView関連の変数
     private var viewWidth: CGFloat!
@@ -127,6 +127,7 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         cell.layer.shadowOffset = CGSize(width: 10, height: 10) // 影の方向
         cell.layer.masksToBounds = false
         cell.categoryNameLabel.text = templateCategoryNameArray[indexPath.row]
+        print("cell.categoryNameLabel.text:",cell.categoryNameLabel.text!)
         cell.backgroundImageView.image = UIImage(named: templatePhotoArray[indexPath.row])
         cell.backgroundImageView.image = cell.darkenPictureCollectionViewCell(image: UIImage(named: templatePhotoArray[indexPath.row])!, level: 0.5)
         return cell
