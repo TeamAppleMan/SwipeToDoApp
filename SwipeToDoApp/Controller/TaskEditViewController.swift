@@ -33,7 +33,7 @@ class TaskEditViewController: UIViewController {
         categoryButton.layer.borderColor = UIColor.systemGray5.cgColor
         categoryButton.layer.borderWidth = 1.0
         categoryButton.layer.cornerRadius = 8.0
-        categoryButton.setTitle("\(selectCategory!) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
         categoryButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         taskTextField.text = catchTask.detail
@@ -82,7 +82,7 @@ class TaskEditViewController: UIViewController {
             return
         }
         selectCategory = editCategoryVC.selectCategory
-        categoryButton.setTitle("\(selectCategory!)", for: .normal)
+        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
 
     }
 
