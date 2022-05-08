@@ -51,7 +51,6 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         // Lottieを表示するか否かの判定
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunchKey"

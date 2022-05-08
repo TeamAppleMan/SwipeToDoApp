@@ -8,11 +8,16 @@
 import UIKit
 import RealmSwift
 
+protocol EditCategoryViewControllerDelegate: AnyObject {
+    func changeCategory(category: String)
+}
+
 class EditCategoryViewController: UIViewController {
 
     private var categoryList: Results<CategoryList>!
     private(set) var selectCategory: String?
     @IBOutlet private var tableView: UITableView!
+    weak var delegate: EditCategoryViewControllerDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +49,8 @@ extension EditCategoryViewController: UITableViewDataSource,UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectCategory = categoryList[indexPath.row].name
+        delegate.changeCategory(category: selectCategory!)
+        dismiss(animated: true, completion: nil)
     }
 
 }

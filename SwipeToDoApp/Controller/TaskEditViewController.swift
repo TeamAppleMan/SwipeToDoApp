@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class TaskEditViewController: UIViewController {
+class TaskEditViewController: UIViewController, EditCategoryViewControllerDelegate{
 
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskTextField: UITextField!
@@ -43,8 +43,9 @@ class TaskEditViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NavVCSegue" {
             let nav = segue.destination as! UINavigationController
-            guard let _ = nav.topViewController as? EditCategoryViewController else { return }
+            guard let nextVC = nav.topViewController as? EditCategoryViewController else { return }
             guard let sheet = nav.sheetPresentationController  else { return }
+            nextVC.delegate = self
 
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作不可能にする
@@ -54,6 +55,11 @@ class TaskEditViewController: UIViewController {
             // 上の灰色のバー
             sheet.prefersGrabberVisible = true
         }
+    }
+
+    func changeCategory(category: String) {
+        selectCategory = category
+        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
     }
 
     func configure(task: Task, tasks: Results<Task>, index: Int) {
@@ -66,24 +72,12 @@ class TaskEditViewController: UIViewController {
         performSegue(withIdentifier: "NavVCSegue", sender: nil)
     }
 
-
     @IBAction func didTapDeleteButton(_ sender: Any) {
         deleteAleart()
     }
 
-
     @IBAction private func didTapSaveButton(_ sender: Any) {
         saveAleart()
-    }
-
-    @IBAction func exitEditSave(segue: UIStoryboardSegue){
-        let editCategoryVC = segue.source as! EditCategoryViewController
-        guard let _ = editCategoryVC.selectCategory else {
-            return
-        }
-        selectCategory = editCategoryVC.selectCategory
-        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
-
     }
 
     func deleteAleart() {
