@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -162,10 +163,10 @@
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
-                                        <color key="value" systemColor="systemBlueColor"/>
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
-                                        <color key="value" red="1" green="0.53757160625720801" blue="0.52316041206187514" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray2Color"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
                                         <color key="value" systemColor="systemOrangeColor"/>
@@ -283,6 +284,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="カテゴリー選択" id="hdP-r8-2tn">
                         <barButtonItem key="leftBarButtonItem" title="キャンセル" id="iR4-kA-5vV">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="ArA-sE-PW4" kind="unwind" unwindAction="exitCancelWithSegue:" id="hFp-cH-bxd"/>
                             </connections>
@@ -328,11 +330,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="カテゴリ一覧" id="sWk-gb-e0X">
                         <barButtonItem key="leftBarButtonItem" image="gearshape" catalog="system" id="jZa-iy-Aep">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="KCX-O7-z7c" kind="presentation" id="MXn-Gm-dFI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus.viewfinder" catalog="system" id="4fa-o6-qQo">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="tappedPlusCategoryButton:" destination="CLw-QW-3dC" id="z6Z-ch-goB"/>
                                 <segue destination="jju-jo-KR6" kind="show" identifier="AddCategorySegue" id="Arw-Rk-oIS"/>
@@ -385,6 +389,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="TJn-JI-VZA">
                         <barButtonItem key="rightBarButtonItem" image="photo" catalog="system" id="aZE-Ru-eDv">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="tappedAlbumButton:" destination="jju-jo-KR6" id="bkc-zd-enZ"/>
                             </connections>
@@ -419,6 +424,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="YKB-mC-fbd"/>
                                 </constraints>
+                                <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="次へ"/>
                                 <connections>
@@ -446,6 +452,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="a8Y-oe-zuZ">
                         <barButtonItem key="rightBarButtonItem" title="スキップ" id="IGB-bq-3tS">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSkipButton:" destination="haP-Bn-hhQ" id="idw-Jx-30Z"/>
                             </connections>
@@ -469,6 +476,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="TDH-vF-CuK"/>
                                 </constraints>
+                                <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="次へ"/>
                                 <connections>
@@ -496,6 +504,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="efc-e9-Nhd">
                         <barButtonItem key="rightBarButtonItem" title="スキップ" id="COd-Rk-R7k">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSkipButton:" destination="AJh-69-Pgt" id="hqw-MR-Jrt"/>
                             </connections>
@@ -519,6 +528,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="hWa-Yb-3gl"/>
                                 </constraints>
+                                <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="次へ"/>
                                 <connections>
@@ -546,6 +556,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1wv-Z5-nY1">
                         <barButtonItem key="rightBarButtonItem" title="スキップ" id="Ql3-Ej-eAm">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSkipButton:" destination="jpl-aF-YAo" id="DBR-uQ-m2t"/>
                             </connections>
@@ -566,9 +577,11 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBc-jK-iT5">
                                 <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="xXV-VI-Oxi"/>
                                 </constraints>
+                                <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="はじめる"/>
                                 <connections>
@@ -709,11 +722,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="編集" id="BhU-Ne-PtM">
                         <barButtonItem key="leftBarButtonItem" title="戻る" image="chevron.backward" catalog="system" id="nAL-Rw-uk1">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="t98-PI-O4g" kind="unwind" unwindAction="exitCancelWithSegue:" id="CSd-G2-qkM"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="保存" id="TO0-2e-kUi">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapSaveButton:" destination="Kvr-yy-RQf" id="v3I-Ny-8pO"/>
                             </connections>
@@ -770,6 +785,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="カテゴリー選択" id="Hs9-fd-8ae">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="xmark" catalog="system" id="hIL-b7-421">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapExitButton:" destination="NkD-ZN-Rf2" id="GRI-JA-reN"/>
                             </connections>
@@ -1146,12 +1162,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="タイトル" id="Vmz-Je-Ci6">
-                        <barButtonItem key="leftBarButtonItem" title="＜ 前の月" id="fHU-cT-6CV">
+                        <barButtonItem key="leftBarButtonItem" title="＜ 前月" id="fHU-cT-6CV">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapFrontMonthButton:" destination="GLf-NZ-Dzb" id="ONe-DJ-etz"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="次の月 ＞" id="bAr-hz-I6h">
+                        <barButtonItem key="rightBarButtonItem" title="次月 ＞" id="bAr-hz-I6h">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didTapNextMonthButton:" destination="GLf-NZ-Dzb" id="Jo8-QO-GCa"/>
                             </connections>
@@ -1344,10 +1362,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.333332061767578"/>
+                                        <rect key="frame" x="16" y="323.00000381469727" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1358,7 +1376,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="10.999999999999998" width="21.333333333333314" height="21.333333333333329"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1684,8 +1702,9 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="PT3-Le-ptF"/>
+        <segue reference="P6k-QB-WtV"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="101"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
@@ -1699,6 +1718,9 @@
         <image name="plus.viewfinder" catalog="system" width="128" height="115"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -1707,6 +1729,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
