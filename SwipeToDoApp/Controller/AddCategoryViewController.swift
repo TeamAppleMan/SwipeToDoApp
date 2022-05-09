@@ -91,7 +91,7 @@ class AddCategoryViewController: UIViewController {
     private func categoryCreateAlert(){
         let alertController = UIAlertController(title: "オリジナルカテゴリの作成", message: "カテゴリ名を入力してください", preferredStyle: .alert)
         // OKが押されたら写真モードに遷移
-        let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
+        let okAction = UIAlertAction(title: "追加", style: .default) { (ok) in
             if let inputCategoryName = alertController.textFields?[0].text{
                 // 入力されたカテゴリ名が空の場合
                 if inputCategoryName == ""{
@@ -126,7 +126,7 @@ class AddCategoryViewController: UIViewController {
             let sourceType: UIImagePickerController.SourceType = .photoLibrary
             self.createImagePicker(sourceType: sourceType)
         }
-        let cancelAction = UIAlertAction(title: "CANCEL", style: .default) { (cancel) in
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (cancel) in
             alertController.dismiss(animated: true, completion: nil)
         }
         // アラートにテキストフィールドを追記
@@ -205,14 +205,14 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
 
         // カテゴリが被っていない時の処理
         let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
+        let okAction = UIAlertAction(title: "追加", style: .default) { (ok) in
             // カテゴリ一覧画面に画像をカテゴリ名前を渡す
             self.addedCategoryList.name = selectedCategoryName
             self.addedCategoryList.photo = selectedCategoryPhoto.pngData()
             self.delegate?.catchAddedCategoryData(catchAddedCategoryList: self.addedCategoryList)
             self.navigationController?.popViewController(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "CANCEL", style: .default){ (cancel) in
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .default){ (cancel) in
             alertController.dismiss(animated: true, completion: nil)
         }
         // OKとCANCELを表示追加し、アラートを表示

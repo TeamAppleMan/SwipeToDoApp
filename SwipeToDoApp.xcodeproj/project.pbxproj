@@ -496,9 +496,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリ写真の選択のため、アルバムを使用する";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -528,9 +529,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリ写真の選択のため、アルバムを使用する";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

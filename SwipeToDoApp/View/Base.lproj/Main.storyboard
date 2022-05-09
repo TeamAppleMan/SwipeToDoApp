@@ -575,34 +575,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBc-jK-iT5">
-                                <rect key="frame" x="40" y="658" width="295" height="60"/>
-                                <color key="backgroundColor" name="AccentColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="xXV-VI-Oxi"/>
-                                </constraints>
-                                <color key="tintColor" name="AccentColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="はじめる"/>
-                                <connections>
-                                    <action selector="didTapStartButton:" destination="EH2-fT-yQl" eventType="touchUpInside" id="STx-bP-F77"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="さぁ、使ってみましょう！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ead-sx-lnz">
                                 <rect key="frame" x="29" y="188" width="317" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upb-fE-zQ3">
+                                <rect key="frame" x="40" y="658" width="295" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="nNX-I8-dzw"/>
+                                </constraints>
+                                <color key="tintColor" name="AccentColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="はじめる"/>
+                                <connections>
+                                    <action selector="didTapStartButton:" destination="EH2-fT-yQl" eventType="touchUpInside" id="IwY-fh-5mk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="deR-WG-smF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="upb-fE-zQ3" firstAttribute="leading" secondItem="deR-WG-smF" secondAttribute="leading" constant="40" id="91k-EI-TCH"/>
                             <constraint firstItem="Ead-sx-lnz" firstAttribute="centerX" secondItem="mi0-R1-4mT" secondAttribute="centerX" id="BJM-pc-utZ"/>
-                            <constraint firstItem="deR-WG-smF" firstAttribute="trailing" secondItem="uBc-jK-iT5" secondAttribute="trailing" constant="40" id="IYH-Gl-JZd"/>
                             <constraint firstItem="Ead-sx-lnz" firstAttribute="top" secondItem="deR-WG-smF" secondAttribute="top" constant="100" id="J0J-g3-vf7"/>
-                            <constraint firstItem="deR-WG-smF" firstAttribute="bottom" secondItem="uBc-jK-iT5" secondAttribute="bottom" constant="60" id="JV3-JK-HTK"/>
-                            <constraint firstItem="uBc-jK-iT5" firstAttribute="leading" secondItem="deR-WG-smF" secondAttribute="leading" constant="40" id="RBZ-va-9hE"/>
+                            <constraint firstItem="deR-WG-smF" firstAttribute="trailing" secondItem="upb-fE-zQ3" secondAttribute="trailing" constant="40" id="kqG-vx-jUw"/>
+                            <constraint firstItem="deR-WG-smF" firstAttribute="bottom" secondItem="upb-fE-zQ3" secondAttribute="bottom" constant="60" id="tRM-kG-H6j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Bbl-Cn-XBH"/>
@@ -1284,10 +1283,10 @@
                             <tableViewSection headerTitle="情報" id="oSk-om-R2R">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="I45-nW-LNU">
-                                        <rect key="frame" x="16" y="279.33333587646484" width="343" height="42.666667938232422"/>
+                                        <rect key="frame" x="16" y="279.33333587646484" width="343" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I45-nW-LNU" id="sQ2-Wb-ZZe">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwc-fk-Ig9">
@@ -1298,7 +1297,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q68-H4-14N">
-                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
