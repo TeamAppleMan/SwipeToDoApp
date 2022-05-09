@@ -37,12 +37,13 @@ class SettingTableViewController: UITableViewController {
     private func shareApp() {
         // TODO: 文字を考える
         let shareText = """
-        シンプルなカウントアプリ
-        「EasyCount」
+        今まで無かったToDoアプリ
+        「Swipe ToDo」
 
-        最高にシンプル。
-        最高に使いやすい。
-        あなたに最高のカウント体験を。
+        スワイプでToDoを消費。
+        グラフでモチベーション管理。
+        まさに、
+        途中で挫折しないToDoアプリ
         """
 
         let activityItems = [shareText] as [Any]
