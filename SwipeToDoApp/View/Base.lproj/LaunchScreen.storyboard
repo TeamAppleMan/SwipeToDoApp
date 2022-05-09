@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="ILT-eA-skV">
-                                <rect key="frame" x="157" y="398" width="100" height="100"/>
+                                <rect key="frame" x="172" y="413" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="CXZ-uJ-6fE"/>
-                                    <constraint firstAttribute="width" constant="100" id="Gcq-mS-TZ5"/>
+                                    <constraint firstAttribute="height" constant="70" id="CXZ-uJ-6fE"/>
+                                    <constraint firstAttribute="width" constant="70" id="Gcq-mS-TZ5"/>
                                 </constraints>
                             </imageView>
                         </subviews>
