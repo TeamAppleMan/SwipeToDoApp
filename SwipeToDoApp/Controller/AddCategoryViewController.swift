@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 protocol AddCategoryViewControllerDelegate{
     func catchAddedCategoryData(catchAddedCategoryList: CategoryList)
 }
@@ -19,10 +20,12 @@ class AddCategoryViewController: UIViewController {
 
     var createdCategoryName: String = ""
 
+    var categoryList: Results<CategoryList>!
+
     // 追加するカテゴリ名
     var addedCategoryList: CategoryList = CategoryList(value: [])
 
-    // HACK: テンプレートカテゴリ 要検討案件です〜
+    // テンプレートカテゴリ
     private var templatePhotoArray: [String] = ["料理","読書","買い物","勉強","子育て","副業"]
     private var templateCategoryNameArray: [String] = ["料理","読書","買い物","勉強","子育て","副業"]
 
@@ -83,13 +86,43 @@ class AddCategoryViewController: UIViewController {
         categoryCreateAlert()
     }
 
+
+    // HACK: コード汚すぎる。。
     private func categoryCreateAlert(){
         let alertController = UIAlertController(title: "オリジナルカテゴリの作成", message: "カテゴリ名を入力してください", preferredStyle: .alert)
         // OKが押されたら写真モードに遷移
         let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
-            if let str = alertController.textFields?[0].text{
-                self.createdCategoryName = str
+            if let inputCategoryName = alertController.textFields?[0].text{
+                // 入力されたカテゴリ名が空の場合
+                if inputCategoryName == ""{
+                    let emptyCategoryNameAlertController = UIAlertController(title: "カテゴリ名が空です", message: "カテゴリ名を入力してください", preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    emptyCategoryNameAlertController.addAction(ok)
+                    self.present(emptyCategoryNameAlertController, animated: true, completion: nil)
+                    return
+                }
+                // strがすでにRealmにあるカテゴリ名とかぶっていたら、カテゴリ名が被っていますアラートを出す
+                let categoryDuplicationAlertController = UIAlertController(title: "カテゴリ名が重複しています", message: "別のカテゴリ名を入力してください", preferredStyle: .alert)
+                let realm = try! Realm()
+                let categoryNameFilters = realm.objects(CategoryList.self)
+                for filter in categoryNameFilters {
+                    // 入力したカテゴリ名とRealmに入っているCategoryListのnameと被っていた時
+                    if filter.name == inputCategoryName {
+                        // カテゴリ重複アラートの表示
+                        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        categoryDuplicationAlertController.addAction(ok)
+                        self.present(categoryDuplicationAlertController, animated: true, completion: nil)
+                        self.present(alertController, animated: true,completion: nil)
+                        return
+                    }
+                }
+                self.createdCategoryName = inputCategoryName
             }
+            // 写真画面に遷移
             let sourceType: UIImagePickerController.SourceType = .photoLibrary
             self.createImagePicker(sourceType: sourceType)
         }
@@ -103,7 +136,7 @@ class AddCategoryViewController: UIViewController {
               textField.keyboardType = .default
 
         })
-        //OKとCANCELを表示追加し、アラートを表示
+        // OKとCANCELを表示追加し、アラートを表示
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
@@ -154,6 +187,23 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCategoryName: String = templateCategoryNameArray[indexPath.row]
         let selectedCategoryPhoto: UIImage = UIImage(named: (templatePhotoArray[indexPath.row]))!
+        // カテゴリが被っていた時にアラートを出す
+        let categoryDuplicationAlertController = UIAlertController(title: "カテゴリが重複しています", message: "別のカテゴリ名を選んでください", preferredStyle: .alert)
+        let realm = try! Realm()
+        let categoryNameFilters = realm.objects(CategoryList.self)
+        for filter in categoryNameFilters {
+            if filter.name == selectedCategoryName {
+                // カテゴリ重複アラートの表示
+                let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                categoryDuplicationAlertController.addAction(ok)
+                present(categoryDuplicationAlertController, animated: true, completion: nil)
+                return
+            }
+        }
+
+        // カテゴリが被っていない時の処理
         let alertController = UIAlertController(title: "カテゴリ追加", message: "\(selectedCategoryName)をカテゴリ一覧に追加しますか？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (ok) in
             // カテゴリ一覧画面に画像をカテゴリ名前を渡す
