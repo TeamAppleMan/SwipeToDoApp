@@ -20,7 +20,6 @@ class MotivationViewController: UIViewController {
 
     @IBOutlet private weak var topView: UIView!
     @IBOutlet private weak var centerView: UIView!
-    @IBOutlet private weak var buttomView: UIView!
 
     @IBOutlet private weak var beforeMonthButton: UIBarButtonItem!
     @IBOutlet private weak var afterMonthButton: UIBarButtonItem!
@@ -29,10 +28,8 @@ class MotivationViewController: UIViewController {
     // 赤・青・緑のトップバーのLabel
     @IBOutlet private weak var taskCountTopBarLabel: UILabel!
     @IBOutlet private weak var taskRatioTopBarLabel: UILabel!
-    @IBOutlet private weak var categoryRatioTopBarLabel: UILabel!
     @IBOutlet private weak var taskCountSubBarLabel: UILabel!
     @IBOutlet private weak var taskRatioSubBarLabel: UILabel!
-    @IBOutlet private weak var categoryRatioSubBarLabel: UILabel!
 
     @IBOutlet private weak var endTaskLabel: UILabel!
     @IBOutlet private weak var inputTaskLabel: UILabel!
@@ -49,24 +46,18 @@ class MotivationViewController: UIViewController {
 
     @IBOutlet private weak var taskCountOfMonthLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfMonthPieChartView: PieChartView!
-    @IBOutlet private weak var categoryRatioOfMonthPieChartView: PieChartView!
     @IBOutlet private weak var taskCountOfAllLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfAllPieChartView: PieChartView!
-    @IBOutlet private weak var categoryRatioOfAllPieChartView: PieChartView!
 
     private var taskCountOfMonthLineDataSet: LineChartDataSet!
     private var taskRatioOfMonthPieDataSet: PieChartDataSet!
-    private var categoryRatioOfMonthPieDataSet: PieChartDataSet!
     private var taskCountOfAllLineDataSet: LineChartDataSet!
     private var taskRatioOfMAllPieDataSet: PieChartDataSet!
-    private var categoryRatioOfAllPieDataSet: PieChartDataSet!
 
     private var taskCountOfMonthChartData: [Double] = []
     private var taskRatioOfMonthPieData: [PieChartDataEntry] = []
-    private var categoryRatioOfMonthPieData: [PieChartDataEntry] = []
     private var taskCountOfAllChartData: [Double] = []
     private var taskRatioOfAllPieData: [PieChartDataEntry] = []
-    private var categoryRatioOfAllPieData: [PieChartDataEntry] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,12 +73,6 @@ class MotivationViewController: UIViewController {
         centerView.layer.shadowOpacity = 0.4
         centerView.layer.shadowRadius = 3
 
-        buttomView.layer.cornerRadius = 12
-        buttomView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        buttomView.layer.shadowColor = UIColor.black.cgColor
-        buttomView.layer.shadowOpacity = 0.4
-        buttomView.layer.shadowRadius = 3
-
         // 赤・青・緑部分を角丸にする
         taskCountTopBarLabel.layer.cornerRadius = 12
         taskCountTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -96,9 +81,6 @@ class MotivationViewController: UIViewController {
         taskRatioTopBarLabel.layer.cornerRadius = 12
         taskRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskRatioTopBarLabel.clipsToBounds = true
-        categoryRatioTopBarLabel.layer.cornerRadius = 12
-        categoryRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        categoryRatioTopBarLabel.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -168,10 +150,8 @@ class MotivationViewController: UIViewController {
     private func calculateMonth() {
         var filterTasks:[Task] = []
         var eachCategoryTasks: [Task] = []
-        var categoryRatioNoDateCheck: [Int] = []
         taskCountOfMonthChartData = []
         taskRatioOfMonthPieData = []
-        categoryRatioOfMonthPieData = []
 
         // トップの折れ線グラフの計算
         // 当月のTaskかどうかをfilterする
@@ -203,27 +183,6 @@ class MotivationViewController: UIViewController {
             createTaskRatioOfMonthPieChart(dataEntries: taskRatioOfMonthPieData)
         }
 
-        // カテゴリー割合計算
-        var count = 0
-        for category in categoryLists {
-            // カテゴリをfilterしてappend
-            eachCategoryTasks = filterTasks.filter{
-                $0.category == category.name
-            }
-            count += eachCategoryTasks.count
-            categoryRatioNoDateCheck.append(eachCategoryTasks.count)
-            categoryRatioOfMonthPieData.append(PieChartDataEntry(value: Double(eachCategoryTasks.count), label: category.name))
-        }
-
-        categoryRatioOfMonthPieData.append(PieChartDataEntry(value: achieveCount-Double(count), label: "未カテゴリー"))
-
-        if categoryRatioNoDateCheck.reduce(0, +) == 0 {
-            // "データがありません"と表示させるために意図的に空にする
-            categoryRatioOfMonthPieData = []
-            createCategoryRatioOfMonthPieChart(dataEntries: categoryRatioOfMonthPieData)
-        } else {
-            createCategoryRatioOfMonthPieChart(dataEntries: categoryRatioOfMonthPieData)
-        }
 
         endTaskNumberLabel1.text = String(Int(achieveCount))
         planTaskNumberLabel.text = String(Int(filterTasks.count))
@@ -232,18 +191,15 @@ class MotivationViewController: UIViewController {
         lineChartDescriptionButtomLabel2.text = "日付"
         taskCountSubBarLabel.text = ""
         taskRatioSubBarLabel.text = ""
-        categoryRatioSubBarLabel.text = ""
+
     }
 
     func calculateAll() {
         var allDateList: [Date] = []
         var endTaskcount = 0.0
         var eachCategoryTasks: [Task] = []
-        var categoryRatioNoDateCheck: [Int] = []
         taskCountOfAllChartData = []
         taskRatioOfAllPieData = []
-        categoryRatioOfAllPieData = []
-
         // 達成数計算
         // 一番古い日付を取得
         for task in tasks {
@@ -253,7 +209,6 @@ class MotivationViewController: UIViewController {
         if allDateList.isEmpty {
             createTaskCountOfAllLineChart(data: taskCountOfAllChartData)
             createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
-            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
             return
         }
 
@@ -290,27 +245,6 @@ class MotivationViewController: UIViewController {
             createTaskRatioOfAllPieChart(dataEntries: taskRatioOfAllPieData)
         }
 
-        //　達成カテゴリ率（円グラフ）計算
-        var count = 0
-        for category in categoryLists {
-            eachCategoryTasks = tasks.filter{
-                $0.category == category.name
-            }
-            count += eachCategoryTasks.count
-            categoryRatioNoDateCheck.append(eachCategoryTasks.count)
-            categoryRatioOfAllPieData.append(PieChartDataEntry(value: Double(eachCategoryTasks.count), label: category.name))
-        }
-
-        categoryRatioOfAllPieData.append(PieChartDataEntry(value: achieveCount-Double(count), label: "未カテゴリー"))
-
-        if categoryRatioNoDateCheck.reduce(0, +) == 0 {
-            // "データがありません"と表示させるために意図的に空にする
-            categoryRatioOfAllPieData = []
-            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
-        } else {
-            createCategoryRatioOfAllPieChart(dataEntries: categoryRatioOfAllPieData)
-        }
-
         endTaskNumberLabel1.text = String(Int(achieveCount))
         planTaskNumberLabel.text = String(Int(allDateList.count))
         endTaskNumberLabel2.text = String(Int(achieveCount))
@@ -318,7 +252,6 @@ class MotivationViewController: UIViewController {
         lineChartDescriptionButtomLabel2.text = "経過月"
         taskCountSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
         taskRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
-        categoryRatioSubBarLabel.text = "\(mostOldDate.year)年\(mostOldDate.month)月〜"
     }
 
     // MARK: 月間上
@@ -423,44 +356,6 @@ class MotivationViewController: UIViewController {
         taskRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         taskRatioOfMonthPieChartView.usePercentValuesEnabled = true
         taskRatioOfMonthPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
-    }
-
-    // MARK: 月間下
-    private func createCategoryRatioOfMonthPieChart(dataEntries: [PieChartDataEntry]) {
-        categoryRatioOfMonthPieChartView.noDataText = "表示できるデータがありません"
-        categoryRatioOfMonthPieChartView.drawHoleEnabled = false //中心まで塗りつぶし
-        categoryRatioOfMonthPieChartView.highlightPerTapEnabled = false  // グラフがタップされたときのハイライトをOFF（任意）
-        categoryRatioOfMonthPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
-        categoryRatioOfMonthPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
-        categoryRatioOfMonthPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
-        categoryRatioOfMonthPieChartView.legend.enabled = true  // グラフの注釈
-        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(8)
-
-        let dataSet = PieChartDataSet(entries: dataEntries, label: "")
-        // グラフの色
-        dataSet.colors = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)]
-        //dataSet.colors = ChartColorTemplates.vordiplom()
-        // グラフのデータの値の色
-        dataSet.valueTextColor = UIColor.gray
-        // グラフのデータのタイトルの色
-        dataSet.entryLabelColor = UIColor.black
-
-        // データがないときに"データがありません"を表示させる
-        if dataEntries.isEmpty == false {
-            categoryRatioOfMonthPieChartView.data = PieChartData(dataSet: dataSet)
-        } else {
-            categoryRatioOfMonthPieChartView.data = nil
-        }
-
-        // データを％表示にする
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1.0
-        formatter.minimumFractionDigits = 0
-        categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfMonthPieChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0)
     }
 
     // MARK: 総合上
@@ -588,44 +483,6 @@ class MotivationViewController: UIViewController {
         taskRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
     }
 
-    // MARK: 総合下
-    private func createCategoryRatioOfAllPieChart(dataEntries: [PieChartDataEntry]) {
-        categoryRatioOfAllPieChartView.noDataText = "表示できるデータがありません"
-        categoryRatioOfAllPieChartView.drawHoleEnabled = false //中心まで塗りつぶし
-        categoryRatioOfAllPieChartView.highlightPerTapEnabled = false  // グラフがタップされたときのハイライトをOFF（任意）
-        categoryRatioOfAllPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
-        categoryRatioOfAllPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
-        categoryRatioOfAllPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
-        categoryRatioOfAllPieChartView.legend.enabled = true  // グラフの注釈
-        categoryRatioOfAllPieChartView.legend.formSize = CGFloat(8)
-
-        let dataSet = PieChartDataSet(entries: dataEntries, label: "")
-        // グラフの色
-        dataSet.colors = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.7296691473, green: 0.796427976, blue: 0.31645393, alpha: 1), #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.8332028824, green: 0.9686274529, blue: 0.9010120746, alpha: 1), #colorLiteral(red: 0.9652879931, green: 0.642761837, blue: 0.9764705896, alpha: 1)]
-        //dataSet.colors = ChartColorTemplates.vordiplom()
-        // グラフのデータの値の色
-        dataSet.valueTextColor = UIColor.gray
-        // グラフのデータのタイトルの色
-        dataSet.entryLabelColor = UIColor.black
-
-        // データがないときにnoDataTextを表示させる
-        if dataEntries.isEmpty == false {
-            categoryRatioOfAllPieChartView.data = PieChartData(dataSet: dataSet)
-        } else {
-            categoryRatioOfAllPieChartView.data = nil
-        }
-
-        // データを％表示にする
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1.0
-        formatter.minimumFractionDigits = 0
-        categoryRatioOfAllPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        categoryRatioOfAllPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfAllPieChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0)
-    }
-
     // グラフを描画するときに必ずこの関数を呼ぶ
     private func presentMonthOrAll(isMonth: Bool) {
         lineChartNoDataLabel.text = ""
@@ -635,10 +492,8 @@ class MotivationViewController: UIViewController {
             self.navigationItem.title = "\(presentDate.year)年\(presentDate.month)月"
             taskRatioOfMonthPieChartView.isHidden = false
             taskCountOfMonthLineChartView.isHidden = false
-            categoryRatioOfMonthPieChartView.isHidden = false
             taskRatioOfAllPieChartView.isHidden = true
             taskCountOfAllLineChartView.isHidden = true
-            categoryRatioOfAllPieChartView.isHidden = true
             calculateMonth()
         } else {
             beforeMonthButton.isEnabled = false
@@ -646,10 +501,8 @@ class MotivationViewController: UIViewController {
             self.navigationItem.title = "総合"
             taskRatioOfMonthPieChartView.isHidden = true
             taskCountOfMonthLineChartView.isHidden = true
-            categoryRatioOfMonthPieChartView.isHidden = true
             taskRatioOfAllPieChartView.isHidden = false
             taskCountOfAllLineChartView.isHidden = false
-            categoryRatioOfAllPieChartView.isHidden = false
             calculateAll()
         }
     }
