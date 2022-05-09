@@ -97,17 +97,12 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
         }
         return CardCell()
     }
-    // 右スワイプした時に呼ばれるデリゲートメソッド
+    // スワイプした時に呼ばれるデリゲートメソッド
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
-        if swipeDirection == .Right{
-            // 右スワイプしたタスクデータはisDoneをfalseにしてRealmに登録
-            let realm = try! Realm()
-            try! realm.write{
-                cardTask[index].isDone = true
-            }
-            HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 1)
-        }else if swipeDirection == .Left{
-            HUD.flash(.labeledError(title: "無効", subtitle: "この操作は現在無効です"), delay: 1)
+        let realm = try! Realm()
+        try! realm.write{
+            cardTask[index].isDone = true
         }
+        HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 1)
     }
 }
