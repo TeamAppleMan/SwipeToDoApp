@@ -171,12 +171,12 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         return 25
     }
     // セルのサイズを決めるデリゲートメソッド
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        cellWidth = viewWidth - 120
-        cellHeight = viewHeight - 450
-        cellOffset = viewWidth - cellWidth
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        cellWidth = viewWidth - 120
+//        cellHeight = viewHeight - 450
+//        cellOffset = viewWidth - cellWidth
+//        return CGSize(width: cellWidth, height: cellHeight)
+//    }
 
     // 余白の調整
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
