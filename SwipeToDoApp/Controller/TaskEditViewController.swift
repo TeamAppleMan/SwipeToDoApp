@@ -92,8 +92,8 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     func deleteAleart() {
-        let alert = UIAlertController(title: "注意", message: "データを完全に削除してもよろしいですか？", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "注意", message: "データを削除してもよろしいですか", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "削除", style: .default) { [self] (action) in
             let realm = try! Realm()
             try! realm.write{
                 realm.delete(self.catchTask)
@@ -108,8 +108,8 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     func saveAleart() {
-        let alert = UIAlertController(title: "保存", message: "データを上書きしてもよろしいですか？", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default) { [self] (action) in
+        let alert = UIAlertController(title: "保存", message: "データを上書きしてもよろしいですか", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "上書き", style: .default) { [self] (action) in
             let realm = try! Realm()
             let target = getFiltersTask[indexNumber]
             let text = taskTextField.text ?? ""
