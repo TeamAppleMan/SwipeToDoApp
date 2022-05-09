@@ -18,10 +18,7 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1, 0] {
-            // アプリを評価するボタンへ
-            reviewApp()
-        } else if indexPath == [1, 1] {
+        if indexPath.row == 0 {
             // アプリをシェアするボタンへ
             shareApp()
         }
@@ -29,9 +26,10 @@ class SettingTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    // れびゅーURLをココに追加
     private func reviewApp() {
         // TODO: 別のURLを指定中
-        if let url = URL(string: "https://apps.apple.com/jp/app/easy-count/id1580335092?uo=4&action=write-review") {
+        if let url = URL(string: "") {
             UIApplication.shared.open(url)
         }
     }
