@@ -96,7 +96,7 @@ class AddCategoryViewController: UIViewController {
                 // 入力されたカテゴリ名が空の場合
                 if inputCategoryName == ""{
                     let emptyCategoryNameAlertController = UIAlertController(title: "カテゴリ名が空です", message: "カテゴリ名を入力してください", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                    let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
                         self.dismiss(animated: true, completion: nil)
                     }
                     emptyCategoryNameAlertController.addAction(ok)
@@ -111,7 +111,7 @@ class AddCategoryViewController: UIViewController {
                     // 入力したカテゴリ名とRealmに入っているCategoryListのnameと被っていた時
                     if filter.name == inputCategoryName {
                         // カテゴリ重複アラートの表示
-                        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                        let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
                             self.dismiss(animated: true, completion: nil)
                         }
                         categoryDuplicationAlertController.addAction(ok)
@@ -194,7 +194,7 @@ extension AddCategoryViewController: UICollectionViewDelegate,UICollectionViewDa
         for filter in categoryNameFilters {
             if filter.name == selectedCategoryName {
                 // カテゴリ重複アラートの表示
-                let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
                     self.dismiss(animated: true, completion: nil)
                 }
                 categoryDuplicationAlertController.addAction(ok)
