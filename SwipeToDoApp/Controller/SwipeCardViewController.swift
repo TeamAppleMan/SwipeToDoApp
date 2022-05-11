@@ -103,6 +103,6 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
         try! realm.write{
             cardTask[index].isDone = true
         }
-        HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 1)
+        HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 0.5)
     }
 }
