@@ -8,7 +8,6 @@ target 'SwipeToDoApp' do
   # Pods for SwipeToDoApp
   pod 'VerticalCardSwiper'
   pod 'FSCalendar'
-  pod 'MaterialComponents'
   pod 'Charts'
   pod 'lottie-ios'
   pod 'RealmSwift'
