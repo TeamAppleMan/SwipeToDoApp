@@ -23,16 +23,18 @@ class SettingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == [1, 0] {
+        if indexPath == [0, 0] {
+            prepareWebWithArrow(url: operationUrl, title: "操作方法")
+        } else if indexPath == [1, 0] {
             reviewApp()
         } else if indexPath == [1, 1] {
             shareApp()
         } else if indexPath == [1, 2] {
-            prepareWebWithNotArrow(url: feedbackUrl)
+            prepareWebWithNotArrow(url: feedbackUrl, title: "お問い合わせ")
+        } else if indexPath == [2, 0] {
+            prepareWebWithArrow(url: privacyUrl, title: "プライバシーポリシー")
         } else if indexPath == [2, 1] {
-            prepareWebWithArrow(url: privacyUrl)
-        } else if indexPath == [2, 2] {
-            prepareWebWithArrow(url: ruleUrl)
+            prepareWebWithArrow(url: ruleUrl,  title: "利用規約")
         }
 
         // 選択された色がスーっと消えていく
@@ -45,17 +47,19 @@ class SettingTableViewController: UITableViewController {
         }
     }
 
-    private func prepareWebWithNotArrow(url: String) {
+    private func prepareWebWithNotArrow(url: String, title: String) {
         let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithNotArrowNC") as? UINavigationController
         let nextVC = nextNC?.topViewController as? SettingFeedbackViewController
+        nextVC?.navigationItem.title = title
         nextVC?.catchUrl(url: url)
         present(nextNC!, animated: true, completion: nil)
     }
 
-    private func prepareWebWithArrow(url: String) {
+    private func prepareWebWithArrow(url: String, title: String) {
         let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithArrowNC") as? UINavigationController
         let nextVC = nextNC?.topViewController as? SettingMethodOfOperationViewController
         nextVC?.catchUrl(url: url)
+        nextVC?.navigationItem.title = title
         present(nextNC!, animated: true, completion: nil)
     }
 
