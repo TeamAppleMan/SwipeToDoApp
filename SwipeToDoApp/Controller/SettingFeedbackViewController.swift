@@ -12,7 +12,7 @@ import PKHUD
 class SettingFeedbackViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet private weak var webView: WKWebView!
-    private let contactUrl = "https://forms.gle/3aT6RegBGJ1L8KPt7"
+    private var presentUrl = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,24 +20,28 @@ class SettingFeedbackViewController: UIViewController, WKUIDelegate, WKNavigatio
         webView.uiDelegate = self
 
         HUD.show(.progress, onView: view)
-        if let url = URL(string: contactUrl) {
+        if let url = URL(string: presentUrl) {
             self.webView.load(URLRequest(url: url))
         } else {
-            print("お問い合わせフォームのURLが取得できませんでした。")
+            print("URLが取得できませんでした。")
         }
     }
 
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("お問い合わせフォームの読み込み開始")
+        print("読み込み開始")
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("お問い合わせフォームの読み込み完了")
+        print("読み込み完了")
         HUD.hide(animated: true)
     }
 
     @IBAction private func didTapExitButton(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    func catchUrl(url: String) {
+        presentUrl = url
     }
 
 }

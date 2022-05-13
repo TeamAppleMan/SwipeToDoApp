@@ -14,19 +14,18 @@ class SettingMethodOfOperationViewController: UIViewController, WKUIDelegate, WK
     @IBOutlet private weak var webView: WKWebView!
     @IBOutlet private weak var backButton: UIBarButtonItem!
     @IBOutlet private weak var forwardButton: UIBarButtonItem!
-
-    private let operationUrl = "https://local-tumbleweed-7ea.notion.site/SwipeToDo-ea54cf669ca246a997f091803dbbb04e"
-
+    private var presentUrl = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
         webView.uiDelegate = self
 
         HUD.show(.progress, onView: view)
-        if let url = URL(string: operationUrl) {
+        if let url = URL(string: presentUrl) {
             self.webView.load(URLRequest(url: url))
         } else {
-            print("操作方法のURLが取得できませんでした。")
+            print("URLが取得できませんでした。")
         }
         judgeToolBarButton()
     }
@@ -36,21 +35,16 @@ class SettingMethodOfOperationViewController: UIViewController, WKUIDelegate, WK
     }
 
     @IBAction func didTapForwardButton(_ sender: Any) {
-
         webView.goForward()
     }
 
-    func webView(_ webView: WKWebView, contextMenuWillPresentForElement elementInfo: WKContextMenuElementInfo) {
-        print("???")
-    }
-
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        print("操作方法の読み込み開始")
+        print("読み込み開始")
         judgeToolBarButton()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("操作方法の読み込み完了")
+        print("読み込み完了")
         HUD.hide(animated: true)
         judgeToolBarButton()
     }
@@ -67,6 +61,10 @@ class SettingMethodOfOperationViewController: UIViewController, WKUIDelegate, WK
         } else {
             forwardButton.isEnabled = false
         }
+    }
+
+    func catchUrl(url: String) {
+        presentUrl = url
     }
 
     @IBAction private func didTapExitButton(_ sender: UIBarButtonItem) {

@@ -10,6 +10,11 @@ import UIKit
 class SettingTableViewController: UITableViewController {
 
     @IBOutlet weak var versionNumber: UILabel!
+    private let reviewUrl = "https://apps.apple.com/jp/app/swipetodo/id1623714500?mt=8&action=write-review"
+    private let operationUrl = "https://local-tumbleweed-7ea.notion.site/SwipeToDo-ea54cf669ca246a997f091803dbbb04e"
+    private let feedbackUrl = "https://forms.gle/3aT6RegBGJ1L8KPt7"
+    private let privacyUrl = "https://tetoblog.org/swipetodo/privacy/"
+    private let ruleUrl = "https://tetoblog.org/swipetodo/rule/"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,19 +24,39 @@ class SettingTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == [1, 0] {
-            // アプリをシェアするボタンへ
+            reviewApp()
+        } else if indexPath == [1, 1] {
             shareApp()
+        } else if indexPath == [1, 2] {
+            prepareWebWithNotArrow(url: feedbackUrl)
+        } else if indexPath == [2, 1] {
+            prepareWebWithArrow(url: privacyUrl)
+        } else if indexPath == [2, 2] {
+            prepareWebWithArrow(url: ruleUrl)
         }
+
         // 選択された色がスーっと消えていく
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    // れびゅーURLをココに追加
     private func reviewApp() {
-        // TODO: 別のURLを指定中
-        if let url = URL(string: "") {
+        if let url = URL(string: reviewUrl) {
             UIApplication.shared.open(url)
         }
+    }
+
+    private func prepareWebWithNotArrow(url: String) {
+        let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithNotArrowNC") as? UINavigationController
+        let nextVC = nextNC?.topViewController as? SettingFeedbackViewController
+        nextVC?.catchUrl(url: url)
+        present(nextNC!, animated: true, completion: nil)
+    }
+
+    private func prepareWebWithArrow(url: String) {
+        let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithArrowNC") as? UINavigationController
+        let nextVC = nextNC?.topViewController as? SettingMethodOfOperationViewController
+        nextVC?.catchUrl(url: url)
+        present(nextNC!, animated: true, completion: nil)
     }
 
     private func shareApp() {
@@ -58,7 +83,6 @@ class SettingTableViewController: UITableViewController {
             popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         }
         self.present(activityVC, animated: true)
-
     }
 
     @IBAction func didTapExitButton(_ sender: Any) {
