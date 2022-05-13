@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
 
-    @IBOutlet weak var versionNumber: UILabel!
+    @IBOutlet private weak var versionNumber: UILabel!
     private let reviewUrl = "https://apps.apple.com/jp/app/swipetodo/id1623714500?mt=8&action=write-review"
     private let operationUrl = "https://local-tumbleweed-7ea.notion.site/SwipeToDo-ea54cf669ca246a997f091803dbbb04e"
     private let feedbackUrl = "https://forms.gle/3aT6RegBGJ1L8KPt7"
@@ -48,19 +48,21 @@ class SettingTableViewController: UITableViewController {
     }
 
     private func prepareWebWithNotArrow(url: String, title: String) {
-        let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithNotArrowNC") as? UINavigationController
-        let nextVC = nextNC?.topViewController as? SettingFeedbackViewController
-        nextVC?.navigationItem.title = title
-        nextVC?.catchUrl(url: url)
-        present(nextNC!, animated: true, completion: nil)
+        guard let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithNotArrowNC") as? UINavigationController, let nextVC = nextNC.topViewController as? SettingWebWithNotArrowViewController else {
+            return
+        }
+        nextVC.navigationItem.title = title
+        nextVC.catchUrl(url: url)
+        present(nextNC, animated: true, completion: nil)
     }
 
     private func prepareWebWithArrow(url: String, title: String) {
-        let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithArrowNC") as? UINavigationController
-        let nextVC = nextNC?.topViewController as? SettingMethodOfOperationViewController
-        nextVC?.catchUrl(url: url)
-        nextVC?.navigationItem.title = title
-        present(nextNC!, animated: true, completion: nil)
+        guard let nextNC = storyboard?.instantiateViewController(withIdentifier: "WebWithArrowNC") as? UINavigationController, let nextVC = nextNC.topViewController as? SettingWebWithArrowViewController else {
+            return
+        }
+        nextVC.catchUrl(url: url)
+        nextVC.navigationItem.title = title
+        present(nextNC, animated: true, completion: nil)
     }
 
     private func shareApp() {

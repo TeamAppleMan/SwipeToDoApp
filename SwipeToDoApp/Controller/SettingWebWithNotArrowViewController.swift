@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import PKHUD
 
-class SettingFeedbackViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+class SettingWebWithNotArrowViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet private weak var webView: WKWebView!
     private var presentUrl = ""
