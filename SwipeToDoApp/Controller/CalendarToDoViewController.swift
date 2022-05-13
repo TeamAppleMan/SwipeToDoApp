@@ -308,6 +308,7 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
                 realm.delete(object)
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            calendar.reloadData()
         }
     }
 
