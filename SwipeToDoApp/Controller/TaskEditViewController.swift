@@ -22,6 +22,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         selectCategory = catchTask.category.description
         categoryButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         categoryButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -47,6 +48,10 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NavVCSegue" {
             let nav = segue.destination as! UINavigationController

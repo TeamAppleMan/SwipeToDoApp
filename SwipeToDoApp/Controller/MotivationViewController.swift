@@ -85,6 +85,7 @@ class MotivationViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
         categoryLists = realm.objects(CategoryList.self)
