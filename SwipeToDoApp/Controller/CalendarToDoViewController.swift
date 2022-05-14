@@ -49,7 +49,6 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.tintColor = .black
         // Lottieを表示するか否かの判定
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunchKey"
@@ -64,7 +63,8 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         addTaskTextField.isEnabled = true
         let realm = try! Realm()
         tasks = realm.objects(Task.self)

@@ -49,6 +49,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
