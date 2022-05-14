@@ -34,7 +34,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="detail" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-h6-UZU">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="detail" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-h6-UZU">
                         <rect key="frame" x="20" y="495" width="320" height="86"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
