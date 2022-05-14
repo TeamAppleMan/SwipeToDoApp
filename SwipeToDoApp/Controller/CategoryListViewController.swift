@@ -10,13 +10,9 @@ import RealmSwift
 
 class CategoryListViewController: UIViewController, SwipeCardViewControllerDelegate{
 
-
     @IBOutlet var tableView: UITableView!
-
     var categoryList: Results<CategoryList>!
-
     private var task: Results<Task>!
-
     private var selectedIndexNumber: Int = 0
 
     override func viewDidLoad() {
@@ -30,6 +26,8 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.tintColor = .black
         tableView.reloadData()
     }
 
@@ -41,21 +39,18 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         if segue.identifier == "AddCategorySegue" {
             let addCategoryVC = segue.destination as! AddCategoryViewController
             addCategoryVC.delegate = self
         }
 
         if segue.identifier == "SwipeCardSegue" {
-            let nav = segue.destination as! UINavigationController
-            let swipeCardVC = nav.topViewController as! SwipeCardViewController
-            swipeCardVC.delegate = self
+            let swipeCardVC = segue.destination as! SwipeCardViewController
+
             let realm = try! Realm()
-            let filtersTask = try! realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[selectedIndexNumber].name,false)
+            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[selectedIndexNumber].name, false)
             swipeCardVC.catchTask = filtersTask
         }
-
     }
 
     func catchDidSwipeCardData(catchTask: Results<Task>) {
@@ -80,7 +75,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         cell.categoryImageView.image = UIImage(data: categoryList[indexPath.row].photo!)
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
         let realm = try! Realm()
-        let filtersTask = try! realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[indexPath.row].name,false)
+        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[indexPath.row].name,false)
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
@@ -98,7 +93,9 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
     // セルをタップした時にスワイプ画面に画面遷移する
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
+        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
+        hidesBottomBarWhenPushed = false
     }
 }
 extension CategoryListViewController: AddCategoryViewControllerDelegate{

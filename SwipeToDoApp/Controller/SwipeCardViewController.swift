@@ -35,6 +35,7 @@ class SwipeCardViewController: UIViewController {
         cardSwiper.reloadData()
         setBackgroundColor()
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.tintColor = .white
         //フォアグラウンド時の処理
         NotificationCenter.default.addObserver(
             self,
@@ -45,6 +46,7 @@ class SwipeCardViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         // HACK: 正直cardTaskに格納する意味はないです。。笑
         cardTask = catchTask
     }
@@ -56,12 +58,11 @@ class SwipeCardViewController: UIViewController {
     }
 
     // CalendarToDoViewControllerの画面遷移
-
-    @IBAction func tappedBackButton(_ sender: Any) {
-        // カードで更新したtaskデータをCalendarToDoViewControllerに渡し、tableViewをリロードするという意図があります
-        delegate?.catchDidSwipeCardData(catchTask: cardTask)
-        dismiss(animated: true)
-    }
+//    @IBAction func tappedBackButton(_ sender: Any) {
+//        // カードで更新したtaskデータをCalendarToDoViewControllerに渡し、tableViewをリロードするという意図があります
+//        delegate?.catchDidSwipeCardData(catchTask: cardTask)
+//        dismiss(animated: true)
+//    }
     private func setBackgroundColor(){
         // Custom Direction
         pastelView.startPastelPoint = .topLeft
@@ -105,4 +106,5 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
         }
         HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 0.5)
     }
+
 }

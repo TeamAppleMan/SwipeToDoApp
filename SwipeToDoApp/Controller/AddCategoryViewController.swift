@@ -52,6 +52,7 @@ class AddCategoryViewController: UIViewController {
         horizontalCollectionView.register(nib, forCellWithReuseIdentifier: "CategoryCollectionID")
         setTestLayout()
     }
+
     // 4番目のCellからスタートする
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

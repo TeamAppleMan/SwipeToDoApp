@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 import PKHUD
 
-class SettingMethodOfOperationViewController: UIViewController, WKUIDelegate, WKNavigationDelegate  {
+class SettingWebWithArrowViewController: UIViewController, WKUIDelegate, WKNavigationDelegate  {
 
     @IBOutlet private weak var webView: WKWebView!
     @IBOutlet private weak var backButton: UIBarButtonItem!

@@ -11,10 +11,10 @@
 		8700281A282762A800C9BDC1 /* EditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87002819282762A800C9BDC1 /* EditCategoryViewController.swift */; };
 		873789872827427900DC09DF /* TaskEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873789862827427900DC09DF /* TaskEditViewController.swift */; };
 		87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802033281BB328006228A9 /* SettingTableViewController.swift */; };
-		87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */; };
+		87802036281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift */; };
 		87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */; };
 		87ACCF412825F32F00135AE7 /* SelectCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */; };
-		87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */; };
+		87DC2375281BC69200E473F7 /* SettingWebWithArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC2374281BC69200E473F7 /* SettingWebWithArrowViewController.swift */; };
 		87E259E8281D4B99006D431F /* Lottie01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E7281D4B99006D431F /* Lottie01ViewController.swift */; };
 		87E259EA281D4BA8006D431F /* Lottie02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */; };
 		87E259EC281D4BBD006D431F /* Lottie03ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259EB281D4BBD006D431F /* Lottie03ViewController.swift */; };
@@ -51,10 +51,10 @@
 		87002819282762A800C9BDC1 /* EditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryViewController.swift; sourceTree = "<group>"; };
 		873789862827427900DC09DF /* TaskEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditViewController.swift; sourceTree = "<group>"; };
 		87802033281BB328006228A9 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
-		87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFeedbackViewController.swift; sourceTree = "<group>"; };
+		87802035281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebWithNotArrowViewController.swift; sourceTree = "<group>"; };
 		87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCategoryTableViewCell.xib; sourceTree = "<group>"; };
-		87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMethodOfOperationViewController.swift; sourceTree = "<group>"; };
+		87DC2374281BC69200E473F7 /* SettingWebWithArrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebWithArrowViewController.swift; sourceTree = "<group>"; };
 		87E259E7281D4B99006D431F /* Lottie01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie01ViewController.swift; sourceTree = "<group>"; };
 		87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie02ViewController.swift; sourceTree = "<group>"; };
 		87E259EB281D4BBD006D431F /* Lottie03ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie03ViewController.swift; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 				95979D0E281280ED00E1457E /* AddCategoryViewController.swift */,
 				95A4990A2816314D00B84AC9 /* MotivationViewController.swift */,
 				87802033281BB328006228A9 /* SettingTableViewController.swift */,
-				87802035281BBF26006228A9 /* SettingFeedbackViewController.swift */,
-				87DC2374281BC69200E473F7 /* SettingMethodOfOperationViewController.swift */,
+				87802035281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift */,
+				87DC2374281BC69200E473F7 /* SettingWebWithArrowViewController.swift */,
 				87E259E7281D4B99006D431F /* Lottie01ViewController.swift */,
 				87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */,
 				87E259EB281D4BBD006D431F /* Lottie03ViewController.swift */,
@@ -331,7 +331,7 @@
 				87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */,
 				87802034281BB328006228A9 /* SettingTableViewController.swift in Sources */,
 				95A499092815FD8B00B84AC9 /* DateExtension.swift in Sources */,
-				87802036281BBF26006228A9 /* SettingFeedbackViewController.swift in Sources */,
+				87802036281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift in Sources */,
 				95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */,
 				95979D0F281280ED00E1457E /* AddCategoryViewController.swift in Sources */,
 				95A4990728157A0700B84AC9 /* DataUtils.swift in Sources */,
@@ -341,7 +341,7 @@
 				95D6EBC0280F976B00960B82 /* CalendarToDoViewController.swift in Sources */,
 				95D7E9C62822449A00AC8FDB /* CardViewCell.swift in Sources */,
 				95D6EBBC280F976B00960B82 /* AppDelegate.swift in Sources */,
-				87DC2375281BC69200E473F7 /* SettingMethodOfOperationViewController.swift in Sources */,
+				87DC2375281BC69200E473F7 /* SettingWebWithArrowViewController.swift in Sources */,
 				95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */,
 				87E259EE281D4BCA006D431F /* Lottie04ViewController.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
@@ -496,7 +496,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
@@ -530,7 +530,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";

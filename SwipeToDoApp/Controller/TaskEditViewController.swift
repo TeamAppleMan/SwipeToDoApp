@@ -47,6 +47,12 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "NavVCSegue" {
             let nav = segue.destination as! UINavigationController

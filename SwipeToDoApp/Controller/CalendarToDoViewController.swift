@@ -31,7 +31,6 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         addTaskTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -64,6 +63,8 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         addTaskTextField.isEnabled = true
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
@@ -104,8 +105,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "SwipeCardSegue" {
-            let nav = segue.destination as! UINavigationController
-            let swipeCardVC = nav.topViewController as! SwipeCardViewController
+            let swipeCardVC = segue.destination as! SwipeCardViewController
             swipeCardVC.delegate = self
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
             let realm = try! Realm()
@@ -132,8 +132,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         }
 
         if segue.identifier == "EditSegue" {
-            let nav = segue.destination as! UINavigationController
-            let nextVC = nav.topViewController as! TaskEditViewController
+            let nextVC = segue.destination as! TaskEditViewController
             nextVC.configure(task: editGiveTask!, tasks: filtersTask, index: index)
         }
 
@@ -160,11 +159,11 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         addTaskTextField.isEnabled = true
     }
 
+    // SwipeCardVCへ画面遷移
     @IBAction private func taskDeleteButton(_ sender: Any) {
-        // SwipeCardVCへ画面遷移
-        // taskTextField.isEnabledがtrueだとモーダル遷移もしてしまうため
-        // addTaskTextField.isEnabled = false
+        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
+        hidesBottomBarWhenPushed = false
     }
 
     // textFieldに文字が入力されていればボタンを表示する
@@ -315,7 +314,9 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         editGiveTask = filtersTask[indexPath.row]
         index = indexPath.row
+        hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "EditSegue", sender: nil)
+        hidesBottomBarWhenPushed = false
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
