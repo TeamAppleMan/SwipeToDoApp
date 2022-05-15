@@ -27,7 +27,9 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
     private var categoryList: Results<CategoryList>!
     private var selectedDate: Date!
     private var editGiveTask: Task?
+    private var list: List<CategoryList>!
     private var index = 0
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,14 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
+        let categoryList = CategoryList()
+        try! realm.write(){
+            if list == nil{
+                list = realm.objects(ItemList.self).first?.list
+            }else{
+                list.append(categoryList)
+            }
+        }
 
         addTaskButton.isEnabled = false
         tableView.allowsSelection = true
@@ -233,7 +243,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     func addNewDate(detail: String, index: Int) {
         let realm = try! Realm()
-        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": categoryList[index].name, "isRepeated": false, "isDone": false, "photo": categoryList[index].photo!])
+        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": list[index].name, "isRepeated": false, "isDone": false, "photo": list[index].photo!])
         try! realm.write{
             realm.add(newTask)
         }
