@@ -13,24 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // Mikeコメ：下記だとうまくいかないです。。
+        // アンインストール後は問題なく使える状態です。
         // migrationはじまり
         let config = Realm.Configuration(
-            // Set the new schema version. This must be greater than the previously used
-            // version (if you've never set a schema version before, the version is 0).
-            //(訳)新しいスキーマのバージョンを設定。以前使っていたバージョンよりも高くなければいけない。これまでバージョンの設定をしていなければ、初期のバージョンの値は0。
             schemaVersion: 1,
 
-            // Set the block which will be called automatically when opening a Realm with
-            // a schema version lower than the one set above
-            //(訳)上記のものより低いスキーマバージョンでrealmを開くときに、自動的に呼び出されるようにブロックの設定をする。
             migrationBlock: { migration, oldSchemaVersion in
-                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-        //(訳)まだマイグレーションを行っていないので、oldSchemaVersion == 0。
-                if (oldSchemaVersion < 1) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
-        //(訳)Realmは新しいプロパティと削除されたプロパティを自動で検知します。そして、自動でディスク上のスキーマを更新する。
+                if oldSchemaVersion < 1 {
+                    migration.enumerateObjects(ofType: CategoryList.className()) { oldObject, newObject in
+                        let categoryList = migration.create(CategoryList.className())
+                        let list = newObject?["list"] as? List<MigrationObject>
+                        list?.append(categoryList)
+                    }
                 }
             })
 
