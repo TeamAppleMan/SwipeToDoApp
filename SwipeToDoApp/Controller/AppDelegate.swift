@@ -13,13 +13,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        // migrationはじまり
+        let config = Realm.Configuration(
+            schemaVersion: 1,
+
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 1 {
+                    migration.create(CategoryLists.className())
+                    migration.enumerateObjects(ofType: CategoryLists.className()) { _, _ in
+                    }
+                }
+            }
+        )
+
+        Realm.Configuration.defaultConfiguration = config
+        let realm = try! Realm()
+        // migrationここまで
+
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch"
         let firstLunch = [firstLunchKey: false]
         userDefaults.register(defaults: firstLunch)
 
-        let realm = try! Realm()
-        let categoryList = realm.objects(CategoryList.self)
+        var categoryList = realm.objects(CategoryList.self)
         if categoryList.isEmpty {
             print("書記爆弾")
             let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
@@ -30,14 +46,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mtg: CategoryList! = CategoryList.init(value: ["name": "家事","photo": imageMtg!])
             do {
                 try realm.write{
-                    realm.add(programming)
-                    realm.add(shopping)
-                    realm.add(mtg)
+                    let list = CategoryLists()
+                    list.list.append(programming)
+                    list.list.append(shopping)
+                    list.list.append(mtg)
+                    realm.add(list)
                 }
             } catch {
                 print("AppDelegateでrealmエラー")
             }
         }
+
+        // realmのマイグレーション後にデータを入れる処理
+        categoryList = realm.objects(CategoryList.self)
+        var list: List<CategoryList>!
+        list = realm.objects(CategoryLists.self).first!.list
+        print(list!)
+        if list.isEmpty && !categoryList.isEmpty {
+            for i in categoryList {
+                try! realm.write {
+                    list.append(i)
+                }
+            }
+        }
+
         return true
     }
 

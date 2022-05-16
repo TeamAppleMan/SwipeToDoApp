@@ -342,13 +342,21 @@
                                 <segue destination="KCX-O7-z7c" kind="presentation" id="MXn-Gm-dFI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="plus.viewfinder" catalog="system" id="4fa-o6-qQo">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="tappedPlusCategoryButton:" destination="CLw-QW-3dC" id="z6Z-ch-goB"/>
-                                <segue destination="jju-jo-KR6" kind="show" identifier="AddCategorySegue" id="Arw-Rk-oIS"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="plus.viewfinder" catalog="system" id="4fa-o6-qQo">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="tappedPlusCategoryButton:" destination="CLw-QW-3dC" id="z6Z-ch-goB"/>
+                                    <segue destination="jju-jo-KR6" kind="show" identifier="AddCategorySegue" id="Arw-Rk-oIS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="編集" id="fEP-ib-aTo">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="tappedEditButton:" destination="CLw-QW-3dC" id="Hcs-oN-xxe"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Jld-Zf-T13" id="5Qx-4w-Ssf"/>
@@ -1331,10 +1339,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="TGH-vN-WZM">
-                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="43"/>
+                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TGH-vN-WZM" id="DM3-lr-1n5">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoH-pt-s8P">
@@ -1345,7 +1353,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FnR-sO-UVM">
-                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1524,7 +1532,6 @@
         <!--Navigation Controller-->
         <scene sceneID="G0L-rq-kMy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y38-0U-a4R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="WebWithArrowNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D10-8t-YfT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dmd-Pj-yZw">
@@ -1536,6 +1543,7 @@
                         <segue destination="cQd-3c-259" kind="relationship" relationship="rootViewController" id="MW5-mf-59m"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y38-0U-a4R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3052" y="2106"/>
         </scene>
@@ -1645,7 +1653,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Fnc-qa-ayo"/>
+        <segue reference="wbx-Mr-jNd"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
