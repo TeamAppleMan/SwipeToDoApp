@@ -98,24 +98,34 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     func deleteAleart() {
+
         let alert = UIAlertController(title: "注意", message: "データを削除してもよろしいですか", preferredStyle: .alert)
+
         let ok = UIAlertAction(title: "削除", style: .default) { [self] (action) in
             let realm = try! Realm()
+
             try! realm.write{
                 realm.delete(self.catchTask)
             }
-            dismiss(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
+
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
         }
+
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
 
     func saveAleart() {
+
         let alert = UIAlertController(title: "保存", message: "データを上書きしてもよろしいですか", preferredStyle: .alert)
+
         let ok = UIAlertAction(title: "上書き", style: .default) { [self] (action) in
+
             let realm = try! Realm()
             let target = getFiltersTask[indexNumber]
             let text = taskTextField.text ?? ""
@@ -137,8 +147,12 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
                 print("画面１のタスク編集画面でRealmエラー")
             }
 
-            dismiss(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.navigationController?.popViewController(animated: true)
+            }
+
         }
+
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
         }
 
