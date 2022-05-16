@@ -40,14 +40,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
-        let categoryList = CategoryList()
-        try! realm.write(){
-            if list == nil{
-                list = realm.objects(ItemList.self).first?.list
-            }else{
-                list.append(categoryList)
-            }
-        }
+        list = realm.objects(CategoryLists.self).first?.list
 
         addTaskButton.isEnabled = false
         tableView.allowsSelection = true

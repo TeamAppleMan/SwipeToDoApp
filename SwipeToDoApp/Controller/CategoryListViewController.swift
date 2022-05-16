@@ -14,21 +14,13 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
     var categoryList: Results<CategoryList>!
     private var task: Results<Task>!
     private var selectedIndexNumber: Int = 0
-
-    // realmを定義
     let realm = try! Realm()
-    // 並び替え用のリスト
     var list: List<CategoryList>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let categoryList = CategoryList()
-        try! realm.write(){
-            if list == nil{
-                list = realm.objects(ItemList.self).first?.list
-            }else{
-                list.append(categoryList)
-            }
-        }
+        let realm = try! Realm()
+        list = realm.objects(CategoryLists.self).first?.list
         setTableView()
     }
 
@@ -56,7 +48,7 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
             let swipeCardVC = segue.destination as! SwipeCardViewController
 
             let realm = try! Realm()
-            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@",categoryList[selectedIndexNumber].name, false)
+            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[selectedIndexNumber].name, false)
             swipeCardVC.catchTask = filtersTask
         }
     }
@@ -69,7 +61,6 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
         calendarToDoVC.tableView.reloadData()
     }
 
-
     @IBAction func tappedEditButton(_ sender: Any) {
         if(tableView.isEditing == false){
             tableView.isEditing = true
@@ -80,7 +71,8 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 
 }
 
-extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
+extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
@@ -91,14 +83,14 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         // Data型をUIImageにキャストしている
         cell.categoryImageView.image = UIImage(data: list[indexPath.row].photo!)
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
-        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@",list[indexPath.row].name,false)
+        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row].name,false)
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            try! realm.write{
+            try! realm.write {
                 let item = list[indexPath.row]
                 realm.delete(item)
             }
@@ -107,15 +99,17 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        try! realm.write{
+        try! realm.write {
             let listItem = list[sourceIndexPath.row]
             list.remove(at: sourceIndexPath.row)
             list.insert(listItem, at: destinationIndexPath.row)
         }
     }
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+
     // セルをタップした時にスワイプ画面に画面遷移する
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
@@ -123,7 +117,9 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource{
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
         hidesBottomBarWhenPushed = false
     }
+
 }
+
 extension CategoryListViewController: AddCategoryViewControllerDelegate{
     // AddCategoryViewControllerDelegateによるデリゲートメソッド: 新規カテゴリを追加した時に呼ばれる
     func catchAddedCategoryData(catchAddedCategoryList: CategoryList) {

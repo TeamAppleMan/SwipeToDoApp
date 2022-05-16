@@ -13,28 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // Mikeコメ：下記だとうまくいかないです。。
-        // アンインストール後は問題なく使える状態です。
         // migrationはじまり
         let config = Realm.Configuration(
             schemaVersion: 1,
 
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
-                    migration.enumerateObjects(ofType: CategoryList.className()) { oldObject, newObject in
-                        let categoryList = migration.create(CategoryList.className())
-                        let list = newObject?["list"] as? List<MigrationObject>
-                        list?.append(categoryList)
+                    migration.create(CategoryLists.className())
+                    migration.enumerateObjects(ofType: CategoryLists.className()) { _, _ in
                     }
                 }
-            })
+            }
+        )
 
-        // Tell Realm to use this new configuration object for the default Realm
-        //(訳)default Realmに対して、新しい設定オブジェクトを使うように、Realmに指示する。
         Realm.Configuration.defaultConfiguration = config
-
-        // Now that we've told Realm how to handle the schema change, opening the file
-        // will automatically perform the migration
         let realm = try! Realm()
         // migrationここまで
 
@@ -43,8 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstLunch = [firstLunchKey: false]
         userDefaults.register(defaults: firstLunch)
 
-        let categoryList = realm.objects(CategoryList.self)
-        var list: List<CategoryList>!
+        var categoryList = realm.objects(CategoryList.self)
         if categoryList.isEmpty {
             print("書記爆弾")
             let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
@@ -55,16 +46,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let mtg: CategoryList! = CategoryList.init(value: ["name": "家事","photo": imageMtg!])
             do {
                 try realm.write{
-                    let itemList = ItemList()
-                    itemList.list.append(programming)
-                    itemList.list.append(shopping)
-                    itemList.list.append(mtg)
-                    realm.add(itemList)
+                    let list = CategoryLists()
+                    list.list.append(programming)
+                    list.list.append(shopping)
+                    list.list.append(mtg)
+                    realm.add(list)
                 }
             } catch {
                 print("AppDelegateでrealmエラー")
             }
         }
+
+        // realmのマイグレーション後にデータを入れる処理
+        categoryList = realm.objects(CategoryList.self)
+        var list: List<CategoryList>!
+        list = realm.objects(CategoryLists.self).first!.list
+        print(list!)
+        if list.isEmpty && !categoryList.isEmpty {
+            for i in categoryList {
+                try! realm.write {
+                    list.append(i)
+                }
+            }
+        }
+
         return true
     }
 

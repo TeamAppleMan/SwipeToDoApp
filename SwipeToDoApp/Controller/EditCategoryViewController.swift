@@ -24,17 +24,10 @@ class EditCategoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let categoryList = CategoryList()
         tableView.register(UINib(nibName: "SelectCategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "SelectCategoryID")
         tableView.rowHeight = 60
-        
-        try! realm.write(){
-            if list == nil{
-                list = realm.objects(ItemList.self).first?.list
-            }else{
-                list.append(categoryList)
-            }
-        }
+        let realm = try! Realm()
+        list = realm.objects(CategoryLists.self).first?.list
     }
 
     @IBAction func didTapExitButton(_ sender: Any) {

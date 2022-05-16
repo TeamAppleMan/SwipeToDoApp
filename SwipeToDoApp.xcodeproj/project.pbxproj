@@ -14,6 +14,7 @@
 		87802036281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87802035281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift */; };
 		87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */; };
 		87ACCF412825F32F00135AE7 /* SelectCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */; };
+		87D916BF2832774200A77BF1 /* CategoryLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D916BE2832774200A77BF1 /* CategoryLists.swift */; };
 		87DC2375281BC69200E473F7 /* SettingWebWithArrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC2374281BC69200E473F7 /* SettingWebWithArrowViewController.swift */; };
 		87E259E8281D4B99006D431F /* Lottie01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E7281D4B99006D431F /* Lottie01ViewController.swift */; };
 		87E259EA281D4BA8006D431F /* Lottie02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */; };
@@ -54,6 +55,7 @@
 		87802035281BBF26006228A9 /* SettingWebWithNotArrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebWithNotArrowViewController.swift; sourceTree = "<group>"; };
 		87ACCF3E2825F32F00135AE7 /* SelectCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		87ACCF3F2825F32F00135AE7 /* SelectCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		87D916BE2832774200A77BF1 /* CategoryLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLists.swift; sourceTree = "<group>"; };
 		87DC2374281BC69200E473F7 /* SettingWebWithArrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWebWithArrowViewController.swift; sourceTree = "<group>"; };
 		87E259E7281D4B99006D431F /* Lottie01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie01ViewController.swift; sourceTree = "<group>"; };
 		87E259E9281D4BA8006D431F /* Lottie02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottie02ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				95D6EBCF280FA91000960B82 /* Task.swift */,
 				95D6EBF92810EAE700960B82 /* CategoryList.swift */,
+				87D916BE2832774200A77BF1 /* CategoryLists.swift */,
 				95979D14281287F000E1457E /* CheckPermission.swift */,
 				95A4990628157A0700B84AC9 /* DataUtils.swift */,
 				95A499082815FD8B00B84AC9 /* DateExtension.swift */,
@@ -345,6 +348,7 @@
 				95979D0928127A4400E1457E /* CategoryListViewController.swift in Sources */,
 				87E259EE281D4BCA006D431F /* Lottie04ViewController.swift in Sources */,
 				95D6EBBE280F976B00960B82 /* SceneDelegate.swift in Sources */,
+				87D916BF2832774200A77BF1 /* CategoryLists.swift in Sources */,
 				95979D122812857F00E1457E /* TemplateCategoryCollectionViewCell.swift in Sources */,
 				873789872827427900DC09DF /* TaskEditViewController.swift in Sources */,
 				95979D0C28127C0E00E1457E /* CategoryTableViewCell.swift in Sources */,

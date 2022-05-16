@@ -6,12 +6,9 @@
 //
 
 import Foundation
-import UIKit
 import RealmSwift
-class CategoryList: Object{
+
+class CategoryList: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var photo: Data? = nil
-}
-class ItemList: Object{
-    let list = List<CategoryList>()
 }
