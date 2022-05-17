@@ -22,7 +22,7 @@ class CardViewCell: CardCell {
 
     func configure(task: Task!) {
         // タスクのカテゴリがnilだったら「未カテゴリ画像」を表示させる
-        if let category = task.category {
+        if let category = task.category, category.image != nil {
             categoryPhotoImageView.image = darkenCardViewCell(image: UIImage(data: category.image)!, level: 0.5)
             categoryLabel.text = category.name
             dateLabel.text = "  \(task.date.year)年\(task.date.month)月\(task.date.day)日"

@@ -34,7 +34,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         categoryButton.layer.borderColor = UIColor.systemGray5.cgColor
         categoryButton.layer.borderWidth = 1.0
         categoryButton.layer.cornerRadius = 8.0
-        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory?.name ?? "未カテゴリ") ", for: .normal)
         categoryButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         if catchTask.isDone == false {
@@ -72,7 +72,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     func changeCategory(category: Category?) {
         selectCategory = category
-        categoryButton.setTitle(" \(selectCategory!.name) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory?.name ?? "未カテゴリ") ", for: .normal)
     }
 
     func configure(task: Task, tasks: Results<Task>, index: Int) {

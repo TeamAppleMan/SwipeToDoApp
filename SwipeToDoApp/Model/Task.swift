@@ -12,7 +12,7 @@ class Task: Object {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var date: Date = Date()
     @objc dynamic var detail: String = ""
-    @objc dynamic var category: Category?
+    @objc dynamic var category: Category? = nil
     @objc dynamic var isRepeatedTodo: Bool = false
     @objc dynamic var isDone: Bool = false
 

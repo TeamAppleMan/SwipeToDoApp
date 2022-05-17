@@ -20,20 +20,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
 
+                    migration.enumerateObjects(ofType: "CategoryList") { old, _ in
+                        let category = migration.create(Category.className())
+                        category["name"] = old?["name"]
+                        category["image"] = old?["photo"]
+                    }
+                    migration.deleteData(forType: "CategoryList")
+
                     migration.enumerateObjects(ofType: Task.className()) { _, new in
                         new!["id"] = NSUUID().uuidString
+                        new!["category"] = Category()
+                        migration.deleteData(forType: "photo")
                     }
 
                     migration.create(CategoryLists.className())
                     migration.enumerateObjects(ofType: CategoryLists.className()) { _, _ in
                     }
 
-                    migration.enumerateObjects(ofType: "CategoryList") { old, _ in
-                        let category = migration.create(Category.className())
-                        category["name"] = old?["name"]
-                        category["photo"] = old?["photo"]
-                    }
-                    migration.deleteData(forType: "CategoryList")
                 }
             }
         )
@@ -47,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstLunch = [firstLunchKey: false]
         userDefaults.register(defaults: firstLunch)
 
-        var categoryList = realm.objects(Category.self)
-        if categoryList.isEmpty {
+        var categories = realm.objects(Category.self)
+        if categories.isEmpty {
             print("書記爆弾")
             let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
             let imageShopping: Data! = (UIImage(named: "仕事"))?.pngData()
@@ -70,16 +73,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // realmのマイグレーション後にデータを入れる処理
-        categoryList = realm.objects(Category.self)
+        categories = realm.objects(Category.self)
         var list: List<Category>!
         list = realm.objects(CategoryLists.self).first!.list
-        print(list!)
-        if list.isEmpty && !categoryList.isEmpty {
-            for i in categoryList {
+
+
+        if list.isEmpty && !categories.isEmpty {
+            for category in categories {
+
+                // バージョン１から２の構造変更で、画面３のセルが増殖するバグの修正
+                if category.image == nil, category.name == "" {
+                    try! realm.write {
+                        realm.delete(category)
+                    }
+                    continue
+                }
+
                 try! realm.write {
-                    list.append(i)
+                    list.append(category)
                 }
             }
+
         }
 
         return true
