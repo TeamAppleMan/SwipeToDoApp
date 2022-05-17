@@ -74,18 +74,28 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        // 未カテゴリセルを追加するために+1している
+        return list.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryID", for: indexPath) as! CategoryTableViewCell
+
+        // 最終行に未カテゴリセルを追加させる
+        if indexPath.row == list.count {
+            cell.categoryImageView?.image = UIImage(named: "ハテナ")!
+            cell.categoryNameLabel.text = "未カテゴリ"
+            //cell.categoryTaskCountLabel.text = String(nullTaskCount.count)
+            return cell
+        }
+
+        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row], false)
         cell.categoryNameLabel.text = list[indexPath.row].name
-        // Data型をUIImageにキャストしている
+        // Data型をUIImageにキャスト
         if let image = list[indexPath.row].image {
             cell.categoryImageView?.image = UIImage(data: image)
         }
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
-        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row], false)
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
