@@ -11,11 +11,11 @@ import RealmSwift
 class CategoryListViewController: UIViewController, SwipeCardViewControllerDelegate{
 
     @IBOutlet var tableView: UITableView!
-    var categoryList: Results<CategoryList>!
+    var categoryList: Results<Category>!
     private var task: Results<Task>!
     private var selectedIndexNumber: Int = 0
     let realm = try! Realm()
-    var list: List<CategoryList>!
+    var list: List<Category>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
             let swipeCardVC = segue.destination as! SwipeCardViewController
 
             let realm = try! Realm()
-            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[selectedIndexNumber].name, false)
+            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[selectedIndexNumber], false)
             swipeCardVC.catchTask = filtersTask
         }
     }
@@ -81,9 +81,11 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryID", for: indexPath) as! CategoryTableViewCell
         cell.categoryNameLabel.text = list[indexPath.row].name
         // Data型をUIImageにキャストしている
-        cell.categoryImageView.image = UIImage(data: list[indexPath.row].photo!)
+        if let image = list[indexPath.row].image {
+            cell.categoryImageView?.image = UIImage(data: image)
+        }
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
-        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row].name,false)
+        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row], false)
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
     }
@@ -122,7 +124,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
 
 extension CategoryListViewController: AddCategoryViewControllerDelegate{
     // AddCategoryViewControllerDelegateによるデリゲートメソッド: 新規カテゴリを追加した時に呼ばれる
-    func catchAddedCategoryData(catchAddedCategoryList: CategoryList) {
+    func catchAddedCategoryData(catchAddedCategoryList: Category) {
         // Realmを使用してカテゴリリストのアプリ内保存を行う
         try! realm.write{
             list.append(catchAddedCategoryList)
@@ -130,4 +132,5 @@ extension CategoryListViewController: AddCategoryViewControllerDelegate{
         // 新しくカテゴリが追加されたので、カテゴリリストの更新を行う
         tableView.reloadData()
     }
+
 }

@@ -24,10 +24,10 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     private var tasks: Results<Task>!
     private var filtersTask: Results<Task>!
-    private var categoryList: Results<CategoryList>!
+    private var categoryList: Results<Category>!
     private var selectedDate: Date!
     private var editGiveTask: Task?
-    private var list: List<CategoryList>!
+    private var list: List<Category>!
     private var index = 0
     let realm = try! Realm()
 
@@ -71,7 +71,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         addTaskTextField.isEnabled = true
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
-        categoryList = realm.objects(CategoryList.self)
+        categoryList = realm.objects(Category.self)
         calendar.reloadData()
         tableView.reloadData()
     }
@@ -236,10 +236,12 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     func addNewDate(detail: String, index: Int) {
         let realm = try! Realm()
-        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": list[index].name, "isRepeated": false, "isDone": false, "photo": list[index].photo!])
+        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": list[index], "isRepeated": false, "isDone": false])
+
         try! realm.write{
             realm.add(newTask)
         }
+
         addTaskTextField.text = ""
         addTaskButton.isEnabled = false
         tableView.reloadData()
@@ -276,7 +278,6 @@ extension CalendarToDoViewController: FSCalendarDelegate, FSCalendarDataSource {
             $0.date == fixdate && $0.isDone == false
         }
 
-
         if filterTasks.isEmpty {
             return 0
         } else {
@@ -298,7 +299,7 @@ extension CalendarToDoViewController: UITableViewDelegate,UITableViewDataSource{
         // HACK: realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングしてtableViewに反映
         let cell = tableView.dequeueReusableCell(withIdentifier: "addedToDoID", for: indexPath) as! addedToDoTableViewCell
         let object = filtersTask[indexPath.row]
-        cell.congifure(detail: object.detail, category: object.category, isDone: object.isDone)
+        cell.congifure(detail: object.detail, categoryName: object.category?.name ?? "未カテゴリ", isDone: object.isDone)
         return cell
     }
 

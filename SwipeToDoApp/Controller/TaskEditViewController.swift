@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class TaskEditViewController: UIViewController, EditCategoryViewControllerDelegate{
+class TaskEditViewController: UIViewController, EditCategoryViewControllerDelegate {
 
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskTextField: UITextField!
@@ -16,13 +16,13 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     @IBOutlet private weak var categoryButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!
     private var getFiltersTask: Results<Task>!
-    private var selectCategory: String!
+    private var selectCategory: Category?
     private var indexNumber: Int!
     private var catchTask: Task!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectCategory = catchTask.category.description
+        selectCategory = catchTask.category
         categoryButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         categoryButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         categoryButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -70,9 +70,9 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         }
     }
 
-    func changeCategory(category: String) {
+    func changeCategory(category: Category?) {
         selectCategory = category
-        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory!.name) ", for: .normal)
     }
 
     func configure(task: Task, tasks: Results<Task>, index: Int) {

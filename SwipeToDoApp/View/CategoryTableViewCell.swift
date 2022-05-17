@@ -9,7 +9,7 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
 
-    @IBOutlet var categoryImageView: UIImageView!
+    @IBOutlet var categoryImageView: UIImageView?
     @IBOutlet var categoryNameLabel: UILabel!
     @IBOutlet var categoryTaskCountLabel: UILabel!
 
@@ -25,8 +25,8 @@ class CategoryTableViewCell: UITableViewCell {
 
     private func setCircleImageView() {
         // ImageViewを円形にする
-        categoryImageView.layer.cornerRadius = categoryImageView.frame.width/2
-        categoryImageView.clipsToBounds = true
+        categoryImageView?.layer.cornerRadius = (categoryImageView?.frame.width ?? CGFloat(200)) / 2
+        categoryImageView?.clipsToBounds = true
     }
     
 }

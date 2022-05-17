@@ -14,12 +14,13 @@ protocol InputCategoryViewControllerDelegate: AnyObject {
 
 class InputCategoryViewController: UIViewController {
 
+    @IBOutlet private var tableView: UITableView!
+
     private var catchTask: String = ""
     private(set) var selectedIndexNumber: Int = 0
-    private var categoryList: Results<CategoryList>!
-    private var list: List<CategoryList>!
+    private var categoryList: Results<Category>!
+    private var list: List<Category>!
 
-    @IBOutlet private var tableView: UITableView!
     weak var delegate: InputCategoryViewControllerDelegate!
     let realm = try! Realm()
 
@@ -46,9 +47,7 @@ extension InputCategoryViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCategoryID", for: indexPath) as! SelectCategoryTableViewCell
-
-        cell.configure(imagePhoto: list[indexPath.row].photo!, name: list[indexPath.row].name)
-        print("name",list[indexPath.row].name)
+        cell.configure(category: list[indexPath.row])
         return cell
     }
 

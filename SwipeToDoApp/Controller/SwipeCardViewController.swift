@@ -22,7 +22,6 @@ class SwipeCardViewController: UIViewController {
 
     private var cardTask: Results<Task>!
     public var catchTask: Results<Task>!
-
     var delegate: SwipeCardViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -86,22 +85,16 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "CardViewID", for: index) as? CardViewCell {
             verticalCardSwiperView.backgroundColor = .clear
-
-            let object = cardTask[index]
-            cardCell.detailTextView.text = object.detail
-            // カテゴリー写真を暗くする
-            cardCell.categoryPhotoImageView.image = cardCell.darkenCardViewCell(image: UIImage(data: object.photo!)!, level: 0.5)
-            cardCell.categoryLabel.text = object.category
-            let catchDate: Date = object.date
-            cardCell.dateLabel.text = "\(catchDate.year)年\(catchDate.month)月\(catchDate.day)日"
+            cardCell.configure(task: cardTask[index])
             return cardCell
         }
         return CardCell()
     }
+
     // スワイプした時に呼ばれるデリゲートメソッド
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
         let realm = try! Realm()
-        try! realm.write{
+        try! realm.write {
             cardTask[index].isDone = true
         }
         HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 0.5)

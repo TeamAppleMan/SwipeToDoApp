@@ -9,10 +9,16 @@ import UIKit
 import RealmSwift
 
 class Task: Object {
+    @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var date: Date = Date()
     @objc dynamic var detail: String = ""
-    @objc dynamic var category: String = ""
+    @objc dynamic var category: Category?
     @objc dynamic var isRepeatedTodo: Bool = false
     @objc dynamic var isDone: Bool = false
-    @objc dynamic var photo: Data? = nil
+
+    // idをプライマリキーに設定
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+
 }

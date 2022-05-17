@@ -19,9 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
+
+                    migration.enumerateObjects(ofType: Task.className()) { _, new in
+                        new!["id"] = NSUUID().uuidString
+                    }
+
                     migration.create(CategoryLists.className())
                     migration.enumerateObjects(ofType: CategoryLists.className()) { _, _ in
                     }
+
+                    migration.enumerateObjects(ofType: "CategoryList") { old, _ in
+                        let category = migration.create(Category.className())
+                        category["name"] = old?["name"]
+                        category["photo"] = old?["photo"]
+                    }
+                    migration.deleteData(forType: "CategoryList")
                 }
             }
         )
@@ -35,15 +47,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firstLunch = [firstLunchKey: false]
         userDefaults.register(defaults: firstLunch)
 
-        var categoryList = realm.objects(CategoryList.self)
+        var categoryList = realm.objects(Category.self)
         if categoryList.isEmpty {
             print("書記爆弾")
             let imageProgramming: Data! = (UIImage(named: "運動"))?.pngData()
             let imageShopping: Data! = (UIImage(named: "仕事"))?.pngData()
             let imageMtg: Data! = (UIImage(named: "家事"))?.pngData()
-            let programming: CategoryList! = CategoryList.init(value: ["name": "運動","photo": imageProgramming!])
-            let shopping: CategoryList! = CategoryList.init(value: ["name": "仕事","photo": imageShopping!])
-            let mtg: CategoryList! = CategoryList.init(value: ["name": "家事","photo": imageMtg!])
+            let programming: Category! = Category.init(value: ["name": "運動","image": imageProgramming!])
+            let shopping: Category! = Category.init(value: ["name": "仕事","image": imageShopping!])
+            let mtg: Category! = Category.init(value: ["name": "家事","image": imageMtg!])
             do {
                 try realm.write{
                     let list = CategoryLists()
@@ -58,8 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // realmのマイグレーション後にデータを入れる処理
-        categoryList = realm.objects(CategoryList.self)
-        var list: List<CategoryList>!
+        categoryList = realm.objects(Category.self)
+        var list: List<Category>!
         list = realm.objects(CategoryLists.self).first!.list
         print(list!)
         if list.isEmpty && !categoryList.isEmpty {
