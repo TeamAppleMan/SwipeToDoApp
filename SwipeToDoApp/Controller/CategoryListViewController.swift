@@ -100,6 +100,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
+
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -120,6 +121,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
             list.remove(at: sourceIndexPath.row)
             list.insert(listItem, at: destinationIndexPath.row)
         }
+
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -132,6 +134,13 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
         hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
         hidesBottomBarWhenPushed = false
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if indexPath.row == list.count {
+                return .none
+            }
+            return .delete
     }
 
 }
