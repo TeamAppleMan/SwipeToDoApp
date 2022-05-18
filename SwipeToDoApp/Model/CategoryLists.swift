@@ -9,5 +9,5 @@ import Foundation
 import RealmSwift
 
 class CategoryLists: Object {
-    let list = List<CategoryList>()
+    let list = List<Category>()
 }

@@ -14,9 +14,9 @@ class addedToDoTableViewCell: UITableViewCell {
     @IBOutlet private weak var checkImage: UIImageView!
     @IBOutlet private weak var notCheckImage: UIImageView!
 
-    func congifure(detail: String, category: String, isDone: Bool) {
+    func congifure(detail: String, categoryName: String, isDone: Bool) {
         detailLabel.text = detail
-        categoryLabel.text = category
+        categoryLabel.text = categoryName
         checkImage.isHidden = !isDone
         notCheckImage.isHidden = isDone
     }

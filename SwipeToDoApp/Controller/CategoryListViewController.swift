@@ -11,11 +11,12 @@ import RealmSwift
 class CategoryListViewController: UIViewController, SwipeCardViewControllerDelegate{
 
     @IBOutlet var tableView: UITableView!
-    var categoryList: Results<CategoryList>!
+    var categoryList: Results<Category>!
     private var task: Results<Task>!
     private var selectedIndexNumber: Int = 0
     let realm = try! Realm()
-    var list: List<CategoryList>!
+    var list: List<Category>!
+    var category: Category? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +47,9 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 
         if segue.identifier == "SwipeCardSegue" {
             let swipeCardVC = segue.destination as! SwipeCardViewController
-
-            let realm = try! Realm()
-            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[selectedIndexNumber].name, false)
-            swipeCardVC.catchTask = filtersTask
+            swipeCardVC.configureFromCategoryVC(swipeCategory: category)
         }
+
     }
 
     func catchDidSwipeCardData(catchTask: Results<Task>) {
@@ -74,18 +73,32 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        // 未カテゴリセルを追加するために+1している
+        return list.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryID", for: indexPath) as! CategoryTableViewCell
+
+        // 最終行に未カテゴリセルを追加させる
+        if indexPath.row == list.count {
+            let filterNillTask = realm.objects(Task.self).filter("category==nil && isDone==%@", false)
+            cell.categoryImageView?.image = UIImage(named: "ハテナ")!
+            cell.categoryNameLabel.text = "未カテゴリ"
+            cell.categoryTaskCountLabel.text = String(filterNillTask.count)
+            return cell
+        }
+
+        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row], false)
         cell.categoryNameLabel.text = list[indexPath.row].name
-        // Data型をUIImageにキャストしている
-        cell.categoryImageView.image = UIImage(data: list[indexPath.row].photo!)
+        // Data型をUIImageにキャスト
+        if let image = list[indexPath.row].image {
+            cell.categoryImageView?.image = UIImage(data: image)
+        }
         // isDoneがfalseのやつとカテゴリ名でフィルタリングをかけて、個数を出す
-        let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[indexPath.row].name,false)
         cell.categoryTaskCountLabel.text = String(filtersTask.count)
         return cell
+
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -96,6 +109,8 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        // 未カテゴリに表示されている数を増やす
+        tableView.reloadRows(at: [IndexPath(row: list.count, section: 0)], with: .automatic)
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -104,6 +119,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
             list.remove(at: sourceIndexPath.row)
             list.insert(listItem, at: destinationIndexPath.row)
         }
+
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -113,16 +129,26 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
     // セルをタップした時にスワイプ画面に画面遷移する
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
+        if indexPath.row < list.count {
+            category = list[indexPath.row]
+        }
         hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
         hidesBottomBarWhenPushed = false
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if indexPath.row == list.count {
+                return .none
+            }
+            return .delete
     }
 
 }
 
 extension CategoryListViewController: AddCategoryViewControllerDelegate{
     // AddCategoryViewControllerDelegateによるデリゲートメソッド: 新規カテゴリを追加した時に呼ばれる
-    func catchAddedCategoryData(catchAddedCategoryList: CategoryList) {
+    func catchAddedCategoryData(catchAddedCategoryList: Category) {
         // Realmを使用してカテゴリリストのアプリ内保存を行う
         try! realm.write{
             list.append(catchAddedCategoryList)
@@ -130,4 +156,5 @@ extension CategoryListViewController: AddCategoryViewControllerDelegate{
         // 新しくカテゴリが追加されたので、カテゴリリストの更新を行う
         tableView.reloadData()
     }
+
 }

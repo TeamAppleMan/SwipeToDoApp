@@ -41,7 +41,7 @@
 		95D6EBF5280FF19500960B82 /* addedToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */; };
 		95D6EBF6280FF19500960B82 /* addedToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */; };
 		95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */; };
-		95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF92810EAE700960B82 /* CategoryList.swift */; };
+		95D6EBFA2810EAE700960B82 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6EBF92810EAE700960B82 /* Category.swift */; };
 		95D7E9C62822449A00AC8FDB /* CardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D7E9C42822449A00AC8FDB /* CardViewCell.swift */; };
 		95D7E9C72822449A00AC8FDB /* CardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D7E9C52822449A00AC8FDB /* CardViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -84,7 +84,7 @@
 		95D6EBF3280FF19500960B82 /* addedToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedToDoTableViewCell.swift; sourceTree = "<group>"; };
 		95D6EBF4280FF19500960B82 /* addedToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = addedToDoTableViewCell.xib; sourceTree = "<group>"; };
 		95D6EBF7280FF50A00960B82 /* InputCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCategoryViewController.swift; sourceTree = "<group>"; };
-		95D6EBF92810EAE700960B82 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
+		95D6EBF92810EAE700960B82 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		95D7E9C42822449A00AC8FDB /* CardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewCell.swift; sourceTree = "<group>"; };
 		95D7E9C52822449A00AC8FDB /* CardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewCell.xib; sourceTree = "<group>"; };
 		A1E1B9EA56197EC8A09A4A01 /* Pods-SwipeToDoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeToDoApp.release.xcconfig"; path = "Target Support Files/Pods-SwipeToDoApp/Pods-SwipeToDoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				95D6EBCF280FA91000960B82 /* Task.swift */,
-				95D6EBF92810EAE700960B82 /* CategoryList.swift */,
+				95D6EBF92810EAE700960B82 /* Category.swift */,
 				87D916BE2832774200A77BF1 /* CategoryLists.swift */,
 				95979D14281287F000E1457E /* CheckPermission.swift */,
 				95A4990628157A0700B84AC9 /* DataUtils.swift */,
@@ -328,7 +328,7 @@
 				95A4990B2816314D00B84AC9 /* MotivationViewController.swift in Sources */,
 				95A29BB6281123CC0025C9A1 /* SwipeCardViewController.swift in Sources */,
 				95D6EBF8280FF50A00960B82 /* InputCategoryViewController.swift in Sources */,
-				95D6EBFA2810EAE700960B82 /* CategoryList.swift in Sources */,
+				95D6EBFA2810EAE700960B82 /* Category.swift in Sources */,
 				87E259EC281D4BBD006D431F /* Lottie03ViewController.swift in Sources */,
 				95979D15281287F000E1457E /* CheckPermission.swift in Sources */,
 				87ACCF402825F32F00135AE7 /* SelectCategoryTableViewCell.swift in Sources */,
@@ -500,7 +500,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
@@ -534,7 +534,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7X9S244452;
+				DEVELOPMENT_TEAM = 558ZJSQN67;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";

@@ -10,35 +10,52 @@ import VerticalCardSwiper
 
 class CardViewCell: CardCell {
 
+    @IBOutlet private var categoryPhotoImageView: UIImageView!
+    @IBOutlet private var categoryLabel: UILabel!
+    @IBOutlet private var detailTextView: UITextView!
+    @IBOutlet private var dateLabel: UILabel!
 
-    @IBOutlet var categoryPhotoImageView: UIImageView!
-    @IBOutlet var categoryLabel: UILabel!
-    @IBOutlet var detailTextView: UITextView!
-    @IBOutlet var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // 写真を角丸に設定
         categoryPhotoImageView.layer.cornerRadius = 12
+    }
+
+    func configure(task: Task!) {
+        // タスクのカテゴリがnilだったら「未カテゴリ画像」を表示させる
+        if let category = task.category, category.image != nil {
+            categoryPhotoImageView.image = darkenCardViewCell(image: UIImage(data: category.image)!, level: 0.5)
+            categoryLabel.text = category.name
+            dateLabel.text = "  \(task.date.year)年\(task.date.month)月\(task.date.day)日"
+            detailTextView.text = task.detail
+        } else {
+            categoryPhotoImageView.image = darkenCardViewCell(image: UIImage(named: "ハテナ")!, level: 0.5)
+            categoryLabel.text = "未カテゴリ"
+            dateLabel.text = "  \(task.date.year)年\(task.date.month)月\(task.date.day)日"
+            detailTextView.text = task.detail
+        }
+
     }
 
     // ライブラリのコードからそのまま拝借
     override func prepareForReuse() {
         super.prepareForReuse()
     }
+
     // ライブラリのコードからそのまま拝借
     override func layoutSubviews() {
         self.layer.cornerRadius = 12
     }
 
     // ライブラリのコードからそのまま拝借
-    public func setRandomBackgroundColor() {
+    private func setRandomBackgroundColor() {
         let randomRed: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let randomGreen: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let randomBlue: CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         self.backgroundColor = UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
+
     // 背景色を暗くフィルターをかける
-    public func darkenCardViewCell(image:UIImage, level:CGFloat) -> UIImage {
+    private func darkenCardViewCell(image: UIImage, level: CGFloat) -> UIImage {
         // 一時的な暗くするようの黒レイヤ
         let frame = CGRect(origin:CGPoint(x:0,y:0),size:image.size)
         let tempView = UIView(frame:frame)

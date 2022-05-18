@@ -12,7 +12,7 @@ import Charts
 
 class MotivationViewController: UIViewController {
 
-    private var categoryLists: Results<CategoryList>!
+    private var categoryLists: Results<Category>!
     private var tasks: Results<Task>!
     private var presentDate: Date!
     private var notAchieveData: [Data] = []
@@ -88,7 +88,7 @@ class MotivationViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
         let realm = try! Realm()
         tasks = realm.objects(Task.self)
-        categoryLists = realm.objects(CategoryList.self)
+        categoryLists = realm.objects(Category.self)
 
         // 今日を取得して、データに格納
         let calPosition = Calendar.current

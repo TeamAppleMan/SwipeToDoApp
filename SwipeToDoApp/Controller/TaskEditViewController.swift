@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class TaskEditViewController: UIViewController, EditCategoryViewControllerDelegate{
+class TaskEditViewController: UIViewController, EditCategoryViewControllerDelegate {
 
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var taskTextField: UITextField!
@@ -16,13 +16,13 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     @IBOutlet private weak var categoryButton: UIButton!
     @IBOutlet private weak var deleteButton: UIButton!
     private var getFiltersTask: Results<Task>!
-    private var selectCategory: String!
+    private var selectCategory: Category?
     private var indexNumber: Int!
     private var catchTask: Task!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectCategory = catchTask.category.description
+        selectCategory = catchTask.category
         categoryButton.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         categoryButton.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         categoryButton.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
@@ -34,7 +34,7 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         categoryButton.layer.borderColor = UIColor.systemGray5.cgColor
         categoryButton.layer.borderWidth = 1.0
         categoryButton.layer.cornerRadius = 8.0
-        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory?.name ?? "未カテゴリ") ", for: .normal)
         categoryButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         if catchTask.isDone == false {
@@ -70,9 +70,9 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         }
     }
 
-    func changeCategory(category: String) {
+    func changeCategory(category: Category?) {
         selectCategory = category
-        categoryButton.setTitle(" \(selectCategory!) ", for: .normal)
+        categoryButton.setTitle(" \(selectCategory?.name ?? "未カテゴリ") ", for: .normal)
     }
 
     func configure(task: Task, tasks: Results<Task>, index: Int) {
@@ -98,24 +98,34 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     func deleteAleart() {
+
         let alert = UIAlertController(title: "注意", message: "データを削除してもよろしいですか", preferredStyle: .alert)
+
         let ok = UIAlertAction(title: "削除", style: .default) { [self] (action) in
             let realm = try! Realm()
+
             try! realm.write{
                 realm.delete(self.catchTask)
             }
-            dismiss(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
+
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
         }
+
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
 
     func saveAleart() {
+
         let alert = UIAlertController(title: "保存", message: "データを上書きしてもよろしいですか", preferredStyle: .alert)
+
         let ok = UIAlertAction(title: "上書き", style: .default) { [self] (action) in
+
             let realm = try! Realm()
             let target = getFiltersTask[indexNumber]
             let text = taskTextField.text ?? ""
@@ -137,8 +147,12 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
                 print("画面１のタスク編集画面でRealmエラー")
             }
 
-            dismiss(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.navigationController?.popViewController(animated: true)
+            }
+
         }
+
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel) { (acrion) in
         }
 

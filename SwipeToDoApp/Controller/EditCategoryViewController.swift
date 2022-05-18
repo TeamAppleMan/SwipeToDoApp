@@ -9,18 +9,18 @@ import UIKit
 import RealmSwift
 
 protocol EditCategoryViewControllerDelegate: AnyObject {
-    func changeCategory(category: String)
+    func changeCategory(category: Category?)
 }
 
 class EditCategoryViewController: UIViewController {
 
-    private var categoryList: Results<CategoryList>!
-    private var list: List<CategoryList>!
-
-    private(set) var selectCategory: String?
     @IBOutlet private var tableView: UITableView!
+
+    private let realm = try! Realm()
+    private var categoryList: Results<Category>!
+    private var list: List<Category>!
+    private(set) var selectCategory: Category?
     weak var delegate: EditCategoryViewControllerDelegate!
-    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +45,13 @@ extension EditCategoryViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCategoryID", for: indexPath) as! SelectCategoryTableViewCell
-        cell.configure(imagePhoto: list[indexPath.row].photo!, name: list[indexPath.row].name)
+        cell.configure(category: list[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectCategory = list[indexPath.row].name
-        delegate.changeCategory(category: selectCategory!)
+        selectCategory = list[indexPath.row]
+        delegate.changeCategory(category: selectCategory)
         dismiss(animated: true, completion: nil)
     }
 
