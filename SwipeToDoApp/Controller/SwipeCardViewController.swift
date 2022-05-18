@@ -19,9 +19,7 @@ class SwipeCardViewController: UIViewController {
 
     @IBOutlet var cardSwiper: VerticalCardSwiper!
     @IBOutlet var pastelView: PastelView!
-
-    private var cardTask: Results<Task>!
-    public var catchTask: Results<Task>!
+    private var swipeTask: Results<Task>!
     var delegate: SwipeCardViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -43,11 +41,24 @@ class SwipeCardViewController: UIViewController {
             object: nil)
     }
 
+    func configureFromCategoryVC(swipeCategory: Category?) {
+        let realm = try! Realm()
+
+        if let swipeCategory = swipeCategory {
+            swipeTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", swipeCategory, false)
+        } else {
+            swipeTask = realm.objects(Task.self).filter("category == nil && isDone==%@", false)
+        }
+
+    }
+
+    func configureFromCalendarVC(swipeTask: Results<Task>) {
+        self.swipeTask = swipeTask
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        // HACK: 正直cardTaskに格納する意味はないです。。笑
-        cardTask = catchTask
     }
     //アプリがフォアグラウンド時(ホーム画面からアプリをタップした時でもBackgroundColorをパステルカラーにする
     @objc func viewWillEnterForeground(_ notification: Notification?) {
@@ -79,13 +90,13 @@ class SwipeCardViewController: UIViewController {
 extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiperDatasource{
     // カードの個数を返すデリゲートメソッド
     func numberOfCards(verticalCardSwiperView: VerticalCardSwiperView) -> Int {
-        cardTask.count
+        swipeTask.count
     }
 
     func cardForItemAt(verticalCardSwiperView: VerticalCardSwiperView, cardForItemAt index: Int) -> CardCell {
         if let cardCell = verticalCardSwiperView.dequeueReusableCell(withReuseIdentifier: "CardViewID", for: index) as? CardViewCell {
             verticalCardSwiperView.backgroundColor = .clear
-            cardCell.configure(task: cardTask[index])
+            cardCell.configure(task: swipeTask[index])
             return cardCell
         }
         return CardCell()
@@ -95,7 +106,7 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
     func willSwipeCardAway(card: CardCell, index: Int, swipeDirection: SwipeDirection) {
         let realm = try! Realm()
         try! realm.write {
-            cardTask[index].isDone = true
+            swipeTask[index].isDone = true
         }
         HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 0.5)
     }

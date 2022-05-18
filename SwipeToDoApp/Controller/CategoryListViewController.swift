@@ -16,6 +16,7 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
     private var selectedIndexNumber: Int = 0
     let realm = try! Realm()
     var list: List<Category>!
+    var category: Category? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +47,9 @@ class CategoryListViewController: UIViewController, SwipeCardViewControllerDeleg
 
         if segue.identifier == "SwipeCardSegue" {
             let swipeCardVC = segue.destination as! SwipeCardViewController
-
-            let realm = try! Realm()
-            let filtersTask = realm.objects(Task.self).filter("category==%@ && isDone==%@", list[selectedIndexNumber], false)
-            swipeCardVC.catchTask = filtersTask
+            swipeCardVC.configureFromCategoryVC(swipeCategory: category)
         }
+
     }
 
     func catchDidSwipeCardData(catchTask: Results<Task>) {
@@ -83,8 +82,7 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
 
         // 最終行に未カテゴリセルを追加させる
         if indexPath.row == list.count {
-            let allTask = realm.objects(Task.self)
-            let filterNillTask = allTask.filter { $0.category == nil }
+            let filterNillTask = realm.objects(Task.self).filter("category==nil && isDone==%@", false)
             cell.categoryImageView?.image = UIImage(named: "ハテナ")!
             cell.categoryNameLabel.text = "未カテゴリ"
             cell.categoryTaskCountLabel.text = String(filterNillTask.count)
@@ -131,6 +129,9 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
     // セルをタップした時にスワイプ画面に画面遷移する
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexNumber = indexPath.row
+        if indexPath.row < list.count {
+            category = list[indexPath.row]
+        }
         hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)
         hidesBottomBarWhenPushed = false

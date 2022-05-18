@@ -113,7 +113,7 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
             // realmで保存されたtaskの中から、(年、月、日付情報が選択された&&isDoneがfalse)であるtaskをフィルタリングして、swipeCardVCに渡す
             let realm = try! Realm()
             let filtersTask = realm.objects(Task.self).filter("date==%@ && isDone==%@", getCalendarDate(), false)
-            swipeCardVC.catchTask = filtersTask
+            swipeCardVC.configureFromCalendarVC(swipeTask: filtersTask)
         }
 
         if segue.identifier == "NavVCSegue" {
