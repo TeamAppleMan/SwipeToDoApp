@@ -83,9 +83,11 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
 
         // 最終行に未カテゴリセルを追加させる
         if indexPath.row == list.count {
+            let allTask = realm.objects(Task.self)
+            let filterNillTask = allTask.filter { $0.category == nil }
             cell.categoryImageView?.image = UIImage(named: "ハテナ")!
             cell.categoryNameLabel.text = "未カテゴリ"
-            //cell.categoryTaskCountLabel.text = String(nullTaskCount.count)
+            cell.categoryTaskCountLabel.text = String(filterNillTask.count)
             return cell
         }
 
@@ -108,6 +110,8 @@ extension CategoryListViewController: UITableViewDelegate,UITableViewDataSource 
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+        // 未カテゴリに表示されている数を増やす
+        tableView.reloadRows(at: [IndexPath(row: list.count, section: 0)], with: .automatic)
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

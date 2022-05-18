@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         category["image"] = old?["photo"]
                     }
                     migration.deleteData(forType: "CategoryList")
-
-                    migration.enumerateObjects(ofType: Task.className()) { _, new in
+        
+                    migration.enumerateObjects(ofType: Task.className()) { old, new in
                         new!["id"] = NSUUID().uuidString
                         new!["category"] = Category()
                         migration.deleteData(forType: "photo")
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var list: List<Category>!
         list = realm.objects(CategoryLists.self).first!.list
 
-
+        // もしRealmの構造変更後、初めてのアップデータとだったら...
         if list.isEmpty && !categories.isEmpty {
             for category in categories {
 
