@@ -80,12 +80,20 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         return 2
     }
 
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return "カテゴリ一覧"
-//        }
-//        return "未分類"
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "カテゴリ一覧"
+        }
+        return "未分類"
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 50
+        } else {
+            return 30
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -184,6 +192,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
             }
             return .none
     }
+
 
 }
 

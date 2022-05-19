@@ -306,7 +306,7 @@
             </objects>
             <point key="canvasLocation" x="2332" y="-292"/>
         </scene>
-        <!--カテゴリ一覧-->
+        <!--カテゴリ-->
         <scene sceneID="bQL-7M-pOV">
             <objects>
                 <viewController id="CLw-QW-3dC" customClass="CategoryListViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -314,12 +314,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jld-Zf-T13">
-                                <rect key="frame" x="0.0" y="88" width="375" height="667"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="20" estimatedSectionHeaderHeight="-1" sectionFooterHeight="20" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jld-Zf-T13">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Jld-Zf-T13" secondAttribute="height" multiplier="375:667" id="FhL-mS-PCa"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="k96-EP-ejv">
                                         <rect key="frame" x="0.0" y="49" width="375" height="43.666667938232422"/>
@@ -344,17 +341,13 @@
                         <viewLayoutGuide key="safeArea" id="I6f-zE-IOv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Jld-Zf-T13" firstAttribute="leading" secondItem="I6f-zE-IOv" secondAttribute="leading" id="4Lg-a3-hdu"/>
-                            <constraint firstAttribute="bottom" secondItem="Jld-Zf-T13" secondAttribute="bottom" constant="57" id="6Rm-qt-mEH"/>
                             <constraint firstItem="Jld-Zf-T13" firstAttribute="top" secondItem="I6f-zE-IOv" secondAttribute="top" id="9dp-yB-MXB"/>
-                            <constraint firstItem="Jld-Zf-T13" firstAttribute="top" secondItem="I6f-zE-IOv" secondAttribute="top" id="Fgd-gU-3Mb"/>
                             <constraint firstItem="Jld-Zf-T13" firstAttribute="leading" secondItem="I6f-zE-IOv" secondAttribute="leading" id="K65-Sc-nv0"/>
-                            <constraint firstAttribute="bottom" secondItem="Jld-Zf-T13" secondAttribute="bottom" constant="57" id="MLi-Qt-Vjb"/>
                             <constraint firstItem="Jld-Zf-T13" firstAttribute="trailing" secondItem="I6f-zE-IOv" secondAttribute="trailing" id="N6T-9s-8DM"/>
-                            <constraint firstItem="Jld-Zf-T13" firstAttribute="trailing" secondItem="I6f-zE-IOv" secondAttribute="trailing" id="Yfk-zj-qKP"/>
+                            <constraint firstItem="I6f-zE-IOv" firstAttribute="bottom" secondItem="Jld-Zf-T13" secondAttribute="bottom" id="z7u-fo-TLO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="カテゴリ一覧" id="sWk-gb-e0X">
+                    <navigationItem key="navigationItem" title="カテゴリ" id="sWk-gb-e0X">
                         <barButtonItem key="leftBarButtonItem" image="gearshape" catalog="system" id="jZa-iy-Aep">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -385,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1B7-dO-kR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="1985"/>
+            <point key="canvasLocation" x="56.799999999999997" y="1984.729064039409"/>
         </scene>
         <!--Add Category View Controller-->
         <scene sceneID="teA-eT-nCQ">
@@ -1359,10 +1352,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="TGH-vN-WZM">
-                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="43.333332061767578"/>
+                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TGH-vN-WZM" id="DM3-lr-1n5">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoH-pt-s8P">
@@ -1373,7 +1366,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FnR-sO-UVM">
-                                                    <rect key="frame" x="305.66666666666669" y="10.999999999999998" width="21.333333333333314" height="21.333333333333329"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
