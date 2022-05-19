@@ -20,6 +20,7 @@ class MotivationViewController: UIViewController {
 
     @IBOutlet private weak var topView: UIView!
     @IBOutlet private weak var centerView: UIView!
+    @IBOutlet private weak var buttomView: UIView!
 
     @IBOutlet private weak var beforeMonthButton: UIBarButtonItem!
     @IBOutlet private weak var afterMonthButton: UIBarButtonItem!
@@ -28,8 +29,11 @@ class MotivationViewController: UIViewController {
     // 赤・青・緑のトップバーのLabel
     @IBOutlet private weak var taskCountTopBarLabel: UILabel!
     @IBOutlet private weak var taskRatioTopBarLabel: UILabel!
+    @IBOutlet private weak var categoryRatioTopBarLabel: UILabel!
+
     @IBOutlet private weak var taskCountSubBarLabel: UILabel!
     @IBOutlet private weak var taskRatioSubBarLabel: UILabel!
+    @IBOutlet private weak var categoryRatioSubBarLabel: UILabel!
 
     @IBOutlet private weak var endTaskLabel: UILabel!
     @IBOutlet private weak var inputTaskLabel: UILabel!
@@ -46,18 +50,24 @@ class MotivationViewController: UIViewController {
 
     @IBOutlet private weak var taskCountOfMonthLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfMonthPieChartView: PieChartView!
+    @IBOutlet private weak var categoryRatioOfMonthPieChartView: PieChartView!
     @IBOutlet private weak var taskCountOfAllLineChartView: LineChartView!
     @IBOutlet private weak var taskRatioOfAllPieChartView: PieChartView!
+    @IBOutlet weak var categoryRatioOfAllPieChartView: PieChartView!
 
     private var taskCountOfMonthLineDataSet: LineChartDataSet!
     private var taskRatioOfMonthPieDataSet: PieChartDataSet!
+    private var categoryRatioOfMonthPieDataSet: PieChartDataSet!
     private var taskCountOfAllLineDataSet: LineChartDataSet!
     private var taskRatioOfMAllPieDataSet: PieChartDataSet!
+    private var categoryRatioOfAllPieDataSet: PieChartDataSet!
 
     private var taskCountOfMonthChartData: [Double] = []
     private var taskRatioOfMonthPieData: [PieChartDataEntry] = []
+    private var categoryRatioOfMonthPieData: [PieChartDataEntry] = []
     private var taskCountOfAllChartData: [Double] = []
     private var taskRatioOfAllPieData: [PieChartDataEntry] = []
+    private var categoryRatioOfAllPieData: [PieChartDataEntry] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +82,11 @@ class MotivationViewController: UIViewController {
         centerView.layer.shadowColor = UIColor.black.cgColor
         centerView.layer.shadowOpacity = 0.4
         centerView.layer.shadowRadius = 3
+        buttomView.layer.cornerRadius = 12
+        buttomView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        buttomView.layer.shadowColor = UIColor.black.cgColor
+        buttomView.layer.shadowOpacity = 0.4
+        buttomView.layer.shadowRadius = 3
 
         // 赤・青・緑部分を角丸にする
         taskCountTopBarLabel.layer.cornerRadius = 12
@@ -81,6 +96,10 @@ class MotivationViewController: UIViewController {
         taskRatioTopBarLabel.layer.cornerRadius = 12
         taskRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         taskRatioTopBarLabel.clipsToBounds = true
+
+        categoryRatioTopBarLabel.layer.cornerRadius = 12
+        categoryRatioTopBarLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        categoryRatioTopBarLabel.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -491,19 +510,23 @@ class MotivationViewController: UIViewController {
             beforeMonthButton.isEnabled = true
             afterMonthButton.isEnabled = true
             self.navigationItem.title = "\(presentDate.year)年\(presentDate.month)月"
-            taskRatioOfMonthPieChartView.isHidden = false
             taskCountOfMonthLineChartView.isHidden = false
-            taskRatioOfAllPieChartView.isHidden = true
+            taskRatioOfMonthPieChartView.isHidden = false
+            categoryRatioOfMonthPieChartView.isHidden = false
             taskCountOfAllLineChartView.isHidden = true
+            taskRatioOfAllPieChartView.isHidden = true
+            categoryRatioOfAllPieChartView.isHidden = true
             calculateMonth()
         } else {
             beforeMonthButton.isEnabled = false
             afterMonthButton.isEnabled = false
             self.navigationItem.title = "総合"
-            taskRatioOfMonthPieChartView.isHidden = true
             taskCountOfMonthLineChartView.isHidden = true
-            taskRatioOfAllPieChartView.isHidden = false
+            taskRatioOfMonthPieChartView.isHidden = true
+            categoryRatioOfMonthPieChartView.isHidden = true
             taskCountOfAllLineChartView.isHidden = false
+            taskRatioOfAllPieChartView.isHidden = false
+            categoryRatioOfAllPieChartView.isHidden = false
             calculateAll()
         }
     }
