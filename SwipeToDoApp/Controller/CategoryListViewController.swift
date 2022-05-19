@@ -87,6 +87,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         return "未分類"
     }
 
+    // Section間の隙間をコードで修正
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 50
