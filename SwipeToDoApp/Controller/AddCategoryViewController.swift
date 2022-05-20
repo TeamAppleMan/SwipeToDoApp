@@ -93,9 +93,9 @@ class AddCategoryViewController: UIViewController {
         let alertController = UIAlertController(title: "オリジナルカテゴリの作成", message: "カテゴリ名を入力してください", preferredStyle: .alert)
         // OKが押されたら写真モードに遷移
         let okAction = UIAlertAction(title: "追加", style: .default) { (ok) in
-            if let inputCategoryName = alertController.textFields?[0].text{
+            if let inputCategoryName = alertController.textFields?[0].text {
                 // 入力されたカテゴリ名が空の場合
-                if inputCategoryName == ""{
+                if inputCategoryName == "" {
                     let emptyCategoryNameAlertController = UIAlertController(title: "カテゴリ名が空です", message: "カテゴリ名を入力してください", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
                         self.dismiss(animated: true, completion: nil)
@@ -108,9 +108,11 @@ class AddCategoryViewController: UIViewController {
                 let categoryDuplicationAlertController = UIAlertController(title: "カテゴリ名が重複しています", message: "別のカテゴリ名を入力してください", preferredStyle: .alert)
                 let realm = try! Realm()
                 let categoryNameFilters = realm.objects(Category.self)
+                // textFieldに入力された前後の空白を消す
+                let trimmedText = inputCategoryName.trimmingCharacters(in: .whitespacesAndNewlines)
                 for filter in categoryNameFilters {
                     // 入力したカテゴリ名とRealmに入っているCategoryListのnameと被っていた時
-                    if filter.name == inputCategoryName {
+                    if filter.name == trimmedText {
                         // カテゴリ重複アラートの表示
                         let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
                             self.dismiss(animated: true, completion: nil)
@@ -121,7 +123,7 @@ class AddCategoryViewController: UIViewController {
                         return
                     }
                 }
-                self.createdCategoryName = inputCategoryName
+                self.createdCategoryName = trimmedText
             }
             // 写真画面に遷移
             let sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -142,7 +144,6 @@ class AddCategoryViewController: UIViewController {
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
-
 
 }
 
