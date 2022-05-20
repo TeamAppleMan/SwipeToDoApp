@@ -124,7 +124,10 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
             guard let sheet = nav.sheetPresentationController  else { return }
             let inputCategoryVC = nav.topViewController as! InputCategoryViewController
             inputCategoryVC.delegate = self
-            inputCategoryVC.configure(task: addTaskTextField.text ?? "")
+
+            let text = addTaskTextField.text ?? ""
+            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            inputCategoryVC.configure(task: trimmedText)
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作不可能にする
             sheet.largestUndimmedDetentIdentifier = .large
@@ -171,7 +174,9 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
 
     // textFieldに文字が入力されていればボタンを表示する
     @IBAction func changedTextField(_ sender: Any) {
-        if addTaskTextField.text == "" {
+        let text = addTaskTextField.text ?? ""
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedText.isEmpty {
             addTaskButton.isEnabled = false
         } else {
             addTaskButton.isEnabled = true
@@ -234,9 +239,9 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
         calendar.selectedDate!.added(year: 0, month: 0, day: 1, hour: 0, minute: 0, second: 0)
     }
 
-    func addNewDate(detail: String, index: Int) {
+    func addNewDate(detail: String, category: Category?) {
         let realm = try! Realm()
-        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": list[index], "isRepeated": false, "isDone": false])
+        let newTask = Task.init(value: ["date": selectedDate!, "detail": detail, "category": category ?? nil, "isRepeated": false, "isDone": false])
 
         try! realm.write{
             realm.add(newTask)

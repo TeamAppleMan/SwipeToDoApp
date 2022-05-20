@@ -168,7 +168,6 @@ class MotivationViewController: UIViewController {
     }
 
     private func calculateMonth() {
-        let realm = try! Realm()
         var toMonthTasks:[Task] = []
         taskCountOfMonthChartData = []
         taskRatioOfMonthPieData = []
@@ -210,9 +209,8 @@ class MotivationViewController: UIViewController {
             var count: Double = 0
         }
         var categoryWithCounts: [CategoryWithCount] = []
-        let categories = realm.objects(CategoryLists.self).first?.list
         var allCounZeroJadge = 0
-        if let categories = categories {
+        if let categories = categoryLists {
             for category in categories {
                 let fileterTasks = toMonthTasks.filter {
                     $0.category == category && $0.isDone == true
@@ -257,7 +255,6 @@ class MotivationViewController: UIViewController {
     }
 
     func calculateAll() {
-        let realm = try! Realm()
         var allDateList: [Date] = []
         var endTaskcount = 0.0
         taskCountOfAllChartData = []
@@ -314,9 +311,8 @@ class MotivationViewController: UIViewController {
             var count: Double = 0
         }
         var categoryWithCounts: [CategoryWithCount] = []
-        let categories = realm.objects(CategoryLists.self).first?.list
         var allCounZeroJadge = 0
-        if let categories = categories {
+        if let categories = categoryLists {
             for category in categories {
                 let fileterTasks = tasks.filter {
                     $0.category == category && $0.isDone == true
@@ -561,7 +557,7 @@ class MotivationViewController: UIViewController {
         // Y軸(leftAxis/rightAxis)
         taskCountOfAllLineChartView.rightAxis.enabled = false //右軸(値)の表示
         taskCountOfAllLineChartView.leftAxis.enabled = true //左軸（値)の表示
-        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 10) + 5//y左軸最大値
+        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 10) + 10//y左軸最大値
         taskCountOfAllLineChartView.leftAxis.axisMinimum = 0 //y左軸最小値
         taskCountOfAllLineChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 11) //y左軸のフォントの大きさ
         taskCountOfAllLineChartView.leftAxis.labelTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //y軸ラベルの色
@@ -642,9 +638,10 @@ class MotivationViewController: UIViewController {
         categoryRatioOfAllPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
         categoryRatioOfAllPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
         categoryRatioOfAllPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
-        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(15)
-        categoryRatioOfMonthPieChartView.legend.formToTextSpace = CGFloat(12)
-        categoryRatioOfMonthPieChartView.legend.yEntrySpace = CGFloat(7)
+        categoryRatioOfAllPieChartView.legend.formSize = CGFloat(15)
+        categoryRatioOfAllPieChartView.legend.formToTextSpace = CGFloat(5)
+        categoryRatioOfAllPieChartView.legend.xEntrySpace = CGFloat(10)
+        categoryRatioOfAllPieChartView.legend.yEntrySpace = CGFloat(13)
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
 

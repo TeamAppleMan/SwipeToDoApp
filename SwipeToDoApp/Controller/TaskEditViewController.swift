@@ -82,6 +82,8 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     @IBAction func didTapCategoryButton(_ sender: Any) {
+        // キーボードを閉じる
+        taskTextField.endEditing(true)
         performSegue(withIdentifier: "NavVCSegue", sender: nil)
     }
 
@@ -91,7 +93,10 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
 
     @IBAction private func didTapSaveButton(_ sender: Any) {
         let text = taskTextField.text ?? ""
-        if text.isEmpty == true {
+        // textの前後の空白を削除する
+        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmedText.isEmpty == true {
             return
         }
         saveAleart()
@@ -121,7 +126,6 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     func saveAleart() {
-
         let alert = UIAlertController(title: "保存", message: "データを上書きしてもよろしいですか", preferredStyle: .alert)
 
         let ok = UIAlertAction(title: "上書き", style: .default) { [self] (action) in
@@ -129,13 +133,15 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
             let realm = try! Realm()
             let target = getFiltersTask[indexNumber]
             let text = taskTextField.text ?? ""
+            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+
             if text.isEmpty == true {
                 return
             }
 
             do {
                 try realm.write {
-                    target.detail = text
+                    target.detail = trimmedText
                     target.category = selectCategory
                     if segmentedControll.selectedSegmentIndex == 0 {
                         target.isDone = false
@@ -159,6 +165,20 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+
+}
+
+extension TaskEditViewController: UITextFieldDelegate {
+
+    // Returnボタンでキーボード収納
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }
