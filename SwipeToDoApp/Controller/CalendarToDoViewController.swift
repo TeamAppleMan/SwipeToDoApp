@@ -124,7 +124,10 @@ class CalendarToDoViewController: UIViewController, InputCategoryViewControllerD
             guard let sheet = nav.sheetPresentationController  else { return }
             let inputCategoryVC = nav.topViewController as! InputCategoryViewController
             inputCategoryVC.delegate = self
-            inputCategoryVC.configure(task: addTaskTextField.text ?? "")
+
+            let text = addTaskTextField.text ?? ""
+            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            inputCategoryVC.configure(task: trimmedText)
             sheet.detents = [.medium()]
             //モーダル出現後も親ビュー操作不可能にする
             sheet.largestUndimmedDetentIdentifier = .large

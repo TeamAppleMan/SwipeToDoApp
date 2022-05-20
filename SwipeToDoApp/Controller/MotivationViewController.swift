@@ -557,7 +557,7 @@ class MotivationViewController: UIViewController {
         // Y軸(leftAxis/rightAxis)
         taskCountOfAllLineChartView.rightAxis.enabled = false //右軸(値)の表示
         taskCountOfAllLineChartView.leftAxis.enabled = true //左軸（値)の表示
-        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 10) + 5//y左軸最大値
+        taskCountOfAllLineChartView.leftAxis.axisMaximum = (data.max() ?? 10) + 10//y左軸最大値
         taskCountOfAllLineChartView.leftAxis.axisMinimum = 0 //y左軸最小値
         taskCountOfAllLineChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 11) //y左軸のフォントの大きさ
         taskCountOfAllLineChartView.leftAxis.labelTextColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1) //y軸ラベルの色

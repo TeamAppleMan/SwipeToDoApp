@@ -82,6 +82,8 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
     }
 
     @IBAction func didTapCategoryButton(_ sender: Any) {
+        // キーボードを閉じる
+        taskTextField.endEditing(true)
         performSegue(withIdentifier: "NavVCSegue", sender: nil)
     }
 
@@ -163,6 +165,20 @@ class TaskEditViewController: UIViewController, EditCategoryViewControllerDelega
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+
+}
+
+extension TaskEditViewController: UITextFieldDelegate {
+
+    // Returnボタンでキーボード収納
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 
 }
