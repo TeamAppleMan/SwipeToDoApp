@@ -24,9 +24,14 @@ class SelectCategoryTableViewCell: UITableViewCell {
     }
 
     // カプセル化
-    func configure(category: Category!) {
-        self.name.text = category.name
-        self.imagePhoto.image = UIImage(data: category.image)
+    func configure(category: Category?) {
+        if let category = category {
+            self.name.text = category.name
+            self.imagePhoto.image = UIImage(data: category.image)
+        } else {
+            self.name.text = "未カテゴリ"
+            self.imagePhoto.image = UIImage(named: "ハテナ")
+        }
     }
 
 }

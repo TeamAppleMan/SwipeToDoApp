@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 protocol InputCategoryViewControllerDelegate: AnyObject {
-    func addNewDate(detail: String, index: Int)
+    func addNewDate(detail: String, category: Category?)
 }
 
 class InputCategoryViewController: UIViewController {
@@ -40,20 +40,38 @@ class InputCategoryViewController: UIViewController {
 
 extension InputCategoryViewController: UITableViewDataSource, UITableViewDelegate {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.count
+        if section == 0 {
+            return list.count
+        } else {
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCategoryID", for: indexPath) as! SelectCategoryTableViewCell
-        cell.configure(category: list[indexPath.row])
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCategoryID", for: indexPath) as! SelectCategoryTableViewCell
+            cell.configure(category: list[indexPath.row])
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectCategoryID", for: indexPath) as! SelectCategoryTableViewCell
+            cell.configure(category: nil)
+            return cell
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexNumber = indexPath.row
-        delegate.addNewDate(detail: catchTask, index: selectedIndexNumber)
+        if indexPath.section == 0 {
+            delegate.addNewDate(detail: catchTask, category: list[indexPath.row])
+        } else {
+            delegate.addNewDate(detail: catchTask, category: nil)
+        }
+
         dismiss(animated: true, completion: nil)
     }
 
