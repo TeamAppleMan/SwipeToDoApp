@@ -10,6 +10,7 @@ import VerticalCardSwiper
 import RealmSwift
 import PKHUD
 import Pastel
+import AudioToolbox
 
 protocol SwipeCardViewControllerDelegate{
     func catchDidSwipeCardData(catchTask: Results<Task>)
@@ -109,6 +110,8 @@ extension SwipeCardViewController: VerticalCardSwiperDelegate,VerticalCardSwiper
             swipeTask[index].isDone = true
         }
         HUD.flash(.labeledSuccess(title: "やることSwipe", subtitle: "お疲れ様でした！"), delay: 0.5)
+        // バイブレーション
+        AudioServicesPlaySystemSound(1102)
     }
 
 }

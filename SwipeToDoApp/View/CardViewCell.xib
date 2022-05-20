@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="detail" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-h6-UZU">
-                        <rect key="frame" x="20" y="495" width="320" height="86"/>
+                        <rect key="frame" x="17" y="495" width="320" height="86"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="86" id="ZJh-tG-K7e"/>
@@ -52,8 +52,8 @@
                 <constraint firstAttribute="bottom" secondItem="nWg-h6-UZU" secondAttribute="bottom" constant="35" id="3pp-po-2jL"/>
                 <constraint firstAttribute="trailing" secondItem="cfy-rv-ist" secondAttribute="trailing" constant="23" id="AQh-D6-p19"/>
                 <constraint firstItem="cfy-rv-ist" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="EUX-9p-NpB"/>
-                <constraint firstAttribute="trailing" secondItem="nWg-h6-UZU" secondAttribute="trailing" symbolic="YES" id="FuA-5x-XaA"/>
-                <constraint firstItem="nWg-h6-UZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="OkB-FD-7Bb"/>
+                <constraint firstAttribute="trailing" secondItem="nWg-h6-UZU" secondAttribute="trailing" constant="3" id="FuA-5x-XaA"/>
+                <constraint firstItem="nWg-h6-UZU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="17" id="OkB-FD-7Bb"/>
                 <constraint firstAttribute="bottom" secondItem="iUp-gc-b4R" secondAttribute="bottom" id="X6D-tH-gEt"/>
                 <constraint firstItem="nWg-h6-UZU" firstAttribute="top" secondItem="cfy-rv-ist" secondAttribute="bottom" constant="1" id="YPc-D5-oVz"/>
                 <constraint firstItem="IqR-WN-Lrd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="129" id="aPD-CQ-ZBM"/>
