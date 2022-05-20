@@ -125,9 +125,31 @@ class AddCategoryViewController: UIViewController {
                 }
                 self.createdCategoryName = trimmedText
             }
-            // 写真画面に遷移
-            let sourceType: UIImagePickerController.SourceType = .photoLibrary
-            self.createImagePicker(sourceType: sourceType)
+            // アラートを出す
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            let cameraAction = UIAlertAction(title: "写真を撮る", style: .default) { (ok) in
+                // カメラを起動
+                let sourceType: UIImagePickerController.SourceType = .camera
+                self.createImagePicker(sourceType: sourceType)
+            }
+            let albumAction = UIAlertAction(title: "写真を選択", style: .default) { (cancel) in
+                //　アルバムを起動
+                let sourceType: UIImagePickerController.SourceType = .photoLibrary
+                self.createImagePicker(sourceType: sourceType)
+            }
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (cancel) in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            // UIAlertControllerにActionを追加
+            let photoImage = UIImage(systemName: "photo")
+            let cameraImage = UIImage(systemName: "camera")
+            alertController.addAction(albumAction)
+            alertController.addAction(cameraAction)
+            alertController.addAction(cancelAction)
+            cameraAction.setValue(photoImage, forKey: "image")
+            albumAction.setValue(cameraImage, forKey: "image")
+            // Alertを表示
+            self.present(alertController, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (cancel) in
             alertController.dismiss(animated: true, completion: nil)
