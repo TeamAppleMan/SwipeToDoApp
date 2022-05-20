@@ -134,7 +134,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdf-Ih-wP4" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="87.999999999999986" width="375" height="200.66666666666663"/>
+                                <rect key="frame" x="15" y="87.999999999999986" width="345" height="200.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="headerDateFormat" value="YYYY年MM月"/>
@@ -225,9 +225,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KaR-3q-FkA" secondAttribute="bottom" constant="20" id="GLg-ZT-NIH"/>
                             <constraint firstItem="KaR-3q-FkA" firstAttribute="top" secondItem="hPW-xD-spN" secondAttribute="bottom" constant="27" id="PYL-bl-TOW"/>
                             <constraint firstItem="hPW-xD-spN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-90" id="TFz-up-uCs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kdf-Ih-wP4" secondAttribute="trailing" id="X03-sx-vPZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Kdf-Ih-wP4" secondAttribute="trailing" constant="15" id="X03-sx-vPZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vLl-AR-igp" secondAttribute="trailing" constant="20" id="dkh-zi-3O8"/>
-                            <constraint firstItem="Kdf-Ih-wP4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="i1N-IW-wBg"/>
+                            <constraint firstItem="Kdf-Ih-wP4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="i1N-IW-wBg"/>
                             <constraint firstItem="hPW-xD-spN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="j4O-rG-wzO"/>
                             <constraint firstItem="hPW-xD-spN" firstAttribute="top" secondItem="Kdf-Ih-wP4" secondAttribute="bottom" constant="10" id="ouT-7R-jzX"/>
                             <constraint firstItem="KaR-3q-FkA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="23" id="wwl-Ic-aMC"/>
