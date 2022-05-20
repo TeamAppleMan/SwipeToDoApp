@@ -475,7 +475,7 @@ class MotivationViewController: UIViewController {
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
         // グラフの色
-        dataSet.colors = [#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)]
+        dataSet.colors = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)]
 
         // 未カテゴリだけ色を灰色にする
         if dataEntries[dataEntries.count - 1].label! == "未カテゴリ" {
@@ -495,11 +495,12 @@ class MotivationViewController: UIViewController {
 
         // データを％表示にする
         let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
+        formatter.numberStyle = .none
         formatter.maximumFractionDigits = 1
         formatter.multiplier = 1.0
+        formatter.minimumFractionDigits = 0
         categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = true
+        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = false
         categoryRatioOfMonthPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
     }
 
@@ -663,11 +664,12 @@ class MotivationViewController: UIViewController {
 
         // データを％表示にする
         let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
+        formatter.numberStyle = .none
         formatter.maximumFractionDigits = 1
         formatter.multiplier = 1.0
-        categoryRatioOfAllPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        categoryRatioOfAllPieChartView.usePercentValuesEnabled = true
+        formatter.minimumFractionDigits = 0
+        categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
+        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = false
         categoryRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
     }
 
