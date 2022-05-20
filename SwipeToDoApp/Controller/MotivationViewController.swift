@@ -471,16 +471,20 @@ class MotivationViewController: UIViewController {
         categoryRatioOfMonthPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
         categoryRatioOfMonthPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
         categoryRatioOfMonthPieChartView.legend.enabled = true  // グラフの注釈
-        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(20)
+        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(15)
+        categoryRatioOfMonthPieChartView.legend.formToTextSpace = CGFloat(12)
+        categoryRatioOfMonthPieChartView.legend.yEntrySpace = CGFloat(7)
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
         // グラフの色
         dataSet.colors = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.6560183516, blue: 0.6063735112, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.7878945572, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.7828175044, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0.6977040816, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0.637542517, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.4891350561, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.780015445, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.6560183516, blue: 0.6063735112, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.7878945572, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.7828175044, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0.6977040816, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0.637542517, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.4891350561, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.780015445, alpha: 1)]
 
         // 未カテゴリだけ色を灰色にする
-        if dataEntries[dataEntries.count - 1].label! == "未カテゴリ" {
+        let filterTask = dataEntries.filter{ $0.label == "未カテゴリ" }
+        if !filterTask.isEmpty {
             dataSet.colors[dataEntries.count - 1] = #colorLiteral(red: 0.8823529412, green: 0.8823529412, blue: 0.8823529412, alpha: 1)
         }
+
         // グラフのデータの値の色
         dataSet.valueTextColor = UIColor.gray
         // グラフのデータのタイトルの色
@@ -501,7 +505,7 @@ class MotivationViewController: UIViewController {
         formatter.minimumFractionDigits = 0
         categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         categoryRatioOfMonthPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfMonthPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        categoryRatioOfMonthPieChartView.animate(xAxisDuration: 2.5, yAxisDuration: 2.5)
     }
 
     // MARK: 総合上
@@ -629,7 +633,7 @@ class MotivationViewController: UIViewController {
         taskRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
     }
 
-    // MARK: 月間下
+    // MARK: 総合下
     private func createCategoryRatioOfAllPieChart(dataEntries: [PieChartDataEntry]) {
         categoryRatioOfAllPieChartView.noDataText = "表示できるデータがありません"
         categoryRatioOfAllPieChartView.drawHoleEnabled = false //中心まで塗りつぶし
@@ -637,8 +641,9 @@ class MotivationViewController: UIViewController {
         categoryRatioOfAllPieChartView.chartDescription.enabled = false  // グラフの説明を非表示
         categoryRatioOfAllPieChartView.drawEntryLabelsEnabled = false  // グラフ上のデータラベルを非表示
         categoryRatioOfAllPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
-        categoryRatioOfAllPieChartView.legend.enabled = true  // グラフの注釈
-        categoryRatioOfAllPieChartView.legend.formSize = CGFloat(20)
+        categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(15)
+        categoryRatioOfMonthPieChartView.legend.formToTextSpace = CGFloat(12)
+        categoryRatioOfMonthPieChartView.legend.yEntrySpace = CGFloat(7)
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
 
@@ -646,7 +651,8 @@ class MotivationViewController: UIViewController {
         dataSet.colors = [#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.6560183516, blue: 0.6063735112, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.7878945572, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.7828175044, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0.6977040816, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0.637542517, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.4891350561, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.780015445, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.9239473939, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.6560183516, blue: 0.6063735112, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.7878945572, alpha: 1), #colorLiteral(red: 0.917396605, green: 0.7570750117, blue: 0.7828175044, alpha: 1), #colorLiteral(red: 0.9768630862, green: 0.8991695642, blue: 0.6977040816, alpha: 1), #colorLiteral(red: 0, green: 0.9521791339, blue: 0.637542517, alpha: 1), #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.4891350561, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.780015445, alpha: 1)]
 
         // 未カテゴリだけ色を灰色にする
-        if dataEntries[dataEntries.count - 1].label! == "未カテゴリ" {
+        let filterTask = dataEntries.filter{ $0.label == "未カテゴリ" }
+        if !filterTask.isEmpty {
             dataSet.colors[dataEntries.count - 1] = #colorLiteral(red: 0.8823529412, green: 0.8823529412, blue: 0.8823529412, alpha: 1)
         }
 
@@ -668,9 +674,9 @@ class MotivationViewController: UIViewController {
         formatter.maximumFractionDigits = 1
         formatter.multiplier = 1.0
         formatter.minimumFractionDigits = 0
-        categoryRatioOfMonthPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        categoryRatioOfMonthPieChartView.usePercentValuesEnabled = false
-        categoryRatioOfAllPieChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        categoryRatioOfAllPieChartView.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
+        categoryRatioOfAllPieChartView.usePercentValuesEnabled = false
+        categoryRatioOfAllPieChartView.animate(xAxisDuration: 2.5, yAxisDuration: 2.5)
     }
 
     // グラフを描画するときに必ずこの関数を呼ぶ
@@ -699,5 +705,12 @@ class MotivationViewController: UIViewController {
             categoryRatioOfAllPieChartView.isHidden = false
             calculateAll()
         }
+    }
+}
+
+extension Array {
+    subscript (element index: Index) -> Element? {
+        //　MARK: 配列の要素以上を指定していたらnilを返すようにする
+        indices.contains(index) ? self[index] : nil
     }
 }
