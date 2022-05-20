@@ -10,10 +10,10 @@ import VerticalCardSwiper
 
 class CardViewCell: CardCell {
 
-    @IBOutlet private var categoryPhotoImageView: UIImageView!
-    @IBOutlet private var categoryLabel: UILabel!
-    @IBOutlet private var detailTextView: UITextView!
-    @IBOutlet private var dateLabel: UILabel!
+    @IBOutlet private weak var categoryPhotoImageView: UIImageView!
+    @IBOutlet private weak var categoryLabel: UILabel!
+    @IBOutlet private weak var detailTextView: UITextView!
+    @IBOutlet private weak var dateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

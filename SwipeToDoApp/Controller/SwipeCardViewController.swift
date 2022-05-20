@@ -17,8 +17,8 @@ protocol SwipeCardViewControllerDelegate{
 
 class SwipeCardViewController: UIViewController {
 
-    @IBOutlet var cardSwiper: VerticalCardSwiper!
-    @IBOutlet var pastelView: PastelView!
+    @IBOutlet weak var cardSwiper: VerticalCardSwiper!
+    @IBOutlet weak var pastelView: PastelView!
     private var swipeTask: Results<Task>!
     var delegate: SwipeCardViewControllerDelegate?
 

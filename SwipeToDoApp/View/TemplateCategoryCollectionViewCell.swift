@@ -9,8 +9,8 @@ import UIKit
 
 class TemplateCategoryCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet var categoryNameLabel: UILabel!
-    @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet weak var categoryNameLabel: UILabel!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundImageView.layer.cornerRadius = 12

@@ -138,7 +138,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             // 未カテゴリに表示されている数を増やす
-            tableView.reloadRows(at: [IndexPath(row: list.count, section: 0)], with: .automatic)
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 1)], with: .automatic)
 
         }
     }
@@ -181,6 +181,8 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         selectedIndexNumber = indexPath.row
         if indexPath.section == 0 {
             category = list[indexPath.row]
+        } else {
+            category = nil
         }
         hidesBottomBarWhenPushed = true
         performSegue(withIdentifier: "SwipeCardSegue", sender: nil)

@@ -9,9 +9,9 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
 
-    @IBOutlet var categoryImageView: UIImageView?
-    @IBOutlet var categoryNameLabel: UILabel!
-    @IBOutlet var categoryTaskCountLabel: UILabel!
+    @IBOutlet weak var categoryImageView: UIImageView?
+    @IBOutlet weak var categoryNameLabel: UILabel!
+    @IBOutlet weak var categoryTaskCountLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

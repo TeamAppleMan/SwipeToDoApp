@@ -14,7 +14,7 @@ protocol AddCategoryViewControllerDelegate{
 
 class AddCategoryViewController: UIViewController {
 
-    @IBOutlet private var horizontalCollectionView: UICollectionView!
+    @IBOutlet private weak var horizontalCollectionView: UICollectionView!
 
     var delegate: AddCategoryViewControllerDelegate?
     var checkPermission = CheckPermission()
@@ -87,7 +87,6 @@ class AddCategoryViewController: UIViewController {
         categoryCreateAlert()
     }
 
-
     // HACK: コード汚すぎる。。
     private func categoryCreateAlert(){
         let alertController = UIAlertController(title: "オリジナルカテゴリの作成", message: "カテゴリ名を入力してください", preferredStyle: .alert)
@@ -98,7 +97,7 @@ class AddCategoryViewController: UIViewController {
                 if inputCategoryName == "" {
                     let emptyCategoryNameAlertController = UIAlertController(title: "カテゴリ名が空です", message: "カテゴリ名を入力してください", preferredStyle: .alert)
                     let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
-                        self.dismiss(animated: true, completion: nil)
+                        self.navigationController?.popViewController(animated: true)
                     }
                     emptyCategoryNameAlertController.addAction(ok)
                     self.present(emptyCategoryNameAlertController, animated: true, completion: nil)
@@ -115,7 +114,7 @@ class AddCategoryViewController: UIViewController {
                     if filter.name == trimmedText {
                         // カテゴリ重複アラートの表示
                         let ok = UIAlertAction(title: "戻る", style: .default) { (action) in
-                            self.dismiss(animated: true, completion: nil)
+                            self.navigationController?.popViewController(animated: true)
                         }
                         categoryDuplicationAlertController.addAction(ok)
                         self.present(categoryDuplicationAlertController, animated: true, completion: nil)
