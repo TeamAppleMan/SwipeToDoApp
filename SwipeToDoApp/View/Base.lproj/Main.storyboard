@@ -848,14 +848,14 @@
             <objects>
                 <viewController id="GLf-NZ-Dzb" customClass="MotivationViewController" customModule="SwipeToDoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W5w-0W-wgu">
-                        <rect key="frame" x="0.0" y="0.0" width="377" height="1500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="377" height="1800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPi-qT-tQe">
-                                <rect key="frame" x="0.0" y="88" width="377" height="1329"/>
+                                <rect key="frame" x="0.0" y="88" width="377" height="1629"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pqk-Bz-qfn">
-                                        <rect key="frame" x="0.0" y="0.0" width="377" height="1500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="377" height="1471"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CYG-8b-w8G">
                                                 <rect key="frame" x="75" y="30" width="227" height="32"/>
@@ -1092,7 +1092,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KK8-T6-2MQ">
-                                                <rect key="frame" x="25" y="1016" width="327" height="350"/>
+                                                <rect key="frame" x="25" y="1016" width="327" height="375"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkG-8Z-No1" customClass="PieChartView" customModule="Charts">
                                                         <rect key="frame" x="20" y="80" width="287" height="250"/>
@@ -1102,10 +1102,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfi-LP-TDJ" customClass="PieChartView" customModule="Charts">
-                                                        <rect key="frame" x="20" y="80" width="287" height="250"/>
+                                                        <rect key="frame" x="20" y="80" width="287" height="275"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="eZx-oa-7af"/>
+                                                            <constraint firstAttribute="height" constant="275" id="eZx-oa-7af"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     達成カテゴリ率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZc-tN-ymm">
@@ -1135,7 +1135,7 @@
                                                     <constraint firstItem="VZc-tN-ymm" firstAttribute="top" secondItem="KK8-T6-2MQ" secondAttribute="top" id="60c-4R-Jwo"/>
                                                     <constraint firstAttribute="trailing" secondItem="VZc-tN-ymm" secondAttribute="trailing" id="NAU-8V-ee8"/>
                                                     <constraint firstItem="VZc-tN-ymm" firstAttribute="leading" secondItem="KK8-T6-2MQ" secondAttribute="leading" id="OZB-qY-8sn"/>
-                                                    <constraint firstAttribute="height" constant="350" id="RFg-Np-JwB"/>
+                                                    <constraint firstAttribute="height" constant="375" id="RFg-Np-JwB"/>
                                                     <constraint firstItem="m3T-Ew-7Df" firstAttribute="top" secondItem="KK8-T6-2MQ" secondAttribute="top" constant="10" id="ZWY-ho-Hyi"/>
                                                     <constraint firstItem="gfi-LP-TDJ" firstAttribute="leading" secondItem="KK8-T6-2MQ" secondAttribute="leading" constant="20" id="caW-tP-WeL"/>
                                                     <constraint firstAttribute="trailing" secondItem="dkG-8Z-No1" secondAttribute="trailing" constant="20" id="clT-oP-Jhc"/>
@@ -1147,9 +1147,9 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1500" id="10k-7q-0gg"/>
                                             <constraint firstItem="4WN-gu-o3F" firstAttribute="top" secondItem="oFc-Uj-BaJ" secondAttribute="bottom" constant="25" id="9uW-1V-qqY"/>
                                             <constraint firstItem="KK8-T6-2MQ" firstAttribute="leading" secondItem="pqk-Bz-qfn" secondAttribute="leading" constant="25" id="EYD-84-dMZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="KK8-T6-2MQ" secondAttribute="bottom" constant="80" id="GGI-pI-Z2I"/>
                                             <constraint firstItem="4WN-gu-o3F" firstAttribute="leading" secondItem="pqk-Bz-qfn" secondAttribute="leading" constant="25" id="IFZ-MS-jrU"/>
                                             <constraint firstItem="KK8-T6-2MQ" firstAttribute="top" secondItem="4WN-gu-o3F" secondAttribute="bottom" constant="25" id="RBk-uA-UBG"/>
                                             <constraint firstItem="CYG-8b-w8G" firstAttribute="top" secondItem="pqk-Bz-qfn" secondAttribute="top" constant="30" id="VYT-J2-fBb"/>
@@ -1198,7 +1198,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <size key="freeformSize" width="377" height="1500"/>
+                    <size key="freeformSize" width="377" height="1800"/>
                     <connections>
                         <outlet property="afterMonthButton" destination="bAr-hz-I6h" id="JNU-D8-UAu"/>
                         <outlet property="beforeMonthButton" destination="fHU-cT-6CV" id="SRE-6y-x4Y"/>
@@ -1413,10 +1413,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="TGH-vN-WZM">
-                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="43"/>
+                                        <rect key="frame" x="16" y="410.33333969116211" width="343" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TGH-vN-WZM" id="DM3-lr-1n5">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="バージョン" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoH-pt-s8P">
@@ -1427,7 +1427,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FnR-sO-UVM">
-                                                    <rect key="frame" x="305.66666666666669" y="11" width="21.333333333333314" height="21"/>
+                                                    <rect key="frame" x="305.66666666666669" y="11.000000000000002" width="21.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
