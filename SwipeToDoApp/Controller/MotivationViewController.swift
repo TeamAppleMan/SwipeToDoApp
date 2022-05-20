@@ -472,8 +472,9 @@ class MotivationViewController: UIViewController {
         categoryRatioOfMonthPieChartView.rotationEnabled = false // グラフがぐるぐる動くのを無効化
         categoryRatioOfMonthPieChartView.legend.enabled = true  // グラフの注釈
         categoryRatioOfMonthPieChartView.legend.formSize = CGFloat(15)
-        categoryRatioOfMonthPieChartView.legend.formToTextSpace = CGFloat(12)
-        categoryRatioOfMonthPieChartView.legend.yEntrySpace = CGFloat(7)
+        categoryRatioOfMonthPieChartView.legend.formToTextSpace = CGFloat(5)
+        categoryRatioOfMonthPieChartView.legend.xEntrySpace = CGFloat(10)
+        categoryRatioOfMonthPieChartView.legend.yEntrySpace = CGFloat(13)
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
         // グラフの色
