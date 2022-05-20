@@ -476,6 +476,11 @@ class MotivationViewController: UIViewController {
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
         // グラフの色
         dataSet.colors = [#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)]
+
+        // 未カテゴリだけ色を灰色にする
+        if dataEntries[dataEntries.count - 1].label! == "未カテゴリ" {
+            dataSet.colors[dataEntries.count - 1] = #colorLiteral(red: 0.8823529412, green: 0.8823529412, blue: 0.8823529412, alpha: 1)
+        }
         // グラフのデータの値の色
         dataSet.valueTextColor = UIColor.gray
         // グラフのデータのタイトルの色
@@ -635,8 +640,15 @@ class MotivationViewController: UIViewController {
         categoryRatioOfAllPieChartView.legend.formSize = CGFloat(20)
 
         let dataSet = PieChartDataSet(entries: dataEntries, label: "")
+
         // グラフの色
         dataSet.colors = [#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)]
+
+        // 未カテゴリだけ色を灰色にする
+        if dataEntries[dataEntries.count - 1].label! == "未カテゴリ" {
+            dataSet.colors[dataEntries.count - 1] = #colorLiteral(red: 0.8823529412, green: 0.8823529412, blue: 0.8823529412, alpha: 1)
+        }
+
         // グラフのデータの値の色
         dataSet.valueTextColor = UIColor.gray
         // グラフのデータのタイトルの色
