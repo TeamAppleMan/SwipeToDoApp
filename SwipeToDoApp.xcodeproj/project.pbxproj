@@ -499,12 +499,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 7X9S244452;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリ写真の選択のため、アルバムを使用する";
+				INFOPLIST_KEY_NSCameraUsageDescription = "カテゴリの写真追加のため、カメラを使用";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリの写真追加のため、アルバムを使用";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -517,7 +518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.SwipeToDoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -533,12 +534,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 7X9S244452;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwipeToDoApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Swipe ToDo";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリ写真の選択のため、アルバムを使用する";
+				INFOPLIST_KEY_NSCameraUsageDescription = "カテゴリの写真追加のため、カメラを使用";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "カテゴリの写真追加のため、アルバムを使用";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -551,7 +553,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mkondo.SwipeToDoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
