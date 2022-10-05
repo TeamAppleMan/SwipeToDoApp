@@ -28,7 +28,19 @@ ToDoカードをスワイプ - カレンダーでToDoを簡単登録。
 - ToDoの達成数をモチベーショングラフ、達成率を円グラフ、達成カテゴリ率を円グラフで表示しています。月間、総合と選択が可能です。
 
 # Installation
-
+```ruby
+pod 'VerticalCardSwiper'
+pod 'SDWebImage', '~> 5.0'
+pod 'PKHUD', '~> 5.0'
+pod 'Alamofire', '~> 5.0.0-rc.3'
+pod 'SwiftyJSON', '~> 4.0'
+pod 'DTGradientButton'
+pod 'ChameleonFramework/Swift'
+pod "SwiftyCam"
+pod 'SwiftVideoGenerator'
+pod 'NVActivityIndicatorView'
+pod 'DSFloatingButton'
+```
 
 # Requirement
 
