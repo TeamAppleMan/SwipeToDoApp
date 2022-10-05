@@ -27,7 +27,7 @@ ToDoカードをスワイプ - カレンダーでToDoを簡単登録。
 - カードをスワイプしてToDoを達成できます。
 - ToDoの達成数をモチベーショングラフ、達成率を円グラフ、達成カテゴリ率を円グラフで表示しています。月間、総合と選択が可能です。
 
-# Installation & Technology used
+# Installation & architecture
 ```ruby
 pod 'VerticalCardSwiper'
 pod 'FSCalendar'
