@@ -30,17 +30,14 @@ ToDoカードをスワイプ - カレンダーでToDoを簡単登録。
 # Installation
 ```ruby
 pod 'VerticalCardSwiper'
-pod 'SDWebImage', '~> 5.0'
-pod 'PKHUD', '~> 5.0'
-pod 'Alamofire', '~> 5.0.0-rc.3'
-pod 'SwiftyJSON', '~> 4.0'
-pod 'DTGradientButton'
-pod 'ChameleonFramework/Swift'
-pod "SwiftyCam"
-pod 'SwiftVideoGenerator'
-pod 'NVActivityIndicatorView'
+pod 'FSCalendar'
+pod 'Charts'
+pod 'lottie-ios'
+pod 'RealmSwift'
+pod 'PKHUD'
+pod 'Pastel'
 pod 'DSFloatingButton'
-```
+``
 
 # Requirement
 
